@@ -12,6 +12,9 @@
     "no-console": false,
     "interface-name": false,
     "no-empty-interface": false,
-    "ordered-imports": false
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "jsx-no-bind": false,
+    "jsx-no-lambda": false
   }
 }

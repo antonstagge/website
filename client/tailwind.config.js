@@ -259,6 +259,8 @@ module.exports = {
     '3xl': '1.875rem',  // 30px
     '4xl': '2.25rem',   // 36px
     '5xl': '3rem',      // 48px
+    'title': '100px',      // 100px
+    'half': '1.5vw',
   },
 
 
@@ -322,6 +324,7 @@ module.exports = {
   */
 
   tracking: {
+    'tighter': '-0.08em',
     'tight': '-0.05em',
     'normal': '0',
     'wide': '0.05em',

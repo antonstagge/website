@@ -5846,6 +5846,14 @@ table {
   font-size: 3rem;
 }
 
+.text-title {
+  font-size: 100px;
+}
+
+.text-half {
+  font-size: 1.5vw;
+}
+
 .italic {
   font-style: italic;
 }
@@ -5982,6 +5990,10 @@ table {
 .focus\:subpixel-antialiased:focus {
   -webkit-font-smoothing: auto;
   -moz-osx-font-smoothing: auto;
+}
+
+.tracking-tighter {
+  letter-spacing: -0.08em;
 }
 
 .tracking-tight {
@@ -6221,6 +6233,14 @@ table {
 }
 
 /* Your custom CSS here */
+
+.flex-2 {
+  flex-grow: 2;
+}
+
+.font-default {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 @media (min-width: 576px) {
   .sm\:list-reset {
@@ -11421,6 +11441,14 @@ table {
     font-size: 3rem;
   }
 
+  .sm\:text-title {
+    font-size: 100px;
+  }
+
+  .sm\:text-half {
+    font-size: 1.5vw;
+  }
+
   .sm\:italic {
     font-style: italic;
   }
@@ -11557,6 +11585,10 @@ table {
   .sm\:focus\:subpixel-antialiased:focus {
     -webkit-font-smoothing: auto;
     -moz-osx-font-smoothing: auto;
+  }
+
+  .sm\:tracking-tighter {
+    letter-spacing: -0.08em;
   }
 
   .sm\:tracking-tight {
@@ -16995,6 +17027,14 @@ table {
     font-size: 3rem;
   }
 
+  .md\:text-title {
+    font-size: 100px;
+  }
+
+  .md\:text-half {
+    font-size: 1.5vw;
+  }
+
   .md\:italic {
     font-style: italic;
   }
@@ -17131,6 +17171,10 @@ table {
   .md\:focus\:subpixel-antialiased:focus {
     -webkit-font-smoothing: auto;
     -moz-osx-font-smoothing: auto;
+  }
+
+  .md\:tracking-tighter {
+    letter-spacing: -0.08em;
   }
 
   .md\:tracking-tight {
@@ -22569,6 +22613,14 @@ table {
     font-size: 3rem;
   }
 
+  .lg\:text-title {
+    font-size: 100px;
+  }
+
+  .lg\:text-half {
+    font-size: 1.5vw;
+  }
+
   .lg\:italic {
     font-style: italic;
   }
@@ -22705,6 +22757,10 @@ table {
   .lg\:focus\:subpixel-antialiased:focus {
     -webkit-font-smoothing: auto;
     -moz-osx-font-smoothing: auto;
+  }
+
+  .lg\:tracking-tighter {
+    letter-spacing: -0.08em;
   }
 
   .lg\:tracking-tight {
@@ -28143,6 +28199,14 @@ table {
     font-size: 3rem;
   }
 
+  .xl\:text-title {
+    font-size: 100px;
+  }
+
+  .xl\:text-half {
+    font-size: 1.5vw;
+  }
+
   .xl\:italic {
     font-style: italic;
   }
@@ -28279,6 +28343,10 @@ table {
   .xl\:focus\:subpixel-antialiased:focus {
     -webkit-font-smoothing: auto;
     -moz-osx-font-smoothing: auto;
+  }
+
+  .xl\:tracking-tighter {
+    letter-spacing: -0.08em;
   }
 
   .xl\:tracking-tight {
