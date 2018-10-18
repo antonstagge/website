@@ -1,6 +1,6 @@
 import Home from 'src/home/Home';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import * as React from 'react';
+import * as React from 'react'; 
 import './App.css';
 
 interface AppProps {};
@@ -12,9 +12,13 @@ class App extends React.Component<AppProps, AppState> {
     }
 
     public render() {
-        return (<Router>
-            <Route exact={true} path="/" component={Home} />
-        </Router>
+        return (<div className="h-screen w-full p-8">
+            <div className="rounded overflow-hidden h-full">
+                <Router>
+                    <Route exact={true} path="/" component={Home} />
+                </Router>
+            </div>
+        </div>
         );
     }
 }
