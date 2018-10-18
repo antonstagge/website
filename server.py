@@ -43,6 +43,26 @@ def get_all_messages():
 
     return jsonify(messages), status_code
 
+@app.route('/api/send_message', methods=['POST'])
+@cross_origin()
+def send_message():
+    status_code = 200
+    try:
+        payload = request.json
+        print(payload)
+        name = payload['name']
+        email = payload['email']
+        message = payload['message']
+
+        # Add the message to the database
+        cur = mysql.connection.cursor()
+        cur.execute('''INSERT INTO message(name, email, message) VALUES (%s, %s, %s);''', [name, email, message])
+        mysql.connection.commit()
+
+    except:
+        traceback.print_exc()
+        status_code = 500
+    return jsonify({'test': "hej"}) , status_code
 
 if __name__ == "__main__":
     app.run()
