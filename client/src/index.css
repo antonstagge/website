@@ -6232,6 +6232,10 @@ table {
   z-index: auto;
 }
 
+.z-neg {
+  z-index: -1;
+}
+
 /* Your custom CSS here */
 
 .flex-2 {
@@ -6243,12 +6247,13 @@ table {
 }
 
 .bgAnimDown {
-  -webkit-animation-name: slide-down;
-          animation-name: slide-down;
+  -webkit-animation-name: slide-up;
+          animation-name: slide-up;
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  animation-direction: reverse;
 }
 
 .bgAnimUp {
@@ -6256,8 +6261,6 @@ table {
           animation-name: slide-up;
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
   -webkit-animation-timing-function: ease-in-out;
           animation-timing-function: ease-in-out;
 }
@@ -6286,28 +6289,45 @@ table {
   }
 }
 
-@-webkit-keyframes slide-down {
+.fadeOutIn {
+  -webkit-animation-name: fade;
+          animation-name: fade;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+}
+
+@-webkit-keyframes fade {
   0% {
-    -webkit-transform: translateY(-100%);
-            transform: translateY(-100%);
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
   }
 
   100% {
-    -webkit-transform: translateY(0%);
-            transform: translateY(0%);
+    opacity: 1;
   }
 }
 
-@keyframes slide-down {
+@keyframes fade {
   0% {
-    -webkit-transform: translateY(-100%);
-            transform: translateY(-100%);
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
   }
 
   100% {
-    -webkit-transform: translateY(0%);
-            transform: translateY(0%);
+    opacity: 1;
   }
+}
+
+.MenuList {
+  transition: font-size 1s;
 }
 
 @media (min-width: 576px) {
@@ -11893,6 +11913,10 @@ table {
 
   .sm\:z-auto {
     z-index: auto;
+  }
+
+  .sm\:z-neg {
+    z-index: -1;
   }
 }
 
@@ -17480,6 +17504,10 @@ table {
   .md\:z-auto {
     z-index: auto;
   }
+
+  .md\:z-neg {
+    z-index: -1;
+  }
 }
 
 @media (min-width: 992px) {
@@ -23066,6 +23094,10 @@ table {
   .lg\:z-auto {
     z-index: auto;
   }
+
+  .lg\:z-neg {
+    z-index: -1;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -28651,5 +28683,9 @@ table {
 
   .xl\:z-auto {
     z-index: auto;
+  }
+
+  .xl\:z-neg {
+    z-index: -1;
   }
 }

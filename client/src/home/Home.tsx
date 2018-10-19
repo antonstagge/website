@@ -3,7 +3,8 @@ import mainimage from './images/main.jpg';
 import oland from './images/oland.jpg';
 import computer from './images/computer.jpg';
 // import { debounce } from 'ts-debounce';
-import MenuItem from './MenuItem';
+import BackgroundImage from './BackgroundImage';
+import MenuList from './MenuList';
 
 enum MenuChoice {
     AboutMe = 0, 
@@ -11,7 +12,7 @@ enum MenuChoice {
     Projects = 2,
 }
 
-enum ChangeDirection {
+export enum ChangeDirection {
     UP,
     DOWN,
 }
@@ -24,22 +25,25 @@ interface MenuItem {
 
 interface HomeProps {};
 interface HomeState {
+    title: string;
     active: MenuChoice;
     changeTo: MenuChoice | -1;
     changeDirection: ChangeDirection;
 };
 
-const animTime = 1000;
+const animTime = 980;
 
 class Home extends React.Component<HomeProps, HomeState> {
+    public toggleTwice: boolean = false
     constructor(props: HomeProps) {
         super(props);
         this.state = {
-            active: 0,
+            title: this.getMenuItem(MenuChoice.AboutMe).title,
+            active: MenuChoice.AboutMe,
             changeTo: -1,
             changeDirection: ChangeDirection.UP,
         };
-        // this.handleScroll = debounce(this.handleScroll, 300);
+        // this.handleScroll = debounce(this.handleScroll, 40);
     }
 
     public componentDidMount() {
@@ -52,31 +56,19 @@ class Home extends React.Component<HomeProps, HomeState> {
         window.removeEventListener('keydown', this.handleKeyDown);
     }
 
-
-    public changeUp = () => {
-        const nextChange = (this.state.active + 1) % 3
-        this.setState({
-            changeTo: nextChange, 
-            changeDirection: ChangeDirection.UP
-        });
-        setTimeout(()=>this.setState({active: nextChange, changeTo: -1}), animTime);
-    }
-
-    public changeDown = () => {
-        const nextChange = (this.state.active + 2) % 3
-        this.setState({
-            changeTo: nextChange,
-            changeDirection: ChangeDirection.DOWN,
-        });
-        setTimeout(() => this.setState({active: nextChange, changeTo: -1}), animTime);
-    }
     public handleScroll = (e: WheelEvent) => {
-        if (this.state.changeTo === -1) {
+        e.preventDefault();
+        if (this.state.changeTo === -1 && this.toggleTwice) {
+            this.toggleTwice = false;
             if (e.deltaY > 0) {
                 this.changeUp();
             } else {
                 this.changeDown();
             }
+        } else if (this.state.changeTo === -1) {
+            this.toggleTwice = true;
+        } else {
+            this.toggleTwice = false;
         }
     }
 
@@ -88,6 +80,32 @@ class Home extends React.Component<HomeProps, HomeState> {
                 this.changeDown();
             }
         }
+    }
+
+    public changeUp = () => {
+        const nextChange = (this.state.active + 1) % 3
+        this.setState({
+            changeTo: nextChange, 
+            changeDirection: ChangeDirection.UP
+        });
+        this.delayChange(nextChange);
+    }
+
+    public changeDown = () => {
+        const nextChange = (this.state.active + 2) % 3
+        this.setState({
+            changeTo: nextChange,
+            changeDirection: ChangeDirection.DOWN,
+        });
+        this.delayChange(nextChange);
+    }
+
+    public delayChange = (nextChange: MenuChoice) => {
+        setTimeout(() => this.setState({title: this.getMenuItem(nextChange).title}), animTime/2)
+        setTimeout(() => {
+            this.setState({active: nextChange});
+            setTimeout(() => this.setState({changeTo: -1}), 400);
+        }, animTime);
     }
 
     public getMenuItem = (choice: MenuChoice): MenuItem => {
@@ -127,29 +145,45 @@ class Home extends React.Component<HomeProps, HomeState> {
         const next = this.getMenuItem((this.state.active + 1) % 3);
 
         return <div
-            className="h-full"
+            className="h-full relative"
         >
-            <MenuItem
-                title={prev.title}
+            <BackgroundImage
                 backgroundImage={prev.backgroundImage}
-                nextTitle={current.title}
-                prevTitle={next.title}
                 className={this.getClassName(prev.number)}
             />
-            <MenuItem
-                title={current.title}
+            <BackgroundImage
                 backgroundImage={current.backgroundImage}
-                nextTitle={next.title}
-                prevTitle={prev.title}
                 className={this.getClassName(current.number)}
             />
-            <MenuItem
-                title={next.title}
+            <BackgroundImage
                 backgroundImage={next.backgroundImage}
-                nextTitle={prev.title}
-                prevTitle={current.title}
                 className={this.getClassName(next.number)}
             />
+            <div className="absolute z-10 pin">
+                <div className="flex text-white h-full">
+                    <div className="flex-1 flex flex-col cursor-pointer">
+                        <div className="flex-2 invisible">
+                            padding
+                        </div>
+                        <div 
+                            className={"flex-1 pl-16 text-5xl tracking-tighter font-bold " + 
+                            (this.state.changeTo !== -1 
+                                ? "fadeOutIn"
+                                : ""
+                            )
+                        }>
+                            {this.state.title}
+                        </div>
+                    </div>
+                    <MenuList titles={
+                        [this.getMenuItem(MenuChoice.AboutMe).title,
+                        this.getMenuItem(MenuChoice.Resume).title,
+                        this.getMenuItem(MenuChoice.Projects).title]
+                        }
+                        active={this.state.changeTo === -1 ? this.state.active : this.state.changeTo}
+                    />
+                </div>
+            </div>
         </div>
     }
 }
