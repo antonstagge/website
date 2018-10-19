@@ -12,8 +12,8 @@ class App extends React.Component<AppProps, AppState> {
     }
 
     public render() {
-        return (<div className="h-screen w-full p-8 select-none font-default">
-            <div className="h-full relative">
+        return (<div className="h-screen w-full p-6 select-none font-default">
+            <div className="h-full relative overflow-hidden">
                 <Router>
                     <Route exact={true} path="/" component={Home} />
                 </Router>

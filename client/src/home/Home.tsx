@@ -3,6 +3,7 @@ import mainimage from './images/main.jpg';
 import oland from './images/oland.jpg';
 import computer from './images/computer.jpg';
 // import { debounce } from 'ts-debounce';
+import MenuItem from './MenuItem';
 
 enum MenuChoice {
     AboutMe = 0, 
@@ -10,23 +11,33 @@ enum MenuChoice {
     Projects = 2,
 }
 
+enum ChangeDirection {
+    UP,
+    DOWN,
+}
+
 interface MenuItem {
     title: string;
     backgroundImage: string;
+    number: MenuChoice;
 }
 
 interface HomeProps {};
 interface HomeState {
     active: MenuChoice;
-    canChange: boolean;
+    changeTo: MenuChoice | -1;
+    changeDirection: ChangeDirection;
 };
+
+const animTime = 1000;
 
 class Home extends React.Component<HomeProps, HomeState> {
     constructor(props: HomeProps) {
         super(props);
         this.state = {
             active: 0,
-            canChange: true,
+            changeTo: -1,
+            changeDirection: ChangeDirection.UP,
         };
         // this.handleScroll = debounce(this.handleScroll, 300);
     }
@@ -41,24 +52,41 @@ class Home extends React.Component<HomeProps, HomeState> {
         window.removeEventListener('keydown', this.handleKeyDown);
     }
 
+
+    public changeUp = () => {
+        const nextChange = (this.state.active + 1) % 3
+        this.setState({
+            changeTo: nextChange, 
+            changeDirection: ChangeDirection.UP
+        });
+        setTimeout(()=>this.setState({active: nextChange, changeTo: -1}), animTime);
+    }
+
+    public changeDown = () => {
+        const nextChange = (this.state.active + 2) % 3
+        this.setState({
+            changeTo: nextChange,
+            changeDirection: ChangeDirection.DOWN,
+        });
+        setTimeout(() => this.setState({active: nextChange, changeTo: -1}), animTime);
+    }
     public handleScroll = (e: WheelEvent) => {
-        if (this.state.canChange) {
+        if (this.state.changeTo === -1) {
             if (e.deltaY > 0) {
-                this.setState({active: (this.state.active + 1) % 3, canChange: false})
+                this.changeUp();
             } else {
-                this.setState({active: (this.state.active + 2) % 3, canChange: false})
+                this.changeDown();
             }
-            setTimeout(() => this.setState({canChange: true}), 1500)
         }
     }
 
     public handleKeyDown = (e: KeyboardEvent) => {
-        if (e.keyCode === 40) {
-            // up
-            this.setState({active: (this.state.active + 1) % 3, canChange: false})
-        } else if (e.keyCode === 38) {
-            // down
-            this.setState({active: (this.state.active + 2) % 3, canChange: false})
+        if (this.state.changeTo === -1) {
+            if (e.keyCode === 40) {
+                this.changeUp();
+            } else if (e.keyCode === 38) {
+                this.changeDown();
+            }
         }
     }
 
@@ -68,51 +96,66 @@ class Home extends React.Component<HomeProps, HomeState> {
                 return {
                     title: 'ABOUT ME',
                     backgroundImage: oland,
+                    number: choice
                 }
             case MenuChoice.Resume:
                 return {
                     title: 'RESUME',
                     backgroundImage: mainimage,
+                    number: choice
                 }
             case MenuChoice.Projects:
                 return {
                     title: 'PROJECTS',
                     backgroundImage: computer,
+                    number: choice
                 }
         }
     }
 
+    public getClassName = (choice: MenuChoice) => {
+        return (this.state.changeTo === choice 
+            ? (this.state.changeDirection === ChangeDirection.UP ? "bgAnimUp" : "bgAnimDown")
+            : this.state.active === choice && this.state.changeTo !== -1
+            ? (this.state.changeDirection === ChangeDirection.UP ? "bgAnimUp" : "bgAnimDown") 
+            : this.state.active === choice ? "" : "hidden")
+    } 
+
     public render() {
 
-        const prevMenuItem = this.getMenuItem((this.state.active + 2) % 3);
-        const menuItem = this.getMenuItem(this.state.active);
-        const nextMenuItem = this.getMenuItem((this.state.active + 1) % 3);
+        console.log(this.state);
 
-        return <div 
-            style={{backgroundImage: "url(" + menuItem.backgroundImage + ")"}} 
-            className="h-full bg-cover"
+        // const prev = this.getMenuItem((this.state.active + 2) % 3);
+        // const current = this.getMenuItem(this.state.active);
+        // const next = this.getMenuItem((this.state.active + 1) % 3);
+
+        return <div
+            className="h-full"
         >
-            <div className="flex text-white h-full">
-                <div className="flex-1 flex flex-col cursor-pointer">
-                    <div className="flex-2 invisible">
-                        padding
-                    </div>
-                    <div className="flex-1 pl-16 text-title tracking-tighter font-bold">
-                        {menuItem.title}
-                    </div>
-                </div>
-                <div className="flex-no-grow pr-10 flex flex-col justify-center text-right">
-                    <div className="flex-no-grow text-half tracking-tighter font-semibold">
-                        {prevMenuItem.title}
-                    </div>
-                    <div className="flex-no-grow text-3xl tracking-tighter font-semibold">
-                        {menuItem.title}
-                    </div>
-                    <div className="flex-no-grow text-half tracking-tighter font-semibold">
-                        {nextMenuItem.title}
-                    </div>
-                </div>
-            </div>
+            <MenuItem 
+                key={"prev" + this.state.active}
+                title={'ABOUT ME'}
+                backgroundImage={oland}
+                nextTitle={'RESUME'}
+                prevTitle={'PROJECTS'}
+                className={this.getClassName(MenuChoice.AboutMe)}
+            />
+            <MenuItem 
+                key={"current" + this.state.active}
+                title={'RESUME'}
+                backgroundImage={mainimage}
+                nextTitle={'PROJECTS'}
+                prevTitle={'ABOUT ME'}
+                className={this.getClassName(MenuChoice.Resume)}
+            />
+            <MenuItem 
+                key={"next" + this.state.active}
+                title={'PROJECTS'}
+                backgroundImage={computer}
+                nextTitle={'ABOUT ME'}
+                prevTitle={'RESUME'}
+                className={this.getClassName(MenuChoice.Projects)}
+            />
         </div>
     }
 }
