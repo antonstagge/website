@@ -145,7 +145,6 @@ class Home extends React.Component<HomeProps, HomeState> {
     } 
 
     public render() {
-        console.log(this.state);
         const prev = this.getMenuItem((this.state.active + 2) % 3);
         const current = this.getMenuItem(this.state.active);
         const next = this.getMenuItem((this.state.active + 1) % 3);
@@ -168,8 +167,8 @@ class Home extends React.Component<HomeProps, HomeState> {
             <div className="absolute z-10 pin">
                 <div className="flex text-white h-full">
                     <div className="flex-1 flex flex-col cursor-pointer"
-                        // onMouseEnter={() => this.setState({hover: true})}
-                        // onMouseLeave={() => this.setState({hover: false})}
+                        onMouseEnter={() => this.setState({hover: true})}
+                        onMouseLeave={() => this.setState({hover: false})}
                     >
                         <div className="flex-2"/>
                         <div className="flex-1 pl-16 flex">
