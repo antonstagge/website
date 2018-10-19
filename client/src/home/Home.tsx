@@ -122,39 +122,33 @@ class Home extends React.Component<HomeProps, HomeState> {
     } 
 
     public render() {
-
-        console.log(this.state);
-
-        // const prev = this.getMenuItem((this.state.active + 2) % 3);
-        // const current = this.getMenuItem(this.state.active);
-        // const next = this.getMenuItem((this.state.active + 1) % 3);
+        const prev = this.getMenuItem((this.state.active + 2) % 3);
+        const current = this.getMenuItem(this.state.active);
+        const next = this.getMenuItem((this.state.active + 1) % 3);
 
         return <div
             className="h-full"
         >
-            <MenuItem 
-                key={"prev" + this.state.active}
-                title={'ABOUT ME'}
-                backgroundImage={oland}
-                nextTitle={'RESUME'}
-                prevTitle={'PROJECTS'}
-                className={this.getClassName(MenuChoice.AboutMe)}
+            <MenuItem
+                title={prev.title}
+                backgroundImage={prev.backgroundImage}
+                nextTitle={current.title}
+                prevTitle={next.title}
+                className={this.getClassName(prev.number)}
             />
-            <MenuItem 
-                key={"current" + this.state.active}
-                title={'RESUME'}
-                backgroundImage={mainimage}
-                nextTitle={'PROJECTS'}
-                prevTitle={'ABOUT ME'}
-                className={this.getClassName(MenuChoice.Resume)}
+            <MenuItem
+                title={current.title}
+                backgroundImage={current.backgroundImage}
+                nextTitle={next.title}
+                prevTitle={prev.title}
+                className={this.getClassName(current.number)}
             />
-            <MenuItem 
-                key={"next" + this.state.active}
-                title={'PROJECTS'}
-                backgroundImage={computer}
-                nextTitle={'ABOUT ME'}
-                prevTitle={'RESUME'}
-                className={this.getClassName(MenuChoice.Projects)}
+            <MenuItem
+                title={next.title}
+                backgroundImage={next.backgroundImage}
+                nextTitle={prev.title}
+                prevTitle={current.title}
+                className={this.getClassName(next.number)}
             />
         </div>
     }
