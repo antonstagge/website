@@ -29,12 +29,14 @@ interface HomeState {
     active: MenuChoice;
     changeTo: MenuChoice | -1;
     changeDirection: ChangeDirection;
+    hover: boolean;
 };
 
-const animTime = 980;
+const animTime = 1000;
 
 class Home extends React.Component<HomeProps, HomeState> {
-    public toggleTwice: boolean = false
+    public toggleTwice: boolean = false;
+    public toggleTwiceRender: boolean = false;
     constructor(props: HomeProps) {
         super(props);
         this.state = {
@@ -42,6 +44,7 @@ class Home extends React.Component<HomeProps, HomeState> {
             active: MenuChoice.AboutMe,
             changeTo: -1,
             changeDirection: ChangeDirection.UP,
+            hover: false,
         };
         // this.handleScroll = debounce(this.handleScroll, 40);
     }
@@ -104,7 +107,7 @@ class Home extends React.Component<HomeProps, HomeState> {
         setTimeout(() => this.setState({title: this.getMenuItem(nextChange).title}), animTime/2)
         setTimeout(() => {
             this.setState({active: nextChange});
-            setTimeout(() => this.setState({changeTo: -1}), 400);
+            setTimeout(() => this.setState({changeTo: -1}), 500);
         }, animTime);
     }
 
@@ -132,14 +135,17 @@ class Home extends React.Component<HomeProps, HomeState> {
     }
 
     public getClassName = (choice: MenuChoice) => {
-        return (this.state.changeTo === choice 
-            ? (this.state.changeDirection === ChangeDirection.UP ? "bgAnimUp" : "bgAnimDown")
-            : this.state.active === choice && this.state.changeTo !== -1
-            ? (this.state.changeDirection === ChangeDirection.UP ? "bgAnimUp" : "bgAnimDown") 
-            : this.state.active === choice ? "" : "hidden")
+        if (this.state.changeTo !== -1 && this.state.active !== this.state.changeTo && (this.state.changeTo === choice || this.state.active === choice)) {
+            // getting swapped from or into
+            return (this.state.changeDirection === ChangeDirection.UP ? "bgAnimUp" : "bgAnimDown");
+        } else {
+            // active or not
+            return (this.state.active === choice ? "" : "hidden")
+        }
     } 
 
     public render() {
+        console.log(this.state);
         const prev = this.getMenuItem((this.state.active + 2) % 3);
         const current = this.getMenuItem(this.state.active);
         const next = this.getMenuItem((this.state.active + 1) % 3);
@@ -161,18 +167,23 @@ class Home extends React.Component<HomeProps, HomeState> {
             />
             <div className="absolute z-10 pin">
                 <div className="flex text-white h-full">
-                    <div className="flex-1 flex flex-col cursor-pointer">
-                        <div className="flex-2 invisible">
-                            padding
-                        </div>
-                        <div 
-                            className={"flex-1 pl-16 text-5xl tracking-tighter font-bold " + 
-                            (this.state.changeTo !== -1 
-                                ? "fadeOutIn"
-                                : ""
-                            )
-                        }>
-                            {this.state.title}
+                    <div className="flex-1 flex flex-col cursor-pointer"
+                        // onMouseEnter={() => this.setState({hover: true})}
+                        // onMouseLeave={() => this.setState({hover: false})}
+                    >
+                        <div className="flex-2"/>
+                        <div className="flex-1 pl-16 flex">
+                             <div 
+                                className={"flex-no-grow text-5xl tracking-tighter font-bold " + 
+                                (this.state.changeTo !== -1 
+                                    ? "fadeOutIn"
+                                    : ""
+                                )
+                            }>
+                                {this.state.title}
+                                <div className={"bg-white h-3 hoverBar " + (this.state.hover ? "w-full": "w-0") } />
+                            </div>
+                            <div className="flex-1"/>
                         </div>
                     </div>
                     <MenuList titles={

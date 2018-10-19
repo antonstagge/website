@@ -6,7 +6,6 @@ interface BackgroundImageProps {
 }
 
 const BackgroundImage: React.SFC<BackgroundImageProps> = ({backgroundImage, className}) => {
-
     return (<div style={{backgroundImage: "url(" + backgroundImage + ")"}} className={"bg-cover h-full w-full " + className}/>)
 }
 

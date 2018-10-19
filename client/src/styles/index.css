@@ -11,16 +11,27 @@
 }
 
 .bgAnimDown {
-    animation-name: slide-up;
+    animation-name: slide-down;
     animation-duration:  1s;
     animation-timing-function: ease-in-out;
-    animation-direction: reverse;
+    animation-fill-mode: forwards;
 }
 
 .bgAnimUp {
     animation-name: slide-up;
     animation-duration:  1s;
     animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slide-down {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
 }
 
 @keyframes slide-up {
@@ -55,4 +66,29 @@
 
 .MenuList {
     transition: font-size 1s;
+}
+
+.hoverBar {
+    transition: width 1s;
+}
+
+.w-0 {
+    width: 0%;
+}
+
+.h-0 {
+    height: 0%;
+}
+
+.order-1 {
+    order: 1;
+}
+
+
+.order-2 {
+    order: 2;
+}
+
+.order-3 {
+    order: 3;
 }

@@ -6247,13 +6247,14 @@ table {
 }
 
 .bgAnimDown {
-  -webkit-animation-name: slide-up;
-          animation-name: slide-up;
+  -webkit-animation-name: slide-down;
+          animation-name: slide-down;
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
   -webkit-animation-timing-function: ease-in-out;
           animation-timing-function: ease-in-out;
-  animation-direction: reverse;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 
 .bgAnimUp {
@@ -6263,6 +6264,32 @@ table {
           animation-duration: 1s;
   -webkit-animation-timing-function: ease-in-out;
           animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes slide-down {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+
+  100% {
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+
+  100% {
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
 }
 
 @-webkit-keyframes slide-up {
@@ -6328,6 +6355,30 @@ table {
 
 .MenuList {
   transition: font-size 1s;
+}
+
+.hoverBar {
+  transition: width 1s;
+}
+
+.w-0 {
+  width: 0%;
+}
+
+.h-0 {
+  height: 0%;
+}
+
+.order-1 {
+  order: 1;
+}
+
+.order-2 {
+  order: 2;
+}
+
+.order-3 {
+  order: 3;
 }
 
 @media (min-width: 576px) {
