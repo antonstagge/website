@@ -16,14 +16,6 @@
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
 }
-
-.bgAnimUp {
-    animation-name: slide-up;
-    animation-duration:  1s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-}
-
 @keyframes slide-down {
     0% {
         transform: translateY(-100%);
@@ -34,6 +26,12 @@
     }
 }
 
+.bgAnimUp {
+    animation-name: slide-up;
+    animation-duration:  1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
 @keyframes slide-up {
     0% {
         transform: translateY(0%);
@@ -41,6 +39,68 @@
 
     100% {
         transform: translateY(-100%);
+    }
+}
+
+.bgAnimDownLast {
+    animation-name: slide-down-last;
+    animation-duration:  1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+@keyframes slide-down-last {
+    0% {
+        transform: translateY(-200%);
+    }
+
+    100% {
+        transform: translateY(-100%);
+    }
+}
+.bgAnimDownFirst {
+    animation-name: slide-down-first;
+    animation-duration:  1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+@keyframes slide-down-first {
+    0% {
+        transform: translateY(0%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+.bgAnimUpLast {
+    animation-name: slide-up-last;
+    animation-duration:  1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+@keyframes slide-up-last {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(-200%);
+    }
+}
+.bgAnimUpFirst {
+    animation-name: slide-up-first;
+    animation-duration:  1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+@keyframes slide-up-first {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0%);
     }
 }
 
@@ -65,7 +125,7 @@
 }
 
 .MenuList {
-    transition: font-size 1s;
+    transition: font-size 0.5s;
 }
 
 .hoverBar {

@@ -2,6 +2,7 @@ import * as React from 'react';
 import mainimage from './images/main.jpg';
 import oland from './images/oland.jpg';
 import computer from './images/computer.jpg';
+import vineyard from './images/vineyard.jpg';
 // import { debounce } from 'ts-debounce';
 import BackgroundImage from './BackgroundImage';
 import MenuList from './MenuList';
@@ -10,6 +11,7 @@ enum MenuChoice {
     AboutMe = 0, 
     Resume = 1,
     Projects = 2,
+    Contact = 3,
 }
 
 export enum ChangeDirection {
@@ -33,6 +35,7 @@ interface HomeState {
 };
 
 const animTime = 1000;
+const items = 4;
 
 class Home extends React.Component<HomeProps, HomeState> {
     public toggleTwice: boolean = false;
@@ -86,7 +89,7 @@ class Home extends React.Component<HomeProps, HomeState> {
     }
 
     public changeUp = () => {
-        const nextChange = (this.state.active + 1) % 3
+        const nextChange = (this.state.active + 1) % items
         this.setState({
             changeTo: nextChange, 
             changeDirection: ChangeDirection.UP
@@ -95,7 +98,7 @@ class Home extends React.Component<HomeProps, HomeState> {
     }
 
     public changeDown = () => {
-        const nextChange = (this.state.active + 2) % 3
+        const nextChange = (this.state.active + (items-1)) % items
         this.setState({
             changeTo: nextChange,
             changeDirection: ChangeDirection.DOWN,
@@ -131,12 +134,25 @@ class Home extends React.Component<HomeProps, HomeState> {
                     backgroundImage: computer,
                     number: choice
                 }
+            case MenuChoice.Contact:
+                return {
+                    title: 'CONTACT',
+                    backgroundImage: vineyard,
+                    number: choice
+                }
         }
     }
 
     public getClassName = (choice: MenuChoice) => {
         if (this.state.changeTo !== -1 && this.state.active !== this.state.changeTo && (this.state.changeTo === choice || this.state.active === choice)) {
-            // getting swapped from or into
+            // getting swapped from or to
+            if (this.state.active === 0 && this.state.changeTo === items-1) {
+                // special case for from 0 to last
+                return (choice === 0 ? "bgAnimDownFirst" : "bgAnimDownLast");
+            } else if (this.state.active === items-1 && this.state.changeTo === 0) {
+                // special case for from last to 0
+                return (choice === 0 ? "bgAnimUpFirst" : "bgAnimUpLast");
+            }
             return (this.state.changeDirection === ChangeDirection.UP ? "bgAnimUp" : "bgAnimDown");
         } else {
             // active or not
@@ -145,25 +161,17 @@ class Home extends React.Component<HomeProps, HomeState> {
     } 
 
     public render() {
-        const prev = this.getMenuItem((this.state.active + 2) % 3);
-        const current = this.getMenuItem(this.state.active);
-        const next = this.getMenuItem((this.state.active + 1) % 3);
-
+        
         return <div
             className="h-full relative"
         >
-            <BackgroundImage
-                backgroundImage={prev.backgroundImage}
-                className={this.getClassName(prev.number)}
-            />
-            <BackgroundImage
-                backgroundImage={current.backgroundImage}
-                className={this.getClassName(current.number)}
-            />
-            <BackgroundImage
-                backgroundImage={next.backgroundImage}
-                className={this.getClassName(next.number)}
-            />
+            {Array.from(Array(items).keys()).map(choice => {
+                return <BackgroundImage
+                    key={choice}
+                    backgroundImage={this.getMenuItem(choice).backgroundImage}
+                    className={this.getClassName(this.getMenuItem(choice).number)}
+                />
+            })}
             <div className="absolute z-10 pin">
                 <div className="flex text-white h-full">
                     <div className="flex-1 flex flex-col cursor-pointer"
@@ -185,11 +193,8 @@ class Home extends React.Component<HomeProps, HomeState> {
                             <div className="flex-1"/>
                         </div>
                     </div>
-                    <MenuList titles={
-                        [this.getMenuItem(MenuChoice.AboutMe).title,
-                        this.getMenuItem(MenuChoice.Resume).title,
-                        this.getMenuItem(MenuChoice.Projects).title]
-                        }
+                    <MenuList 
+                        titles={Array.from(Array(items).keys()).map(choice => this.getMenuItem(choice).title)}
                         active={this.state.changeTo === -1 ? this.state.active : this.state.changeTo}
                     />
                 </div>
