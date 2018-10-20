@@ -1,8 +1,10 @@
 import * as React from 'react';
+import { MenuChoice } from './Home';
 
 interface MenuListProps {
     titles: string[];
     active: number;
+    onClick(choice: MenuChoice): void;
 }
 interface MenuListState {
     hover: number;
@@ -16,13 +18,14 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
         }
     }
     public render() {
-        const {titles, active} = this.props;
+        const {titles, active, onClick} = this.props;
         return (<div className="flex-no-grow flex flex-col justify-center text-right">
             {titles.map((title, index) => (
                 <div 
                 key={"menulist_" + index}
                 onMouseEnter={() => this.setState({hover: index})}
                 onMouseLeave={() => this.setState({hover: -1})}
+                onClick={() => onClick(index)}
                 className={"flex-no-grow  h-6 flex cursor-pointer " 
             }>
                 <div className="flex-1 flex flex-col justify-center">

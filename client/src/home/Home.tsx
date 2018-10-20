@@ -1,13 +1,14 @@
 import * as React from 'react';
-import mainimage from './images/main.jpg';
-import oland from './images/oland.jpg';
-import computer from './images/computer.jpg';
-import vineyard from './images/vineyard.jpg';
+import mainimage from 'src/resources/images/main.jpg';
+import oland from 'src/resources/images/oland.jpg';
+import vineyard from 'src/resources/images/vineyard.jpg';
+import computer from 'src/resources/images/computer.jpg';
 // import { debounce } from 'ts-debounce';
 import BackgroundImage from './BackgroundImage';
 import MenuList from './MenuList';
+import Socials from './Socials';
 
-enum MenuChoice {
+export enum MenuChoice {
     AboutMe = 0, 
     Resume = 1,
     Projects = 2,
@@ -35,7 +36,7 @@ interface HomeState {
 };
 
 const animTime = 1000;
-const items = 4;
+const numItems = 4;
 
 class Home extends React.Component<HomeProps, HomeState> {
     public toggleTwice: boolean = false;
@@ -67,9 +68,9 @@ class Home extends React.Component<HomeProps, HomeState> {
         if (this.state.changeTo === -1 && this.toggleTwice) {
             this.toggleTwice = false;
             if (e.deltaY > 0) {
-                this.changeUp();
-            } else {
                 this.changeDown();
+            } else {
+                this.changeUp();
             }
         } else if (this.state.changeTo === -1) {
             this.toggleTwice = true;
@@ -81,27 +82,27 @@ class Home extends React.Component<HomeProps, HomeState> {
     public handleKeyDown = (e: KeyboardEvent) => {
         if (this.state.changeTo === -1) {
             if (e.keyCode === 40) {
-                this.changeUp();
-            } else if (e.keyCode === 38) {
                 this.changeDown();
+            } else if (e.keyCode === 38) {
+                this.changeUp();
             }
         }
     }
 
-    public changeUp = () => {
-        const nextChange = (this.state.active + 1) % items
+    public changeDown = () => {
+        const nextChange = (this.state.active + 1) % numItems
         this.setState({
             changeTo: nextChange, 
-            changeDirection: ChangeDirection.UP
+            changeDirection: ChangeDirection.DOWN
         });
         this.delayChange(nextChange);
     }
 
-    public changeDown = () => {
-        const nextChange = (this.state.active + (items-1)) % items
+    public changeUp = () => {
+        const nextChange = (this.state.active + (numItems-1)) % numItems
         this.setState({
             changeTo: nextChange,
-            changeDirection: ChangeDirection.DOWN,
+            changeDirection: ChangeDirection.UP,
         });
         this.delayChange(nextChange);
     }
@@ -146,17 +147,31 @@ class Home extends React.Component<HomeProps, HomeState> {
     public getClassName = (choice: MenuChoice) => {
         if (this.state.changeTo !== -1 && this.state.active !== this.state.changeTo && (this.state.changeTo === choice || this.state.active === choice)) {
             // getting swapped from or to
-            if (this.state.active === 0 && this.state.changeTo === items-1) {
+            if (this.state.active === 0 && this.state.changeTo === numItems-1) {
                 // special case for from 0 to last
                 return (choice === 0 ? "bgAnimDownFirst" : "bgAnimDownLast");
-            } else if (this.state.active === items-1 && this.state.changeTo === 0) {
+            } else if (this.state.active === numItems-1 && this.state.changeTo === 0) {
                 // special case for from last to 0
                 return (choice === 0 ? "bgAnimUpFirst" : "bgAnimUpLast");
             }
-            return (this.state.changeDirection === ChangeDirection.UP ? "bgAnimUp" : "bgAnimDown");
+            return (this.state.changeDirection !== ChangeDirection.UP ? "bgAnimUp" : "bgAnimDown");
         } else {
             // active or not
             return (this.state.active === choice ? "" : "hidden")
+        }
+    }
+
+    public clickedChoice = (choice: MenuChoice) => {
+        if (this.state.active + 1 === choice) {
+            this.changeDown();
+        } else if (this.state.active - 1 === choice) {
+            this.changeUp();
+        } else {
+            this.setState({
+                changeTo: choice,
+                changeDirection: choice < this.state.active ? ChangeDirection.UP : ChangeDirection.DOWN,
+            });
+            this.delayChange(choice);
         }
     } 
 
@@ -165,7 +180,7 @@ class Home extends React.Component<HomeProps, HomeState> {
         return <div
             className="h-full relative"
         >
-            {Array.from(Array(items).keys()).map(choice => {
+            {Array.from(Array(numItems).keys()).map(choice => {
                 return <BackgroundImage
                     key={choice}
                     backgroundImage={this.getMenuItem(choice).backgroundImage}
@@ -174,27 +189,34 @@ class Home extends React.Component<HomeProps, HomeState> {
             })}
             <div className="absolute z-10 pin">
                 <div className="flex text-white h-full">
-                    <div className="flex-1 flex flex-col cursor-pointer"
-                        onMouseEnter={() => this.setState({hover: true})}
-                        onMouseLeave={() => this.setState({hover: false})}
-                    >
-                        <div className="flex-2"/>
-                        <div className="flex-1 pl-16 flex">
+                    <div className="flex-1 flex flex-col">
+                        <Socials 
+                            className="flex-1"
+                        />
+                        <div 
+                            className="flex-2 pl-16 cursor-pointer flex flex-col justify-end"
+                            onMouseEnter={() => this.setState({hover: true})}
+                            onMouseLeave={() => this.setState({hover: false})}
+                        >
                              <div 
-                                className={"flex-no-grow text-5xl tracking-tighter font-bold " + 
+                                className={"flex-no-grow text-5xl tracking-tighter font-bold flex " + 
                                 (this.state.changeTo !== -1 
                                     ? "fadeOutIn"
                                     : ""
                                 )
                             }>
-                                {this.state.title}
-                                <div className={"bg-white h-3 hoverBar " + (this.state.hover ? "w-full": "w-0") } />
+                                <div className="flex-no-grow">
+                                    {this.state.title}
+                                    <div className={"bg-white h-3 hoverBar " + (this.state.hover ? "w-full": "w-0") } />
+                                </div>
+                                <div className="flex-1"/>
                             </div>
-                            <div className="flex-1"/>
                         </div>
+                        <div className="flex-1"/>
                     </div>
                     <MenuList 
-                        titles={Array.from(Array(items).keys()).map(choice => this.getMenuItem(choice).title)}
+                        onClick={this.clickedChoice}
+                        titles={Array.from(Array(numItems).keys()).map(choice => this.getMenuItem(choice).title)}
                         active={this.state.changeTo === -1 ? this.state.active : this.state.changeTo}
                     />
                 </div>
