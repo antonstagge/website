@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { MenuChoice } from './Home';
 
-interface MenuListProps {
+export interface MenuListProps {
     titles: string[];
     active: number;
+    className?: string;
     onClick(choice: MenuChoice): void;
 }
 interface MenuListState {
@@ -18,8 +19,8 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
         }
     }
     public render() {
-        const {titles, active, onClick} = this.props;
-        return (<div className="flex-no-grow flex flex-col justify-center text-right">
+        const {titles, active,className, onClick} = this.props;
+        return (<div className={"flex flex-col justify-center text-right " + className}>
             {titles.map((title, index) => (
                 <div 
                 key={"menulist_" + index}
@@ -29,7 +30,7 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
                 className={"flex-no-grow  h-6 flex cursor-pointer " 
             }>
                 <div className="flex-1 flex flex-col justify-center">
-                    <div className={"flex-no-grow tracking-tighter font-semibold MenuList " + 
+                    <div className={"flex-no-grow tracking-tighter font-semibold whitespace-no-wrap MenuList " + 
                         (this.state.hover === -1 
                             ? index === active
                                 ? "text-3xl"

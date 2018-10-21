@@ -37,7 +37,40 @@ interface HomeState {
 };
 
 const animTime = 1000;
-const numItems = 4;
+export const numItems = 4;
+
+export const getMenuItem = (choice: MenuChoice): MenuItem => {
+    switch(choice) {
+        case MenuChoice.AboutMe: 
+            return {
+                title: 'ABOUT ME',
+                backgroundImage: oland,
+                number: choice,
+                link: 'aboutme'
+            }
+        case MenuChoice.Resume:
+            return {
+                title: 'RESUME',
+                backgroundImage: mainimage,
+                number: choice,
+                link: 'resume'
+            }
+        case MenuChoice.Projects:
+            return {
+                title: 'PROJECTS',
+                backgroundImage: computer,
+                number: choice,
+                link: 'projects'
+            }
+        case MenuChoice.Contact:
+            return {
+                title: 'CONTACT',
+                backgroundImage: vineyard,
+                number: choice,
+                link: 'contact'
+            }
+    }
+}
 
 class Home extends React.Component<HomeProps, HomeState> {
     public toggleTwice: boolean = false;
@@ -45,7 +78,7 @@ class Home extends React.Component<HomeProps, HomeState> {
     constructor(props: HomeProps) {
         super(props);
         this.state = {
-            title: this.getMenuItem(MenuChoice.AboutMe).title,
+            title: getMenuItem(MenuChoice.AboutMe).title,
             active: MenuChoice.AboutMe,
             changeTo: -1,
             changeDirection: ChangeDirection.UP,
@@ -109,44 +142,11 @@ class Home extends React.Component<HomeProps, HomeState> {
     }
 
     public delayChange = (nextChange: MenuChoice) => {
-        setTimeout(() => this.setState({title: this.getMenuItem(nextChange).title}), animTime/2)
+        setTimeout(() => this.setState({title: getMenuItem(nextChange).title}), animTime/2)
         setTimeout(() => {
             this.setState({active: nextChange});
             setTimeout(() => this.setState({changeTo: -1}), 500);
         }, animTime);
-    }
-
-    public getMenuItem = (choice: MenuChoice): MenuItem => {
-        switch(choice) {
-            case MenuChoice.AboutMe: 
-                return {
-                    title: 'ABOUT ME',
-                    backgroundImage: oland,
-                    number: choice,
-                    link: 'aboutme'
-                }
-            case MenuChoice.Resume:
-                return {
-                    title: 'RESUME',
-                    backgroundImage: mainimage,
-                    number: choice,
-                    link: 'resume'
-                }
-            case MenuChoice.Projects:
-                return {
-                    title: 'PROJECTS',
-                    backgroundImage: computer,
-                    number: choice,
-                    link: 'projects'
-                }
-            case MenuChoice.Contact:
-                return {
-                    title: 'CONTACT',
-                    backgroundImage: vineyard,
-                    number: choice,
-                    link: 'contact'
-                }
-        }
     }
 
     public getClassName = (choice: MenuChoice) => {
@@ -190,8 +190,8 @@ class Home extends React.Component<HomeProps, HomeState> {
             {Array.from(Array(numItems).keys()).map(choice => {
                 return <BackgroundImage
                     key={choice}
-                    backgroundImage={this.getMenuItem(choice).backgroundImage}
-                    className={this.getClassName(this.getMenuItem(choice).number)}
+                    backgroundImage={getMenuItem(choice).backgroundImage}
+                    className={this.getClassName(getMenuItem(choice).number)}
                 />
             })}
             <div className="absolute z-10 pin">
@@ -201,7 +201,7 @@ class Home extends React.Component<HomeProps, HomeState> {
                             className="flex-1"
                         />
                         <NoStyleLink 
-                            to={this.getMenuItem(this.state.active).link}
+                            to={getMenuItem(this.state.active).link}
                             className="flex-5 pl-16 cursor-pointer flex flex-col justify-end"
                             onMouseEnter={() => this.setState({hover: true})}
                             onMouseLeave={() => this.setState({hover: false})}
@@ -223,8 +223,9 @@ class Home extends React.Component<HomeProps, HomeState> {
                         <div className="flex-1"/>
                     </div>
                     <MenuList 
+                        className="flex-no-grow"
                         onClick={this.clickedChoice}
-                        titles={Array.from(Array(numItems).keys()).map(choice => this.getMenuItem(choice).title)}
+                        titles={Array.from(Array(numItems).keys()).map(choice => getMenuItem(choice).title)}
                         active={this.state.changeTo === -1 ? this.state.active : this.state.changeTo}
                     />
                 </div>

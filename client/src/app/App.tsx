@@ -18,7 +18,7 @@ class App extends React.Component<AppProps, AppState> {
     public render() {
         return (<div className="min-h-screen p-6 select-none font-default flex flex-col">
             <Router>
-                <div className="flex-1 flex flex-col border shadow">
+                <div className="flex-1 flex flex-col border border-black shadow-md">
                     <Route exact={true} path="/" component={Home} />
                     <Route path="/aboutme" component={AboutMe} />
                     <Route path="/resume" component={Resume} />
