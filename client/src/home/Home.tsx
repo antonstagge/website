@@ -3,10 +3,10 @@ import mainimage from 'src/resources/images/main.jpg';
 import oland from 'src/resources/images/oland.jpg';
 import vineyard from 'src/resources/images/vineyard.jpg';
 import computer from 'src/resources/images/computer.jpg';
-// import { debounce } from 'ts-debounce';
 import BackgroundImage from './BackgroundImage';
 import MenuList from './MenuList';
 import Socials from './Socials';
+import NoStyleLink from 'src/shared/NoStyleLink';
 
 export enum MenuChoice {
     AboutMe = 0, 
@@ -24,6 +24,7 @@ interface MenuItem {
     title: string;
     backgroundImage: string;
     number: MenuChoice;
+    link: string;
 }
 
 interface HomeProps {};
@@ -121,25 +122,29 @@ class Home extends React.Component<HomeProps, HomeState> {
                 return {
                     title: 'ABOUT ME',
                     backgroundImage: oland,
-                    number: choice
+                    number: choice,
+                    link: 'aboutme'
                 }
             case MenuChoice.Resume:
                 return {
                     title: 'RESUME',
                     backgroundImage: mainimage,
-                    number: choice
+                    number: choice,
+                    link: 'resume'
                 }
             case MenuChoice.Projects:
                 return {
                     title: 'PROJECTS',
                     backgroundImage: computer,
-                    number: choice
+                    number: choice,
+                    link: 'projects'
                 }
             case MenuChoice.Contact:
                 return {
                     title: 'CONTACT',
                     backgroundImage: vineyard,
-                    number: choice
+                    number: choice,
+                    link: 'contact'
                 }
         }
     }
@@ -176,9 +181,11 @@ class Home extends React.Component<HomeProps, HomeState> {
     } 
 
     public render() {
-        
         return <div
-            className="h-full relative"
+            className="flex-1 max-h-full relative overflow-hidden"
+            style={{
+                height: 'calc(100vh - 3rem)'
+            }}
         >
             {Array.from(Array(numItems).keys()).map(choice => {
                 return <BackgroundImage
@@ -193,8 +200,9 @@ class Home extends React.Component<HomeProps, HomeState> {
                         <Socials 
                             className="flex-1"
                         />
-                        <div 
-                            className="flex-2 pl-16 cursor-pointer flex flex-col justify-end"
+                        <NoStyleLink 
+                            to={this.getMenuItem(this.state.active).link}
+                            className="flex-5 pl-16 cursor-pointer flex flex-col justify-end"
                             onMouseEnter={() => this.setState({hover: true})}
                             onMouseLeave={() => this.setState({hover: false})}
                         >
@@ -206,12 +214,12 @@ class Home extends React.Component<HomeProps, HomeState> {
                                 )
                             }>
                                 <div className="flex-no-grow">
-                                    {this.state.title}
+                                        {this.state.title}
                                     <div className={"bg-white h-3 hoverBar " + (this.state.hover ? "w-full": "w-0") } />
                                 </div>
                                 <div className="flex-1"/>
                             </div>
-                        </div>
+                        </NoStyleLink>
                         <div className="flex-1"/>
                     </div>
                     <MenuList 

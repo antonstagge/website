@@ -1,4 +1,8 @@
 import Home from 'src/home/Home';
+import AboutMe from 'src/aboutme/AboutMe';
+import Resume from 'src/resume/Resume';
+import Projects from 'src/projects/Projects';
+import Contact from 'src/contact/Contact';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import * as React from 'react'; 
 import './App.css';
@@ -12,12 +16,16 @@ class App extends React.Component<AppProps, AppState> {
     }
 
     public render() {
-        return (<div className="h-screen p-6 select-none font-default">
-            <div className="h-full overflow-hidden">
-                <Router>
+        return (<div className="min-h-screen p-6 select-none font-default flex flex-col">
+            <Router>
+                <div className="flex-1 flex flex-col border shadow">
                     <Route exact={true} path="/" component={Home} />
-                </Router>
-            </div>
+                    <Route path="/aboutme" component={AboutMe} />
+                    <Route path="/resume" component={Resume} />
+                    <Route path="/projects" component={Projects} />
+                    <Route path="/contact" component={Contact} />   
+                </div>
+            </Router>
         </div>
         );
     }
