@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MenuChoice } from './Home';
+import { MenuChoice } from 'src/home/Home';
 
 export interface MenuListProps {
     titles: string[];

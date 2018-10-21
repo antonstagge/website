@@ -4,7 +4,7 @@ import oland from 'src/resources/images/oland.jpg';
 import vineyard from 'src/resources/images/vineyard.jpg';
 import computer from 'src/resources/images/computer.jpg';
 import BackgroundImage from './BackgroundImage';
-import MenuList from './MenuList';
+import MenuList from 'src/shared/MenuList';
 import Socials from './Socials';
 import NoStyleLink from 'src/shared/NoStyleLink';
 

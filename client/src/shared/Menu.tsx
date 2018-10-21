@@ -1,7 +1,7 @@
 import * as React from 'react';
 import oneham from 'src/resources/images/oneham.png';
 import onehamblack from 'src/resources/images/onehamblack.png';
-import MenuList from 'src/home/MenuList';
+import MenuList from './MenuList';
 import { MenuChoice, getMenuItem } from 'src/home/Home';
 
 interface MenuProps {
