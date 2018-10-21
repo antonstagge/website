@@ -62,7 +62,10 @@ class Menu extends React.Component<MenuProps, MenuState> {
             {oneHamBlackElem}
         </div>
 
-        return <div className="absolute pin-t pin-r z-10 pt-6 pr-6 flex flex-col justify-center">
+        return <div 
+            className="absolute pin-t pin-r z-10 pt-6 pr-6 flex flex-col justify-center"
+            onBlur={() => this.setState({show: false})}
+        >
             <div className="flex-no-grow cursor-pointer h-12 w-12 flex flex-col justify-center z-20 fadeIn"
                 onMouseEnter={() => this.setState({hover: true})}
                 onMouseLeave={() => this.setState({hover: false})}
@@ -70,7 +73,10 @@ class Menu extends React.Component<MenuProps, MenuState> {
             >
                 {this.state.show ? hamblackElem :hamElem}
             </div>
-            <div className="absolute pin-r pin-y flex flex-col justify-center bg-white border-l border-black overflow-hidden"
+            <div 
+                className={"absolute pin-r pin-y flex flex-col justify-center bg-white overflow-hidden "
+                    + (this.state.show ? "border-l border-b border-black": "")
+                }
                 style={{
                     height: 'calc(100vh - 3rem)',
                     width: (this.state.show ? '270%' : '0%'),
