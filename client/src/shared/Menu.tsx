@@ -63,7 +63,7 @@ class Menu extends React.Component<MenuProps, MenuState> {
         </div>
 
         return <div className="absolute pin-t pin-r z-10 pt-6 pr-6 flex flex-col justify-center">
-            <div className="flex-no-grow cursor-pointer h-12 w-12 flex flex-col justify-center z-20"
+            <div className="flex-no-grow cursor-pointer h-12 w-12 flex flex-col justify-center z-20 fadeIn"
                 onMouseEnter={() => this.setState({hover: true})}
                 onMouseLeave={() => this.setState({hover: false})}
                 onClick={() => this.setState({show: !this.state.show})}

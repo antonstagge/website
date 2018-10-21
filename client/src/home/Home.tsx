@@ -7,6 +7,7 @@ import BackgroundImage from './BackgroundImage';
 import MenuList from 'src/shared/MenuList';
 import Socials from './Socials';
 import NoStyleLink from 'src/shared/NoStyleLink';
+import { RouteComponentProps } from 'react-router-dom';
 
 export enum MenuChoice {
     AboutMe = 0, 
@@ -27,7 +28,6 @@ interface MenuItem {
     link: string;
 }
 
-interface HomeProps {};
 interface HomeState {
     title: string;
     active: MenuChoice;
@@ -72,10 +72,10 @@ export const getMenuItem = (choice: MenuChoice): MenuItem => {
     }
 }
 
-class Home extends React.Component<HomeProps, HomeState> {
+class Home extends React.Component<RouteComponentProps, HomeState> {
     public toggleTwice: boolean = false;
     public toggleTwiceRender: boolean = false;
-    constructor(props: HomeProps) {
+    constructor(props: RouteComponentProps) {
         super(props);
         this.state = {
             title: getMenuItem(MenuChoice.AboutMe).title,
@@ -180,6 +180,10 @@ class Home extends React.Component<HomeProps, HomeState> {
         }
     } 
 
+    public doubleClickedChoice = (choice: MenuChoice) => {
+        this.props.history.push(getMenuItem(choice).link);
+    }
+
     public render() {
         return <div
             className="flex-1 max-h-full relative overflow-hidden"
@@ -225,6 +229,7 @@ class Home extends React.Component<HomeProps, HomeState> {
                     <MenuList 
                         className="flex-no-grow"
                         onClick={this.clickedChoice}
+                        onDoubleClick={this.doubleClickedChoice}
                         titles={Array.from(Array(numItems).keys()).map(choice => getMenuItem(choice).title)}
                         active={this.state.changeTo === -1 ? this.state.active : this.state.changeTo}
                     />

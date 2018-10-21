@@ -14,12 +14,14 @@ class AboutMe extends React.Component<RouteComponentProps, AboutMeState> {
     }
 
     public render() {
-        console.log(this.props)
         return <div className="flex-1 flex flex-col relative">
-           <BackgroundImage 
-                backgroundImage={oland}
-           />
-           <div className="absolute text-white text-5xl tracking-tighter font-bold pin-t pin-l z-10 pt-6 pl-16">
+            <div className="overflow-hidden shrinkHeight">
+                <BackgroundImage 
+                    backgroundImage={oland}
+                />
+            </div>
+           
+           <div className="absolute text-white text-5xl tracking-tighter font-bold pin-t pin-l z-10 pt-6 pl-16 fadeIn">
                 {'ABOUT ME'}
            </div>
            <Menu 

@@ -6505,6 +6505,66 @@ table {
   }
 }
 
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+          animation-name: fadeIn;
+  -webkit-animation-duration: .5s;
+          animation-duration: .5s;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.shrinkHeight {
+  -webkit-animation-name: shrinkHeight;
+          animation-name: shrinkHeight;
+  -webkit-animation-duration: .5s;
+          animation-duration: .5s;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes shrinkHeight {
+  0% {
+    height: calc(100vh - 3rem);
+  }
+
+  100% {
+    height: 16rem;
+  }
+}
+
+@keyframes shrinkHeight {
+  0% {
+    height: calc(100vh - 3rem);
+  }
+
+  100% {
+    height: 16rem;
+  }
+}
+
 .MenuList {
   transition: font-size .5s;
 }
