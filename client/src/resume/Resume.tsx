@@ -40,7 +40,14 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
             </div>
            
            <div className="absolute text-white text-5xl tracking-tighter font-bold pin-t pin-l z-10 pt-6 pl-16 fadeIn">
-                {'RESUME'}
+                <div>
+                    {'RESUME'}
+                </div>
+                <div className="text-lg tracking-normal cursor-pointer"
+                    onClick={() => this.props.history.push("/")}
+                >
+                    {'back'}
+                </div>
            </div>
            <Menu 
                 changeLocation={this.props.history.push}
@@ -59,7 +66,7 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
 
                 <div className="text-3xl pt-8 pb-4 text-grey-dark">Experience</div>
                 {this.CVItem('Software developer', 'SIPRI - Stockholm International Peace Research Institute' , 'spring 2016',
-                    "As part of a school project to recreate a database and web application used at SIPRI, I was front-end lead. I we created the front-end using React."
+                    "As part of a school project to recreate a database and web application used at SIPRI, I was front-end lead. We created the front-end using React."
                 )}
                 {this.CVItem('Software developer', 'Windfall VR' , 'summer 2017',
                     "Developed a game in VR using Unity Engine and C#. This was the early phases of the game."

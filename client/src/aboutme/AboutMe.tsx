@@ -23,7 +23,14 @@ class AboutMe extends React.Component<RouteComponentProps, AboutMeState> {
             </div>
            
            <div className="absolute text-white text-5xl tracking-tighter font-bold pin-t pin-l z-10 pt-6 pl-16 fadeIn">
-                {'ABOUT ME'}
+                <div>
+                    {'ABOUT ME'}
+                </div>
+                <div className="text-lg tracking-normal cursor-pointer"
+                    onClick={() => this.props.history.push("/")}
+                >
+                    {'back'}
+                </div>
            </div>
            <Menu 
                 changeLocation={this.props.history.push}
