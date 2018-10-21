@@ -12,6 +12,7 @@ interface MenuProps {
 interface MenuState {
     hover: boolean;
     show: boolean;
+    inside: boolean;
 }
 
 class Menu extends React.Component<MenuProps, MenuState> {
@@ -20,6 +21,21 @@ class Menu extends React.Component<MenuProps, MenuState> {
         this.state = {
             hover: false,
             show: false,
+            inside: true,
+        }
+    }
+
+    public componentDidMount() {
+        window.addEventListener('click', this.handleClickOutside);
+    }
+
+    public componentWillUnmount() {
+        window.removeEventListener('click', this.handleClickOutside);
+    }
+    
+    public handleClickOutside = () => {
+        if (!this.state.inside) {
+            this.setState({show: false, inside: false});
         }
     }
 
@@ -64,7 +80,8 @@ class Menu extends React.Component<MenuProps, MenuState> {
 
         return <div 
             className="absolute pin-t pin-r z-10 pt-6 pr-6 flex flex-col justify-center"
-            onBlur={() => this.setState({show: false})}
+            onMouseEnter={() => this.setState({inside: true})}
+            onMouseLeave={() => this.setState({inside: false})}
         >
             <div className="flex-no-grow cursor-pointer h-12 w-12 flex flex-col justify-center z-20 fadeIn"
                 onMouseEnter={() => this.setState({hover: true})}
@@ -74,14 +91,16 @@ class Menu extends React.Component<MenuProps, MenuState> {
                 {this.state.show ? hamblackElem :hamElem}
             </div>
             <div 
-                className={"absolute pin-r pin-y flex flex-col justify-center bg-white overflow-hidden "
-                    + (this.state.show ? "border-l border-b border-black": "")
+                className={"absolute pin-r pin-y flex flex-col justify-center bg-white overflow-hidden border-black "
+                    + (this.state.show ? "border-l border-b ": "border-b")
                 }
                 style={{
                     height: 'calc(100vh - 3rem)',
                     width: (this.state.show ? '270%' : '0%'),
                     transition: 'width 1s'
                 }}
+                onMouseEnter={() => this.setState({inside: true})}
+                onMouseLeave={() => this.setState({inside: false})}
             >
                 <MenuList 
                     className="flex-no-grow"

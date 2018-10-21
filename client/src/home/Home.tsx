@@ -12,7 +12,7 @@ import { RouteComponentProps } from 'react-router-dom';
 export enum MenuChoice {
     AboutMe = 0, 
     Resume = 1,
-    Projects = 2,
+    Portfolio = 2,
     Contact = 3,
 }
 
@@ -55,12 +55,12 @@ export const getMenuItem = (choice: MenuChoice): MenuItem => {
                 number: choice,
                 link: 'resume'
             }
-        case MenuChoice.Projects:
+        case MenuChoice.Portfolio:
             return {
-                title: 'PROJECTS',
+                title: 'PORTFOLIO',
                 backgroundImage: computer,
                 number: choice,
-                link: 'projects'
+                link: 'portfolio'
             }
         case MenuChoice.Contact:
             return {

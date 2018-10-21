@@ -1,7 +1,7 @@
 import Home from 'src/home/Home';
 import AboutMe from 'src/aboutme/AboutMe';
 import Resume from 'src/resume/Resume';
-import Projects from 'src/projects/Projects';
+import Portfolio from 'src/portfolio/Portfolio';
 import Contact from 'src/contact/Contact';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import * as React from 'react'; 
@@ -22,7 +22,7 @@ class App extends React.Component<AppProps, AppState> {
                     <Route exact={true} path="/" component={Home} />
                     <Route path="/aboutme" component={AboutMe} />
                     <Route path="/resume" component={Resume} />
-                    <Route path="/projects" component={Projects} />
+                    <Route path="/portfolio" component={Portfolio} />
                     <Route path="/contact" component={Contact} />   
                 </div>
             </Router>

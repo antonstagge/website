@@ -39,7 +39,7 @@ class AboutMe extends React.Component<RouteComponentProps, AboutMeState> {
                 </div>
                 <div className="flex-1 pl-4 text-lg">
                     <p>
-                    I'm a social and happy guy and I'm at the moment doing my masters studies in 
+                    My name is Anton Stagge and I'm a social, outgoing and happy guy and I'm at the moment doing my masters studies in 
                     engineering and computer science at the Royal Institute of Technology. 
                     I've completed my bachelors degree, where I did a bachelors thesis about on the 
                     subject of applying machine learning techniques on Automated Guided Vehicles in 
@@ -48,8 +48,8 @@ class AboutMe extends React.Component<RouteComponentProps, AboutMeState> {
                     <p>&nbsp;</p>
                     <p>
                     I'm a very meticulous person that always strives after perfection. 
-                    I've it easy for me to learn new things fast, but I always want and try to understand 
-                    every detail. Because it's then that I can perform at my best, 
+                    It is easy for me to learn new things quickly, but I always want, and try, to understand 
+                    everything in detail. It is then that I can perform best, 
                     one could say that I'm a fullstack thinker. 
                     </p>
                     <p>&nbsp;</p>
