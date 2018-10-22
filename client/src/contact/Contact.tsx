@@ -12,6 +12,13 @@ enum InputType {
     Message
 }
 
+enum CanSend {
+    True = 0,
+    NameMissing = 1 << 0,
+    EmailMissing = 1 << 1,
+    MessageMissing = 1 << 2,
+}
+
 interface ContactState {
     name: string;
     email: string;
@@ -20,6 +27,7 @@ interface ContactState {
     sending: boolean;
     success: boolean | null;
     error: string;
+    canSend: CanSend;
 }
 
 class Contact extends React.Component<RouteComponentProps, ContactState> {
@@ -33,6 +41,7 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
             sending: false,
             success: null,
             error: '',
+            canSend: CanSend.NameMissing | CanSend.EmailMissing | CanSend.MessageMissing,
         }
     }
 
@@ -47,22 +56,48 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
     }
 
     public handleInput = (type: InputType, value: string) => {
+        value = value.trim()
         switch(type) {
             case InputType.Name:
-                this.setState({name: value});
+                this.setState({
+                    name: value,
+                    canSend: value !== "" ? this.state.canSend & ~CanSend.NameMissing : this.state.canSend | CanSend.NameMissing
+                });
                 return;
             case InputType.Email:
-                this.setState({email: value});
+                this.setState({
+                    email: value,
+                    canSend: value !== "" ? this.state.canSend & ~CanSend.EmailMissing : this.state.canSend | CanSend.EmailMissing
+                });
                 return;
             case InputType.Message:
-                this.setState({message: value});
+                this.setState({
+                    message: value,
+                    canSend: value !== "" ? this.state.canSend & ~CanSend.MessageMissing : this.state.canSend | CanSend.MessageMissing
+                });
                 return;
         }
     }
 
-    public listItem = (title: string, descr:string) => <div className="flex py-1 pl-2">
+    public listItem = (title: string, descr:string) => 
+        <div className="flex py-1 pl-2">
             <div className="font-bold">{title}:</div>
             <div>&nbsp;{descr}</div>
+        </div>
+
+    public styledInput = (title: string, type: InputType, canSendValue: CanSend, className: string) => 
+        <div className={"flex-1 flex flex-col pr-4 " + className}>
+            <label htmlFor={title} className="text-sm text-grey-dark flex">
+                {title}&nbsp;
+                {(this.state.canSend & canSendValue)
+                    ? <div className="text-red-light text-xs flex flex-col justify-center">(required)</div>
+                    : null
+                }
+            </label>
+            <input type="text" id={title}
+                className="border border-black "
+                onChange={(e) => this.handleInput(type, e.target.value)}
+            />
         </div>
 
     public render() {
@@ -134,40 +169,41 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
                         Reach out to me here
                     </div>
                     <div className="flex">
-                        <div className="flex-1 flex flex-col pr-4">
-                            <label htmlFor="name" className="text-sm text-grey-dark">Name</label>
-                            <input type="text" id="name"
-                                className="border border-black "
-                                onChange={(e) => this.handleInput(InputType.Name, e.target.value)}
-                            />
-                        </div>
-                        <div className="flex-1 flex flex-col pl-4">
-                            <label htmlFor="email" className="text-sm text-grey-dark">Email</label>
-                            <input type="text" id="email"
-                                className="border border-black "
-                                onChange={(e) => this.handleInput(InputType.Email, e.target.value)}
-                            />
-                        </div>
+                        {this.styledInput("Name", InputType.Name, CanSend.NameMissing, "pr-4")}
+                        {this.styledInput("Email", InputType.Email, CanSend.EmailMissing, "pl-4")}
                     </div>
                     <div className="pt-2 flex flex-col">
-                        <label htmlFor="message" className="text-sm text-grey-dark">Message</label>
-                        <textarea name="message" id="message"
+                        <label htmlFor={"Message"} className="text-sm text-grey-dark flex">
+                            {"Message"}&nbsp;
+                            {(this.state.canSend & CanSend.MessageMissing)
+                                ? <div className="text-red-light text-xs flex flex-col justify-center">(required)</div>
+                                : null
+                            }
+                        </label>
+                        <textarea name="Message" id="Message"
                             maxLength={249} 
                             className="border border-black resize-none h-32"
                             onChange={(e) => this.handleInput(InputType.Message, e.target.value)}
                         />
                     </div>
-                    <div className="flex justify-center pt-2">
+                    <div className="flex justify-between pt-2">
+                        <div className="flex-1">
+                            captcha
+                        </div>
                         {this.state.sending
                             ? <div>sending...</div>
                             : this.state.success === null
                                 ? <div    
-                                    className={"w-16 h-10 cursor-pointer border border-black flex flex-col justify-center text-center font-semibold " + 
-                                        (this.state.hover
-                                            ? "text-black bg-white"
-                                            : "bg-black text-white")
+                                    className={"w-16 h-10 border border-black flex flex-col justify-center text-center font-semibold " + 
+                                        (this.state.canSend === CanSend.True
+                                            ? "cursor-pointer " + (this.state.hover
+                                                ? "text-black bg-white"
+                                                : "bg-black text-white")
+                                            : "text-black bg-grey-lighter"
+                                        )
+                                    
                                     }
-                                    onClick={this.sendMessage}
+                                    onClick={() => this.state.canSend === CanSend.True ? this.sendMessage() : null}
                                     onMouseEnter={() => this.setState({hover: true})}
                                     onMouseLeave={() => this.setState({hover: false})}
                                     >
