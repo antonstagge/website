@@ -19,6 +19,7 @@ interface ContactState {
     hover: boolean;
     sending: boolean;
     success: boolean | null;
+    error: string;
 }
 
 class Contact extends React.Component<RouteComponentProps, ContactState> {
@@ -31,18 +32,17 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
             hover: false,
             sending: false,
             success: null,
+            error: '',
         }
     }
 
     public sendMessage = () => {
         if (this.state.sending) {return;}
         this.setState({sending: true});
-        api.post('send_message', this.state).then(resp => {
-            if (api.isOK(resp)) {
-                this.setState({sending: false, success: true})
-            } else {
-                this.setState({sending: false, success: false})
-            }
+        api.post('send_message', this.state).then((resp) => {
+            this.setState({sending: false, success: true})
+        }).catch((badResp) => {
+            this.setState({sending: false, success: false, error: badResp.response.data.error})
         })
     }
 
@@ -178,7 +178,7 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
                                         Success!
                                     </div>
                                     : <div className="text-lg h-10 text-red flex flex-col justify-center text-center font-semibold">
-                                        Woops, something went wrong...
+                                        {this.state.error}
                                     </div>
                         }
                     </div>
