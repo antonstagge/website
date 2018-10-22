@@ -36,7 +36,7 @@ class Menu extends React.Component<MenuProps, MenuState> {
     
     public handleClickOutside = () => {
         if (!this.state.inside) {
-            this.setState({show: false, inside: false});
+            this.setState({show: false, inside: true});
         }
     }
 
@@ -80,7 +80,7 @@ class Menu extends React.Component<MenuProps, MenuState> {
         </div>
 
         return <div 
-            className={"absolute pin-t pin-r z-10 pt-6 pr-6 flex flex-col justify-center " + this.props.className}
+            className={"absolute pin-t pin-r z-10 h-64 pt-6 pr-6 pl-2 flex flex-col justify-start " + this.props.className}
             onMouseEnter={() => this.setState({inside: true})}
             onMouseLeave={() => this.setState({inside: false})}
         >
@@ -92,11 +92,8 @@ class Menu extends React.Component<MenuProps, MenuState> {
                 {this.state.show ? hamblackElem :hamElem}
             </div>
             <div 
-                className={"absolute pin-r pin-y flex flex-col justify-center bg-white overflow-hidden border-black "
-                    + (this.state.show ? "border-l border-b ": "border-b")
-                }
+                className={"absolute pin-r pin-t h-64 flex flex-col justify-end bg-white overflow-hidden border-black "}
                 style={{
-                    height: 'calc(100vh - 3rem)',
                     width: (this.state.show ? '270%' : '0%'),
                     transition: 'width 1s'
                 }}

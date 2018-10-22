@@ -33,7 +33,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                 />
             </div>
             <div className={"absolute text-white text-5xl tracking-tighter font-bold pin-t "
-                + "pin-l z-10 pt-6 pl-16 h-64 flex flex-col justify-between cursor-pointer " 
+                + "pin-l z-10 w-full pt-6 px-16 h-64 flex flex-col justify-between cursor-pointer " 
                 + (this.state.shrink ? "fadeIn" : "fadeOut")}
                 onClick={() => {
                     this.setState({shrink: false});

@@ -16,7 +16,7 @@ class App extends React.Component<AppProps, AppState> {
     }
 
     public render() {
-        return (<div className="min-h-screen p-6 select-none font-default flex flex-col">
+        return (<div className="min-h-screen p-6 pb-0 select-none font-default flex flex-col">
             <Router>
                 <div className="flex-1 flex flex-col border border-black shadow-md">
                     <Route exact={true} path="/" component={Home} />
@@ -26,6 +26,9 @@ class App extends React.Component<AppProps, AppState> {
                     <Route path="/contact" component={Contact} />   
                 </div>
             </Router>
+            <div className="h-6 flex-no-grow text-grey text-right text-sm">
+                Copyright &copy; 2018 Anton Stagge 
+            </div>
         </div>
         );
     }
