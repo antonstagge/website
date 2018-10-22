@@ -25,7 +25,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 # MySQL configuration
 mysql = MySQL(app)
 app.config['MYSQL_USER'] = 'website'
-app.config['MYSQL_PASSWORD'] = 'website'
 app.config['MYSQL_DB'] = 'website'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
@@ -105,13 +104,15 @@ def send_message():
 
 if __name__ == "__main__":
     args = sys.argv[1:]
-    if len(args) != 2:
-        print("specify server gmail addr and password!")
+    if len(args) != 3:
+        print("specify server gmail addr and password and then databse password!")
         sys.exit(-1)
     my_mail = args[0]
     password = args[1]
+    db_pw = args[2]
+    app.config['MYSQL_PASSWORD'] = db_pw
     # Open database connection
-    db = MySQLdb.connect("localhost","website","website","website")
+    db = MySQLdb.connect("localhost","website", db_pw, "website")
     # prepare a cursor object using cursor() method
     cursor = db.cursor()
     # Start thread to send email every day

@@ -1,4 +1,5 @@
 CREATE DATABASE IF NOT EXISTS website;
+CREATE USER IF NOT EXISTS 'website'@'localhost';
 use website;
 
 DROP TABLE IF EXISTS message;
