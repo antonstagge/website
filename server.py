@@ -1,20 +1,21 @@
 # server.py
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, session
 from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
 import json
 import traceback
-from send_mail import send_mails
+from send_mail import mail_checker
 import sys
-import sched, time
 import _thread
 import MySQLdb
+from pyfiglet import Figlet
+import random
+import string
 
-# for sending mail every day
-s = sched.scheduler(time.time, time.sleep)
 
 # The front-end
 app = Flask(__name__, static_folder="client/build/static", template_folder="client/build")
+app.secret_key = 'vXsB4qbqsfbXS2Ss'
 
 # CORS configuration
 # For dev mode only
@@ -29,8 +30,36 @@ app.config['MYSQL_DB'] = 'website'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 @app.route("/")
+@cross_origin()
 def index():
     return render_template("index.html")
+
+@app.route("/api/generate_captcha", methods=['GET', 'POST'])
+@cross_origin()
+def generate_captcha():
+    if request.method == 'GET':
+        captcha_key = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+        session['key'] = captcha_key
+        session.modified = True
+        # Create the ascii version of the key
+        fig = Figlet(font='georgia11')
+        captcha = fig.renderText(captcha_key)
+        return jsonify(captcha), 201
+
+    elif request.method == 'POST':
+        try:
+            payload = request.json
+            key = payload['key']
+            session_key = session['key']
+            if key == session_key:
+                return jsonify({}), 200
+            else:
+                return jsonify({'error': 'Not a match.'}), 403
+        except:
+            return jsonify({'error': 'No session key set.'}), 404
+    else:
+        return jsonify({'error': 'Wrong http method.'}), 405
+
 
 @app.route("/api/get_all_messages")
 @cross_origin()
@@ -73,30 +102,6 @@ def send_message():
         status_code = 500
     return jsonify({}) , status_code
 
-
-def mail_checker(my_mail, password, db, cursor):
-    try:
-        # Fetch the Messages from the database
-        cursor.execute('''SELECT * FROM message;''')
-        results = cursor.fetchall()
-
-        # Add the Messages to a list
-        messages = []
-        for result in results:
-            messages.append(result)
-
-        if len(messages) > 0:
-            ok = send_mails(my_mail, password, messages)
-            if not ok:
-                print("Could not send mail on " + time.strftime("%d/%m/%Y"))
-            else:
-                cursor.execute('''DELETE FROM message;''')
-                db.commit()
-    except:
-        traceback.print_exc()
-
-    s.enter(86400, 1, mail_checker, argument=(my_mail, password,))
-    s.run()
 
 if __name__ == "__main__":
     args = sys.argv[1:]

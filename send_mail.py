@@ -2,6 +2,11 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
 import sys
+import sched, time
+
+
+# for sending mail every day
+s = sched.scheduler(time.time, time.sleep)
 
 def send_mail(my_mail, pw, from_addr, message):
     msg = MIMEMultipart()
@@ -44,6 +49,30 @@ def send_mails(my_mail, pw, messages):
     except smtplib.SMTPException:
         return False
 
+def mail_checker(my_mail, password, db, cursor):
+    try:
+        # Fetch the Messages from the database
+        cursor.execute('''SELECT * FROM message;''')
+        results = cursor.fetchall()
+
+        # Add the Messages to a list
+        messages = []
+        for result in results:
+            messages.append(result)
+
+        if len(messages) > 0:
+            ok = send_mails(my_mail, password, messages)
+            if not ok:
+                print("Could not send mail on " + time.strftime("%d/%m/%Y"))
+            else:
+                print("Mail sent on " + time.strftime("%d/%m/%Y"))
+                cursor.execute('''DELETE FROM message;''')
+                db.commit()
+    except:
+        traceback.print_exc()
+
+    s.enter(86400, 1, mail_checker, argument=(my_mail, password,))
+    s.run()
 
 if __name__ == "__main__":
     args = sys.argv[1:]

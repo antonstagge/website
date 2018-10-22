@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS website;
+use website;
+
 DROP TABLE IF EXISTS message;
 
 CREATE TABLE IF NOT EXISTS message (
