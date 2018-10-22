@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-export const get = (path: string, payload: any) => {
-    return axios.get('http://localhost:5000/api/' + path, {
-        params: payload,
-    })
+export const get = (path: string, payload?: any) => {
+    return axios.get('http://localhost:5000/api/' + path)
 }
 
 export const post = (path: string, payload: any) => {

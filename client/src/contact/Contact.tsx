@@ -1,21 +1,24 @@
 import * as React from 'react';
+import * as api from 'src/api/api';
+import Captcha from './Captcha';
 import { MenuChoice, numItems , getMenuItem} from 'src/home/Home';
 import { RouteComponentProps } from 'react-router-dom';
-import * as api from 'src/api/api';
 import { debounce } from 'ts-debounce';
 import Header from 'src/shared/Header';
+import Button from 'src/shared/Button';
 
 enum InputType {
     Name,
     Email,
-    Message
+    Message,
 }
 
-enum CanSend {
+export enum CanSend {
     True = 0,
     NameMissing = 1 << 0,
     EmailMissing = 1 << 1,
     MessageMissing = 1 << 2,
+    Captcha = 1 << 3,
 }
 
 interface ContactState {
@@ -40,7 +43,7 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
             sending: false,
             success: null,
             error: '',
-            canSend: CanSend.NameMissing | CanSend.EmailMissing | CanSend.MessageMissing,
+            canSend: CanSend.NameMissing | CanSend.EmailMissing | CanSend.MessageMissing | CanSend.Captcha,
         }
 
         this.handleInput = debounce(this.handleInput, 200);
@@ -101,6 +104,16 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
             />
         </div>
 
+    public copyText = (e: React.MouseEvent) => {
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(e.currentTarget);
+        selection.removeAllRanges();
+        selection.addRange(range);
+        // add to clipboard.
+        document.execCommand('copy');
+    }
+
     public render() {
         return <div className="flex-1 flex flex-col relative">
             <Header 
@@ -119,35 +132,9 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
                             Email:&nbsp;
                         </div>
                         <div className="select-text font-bold"
-                            onClick={e => {
-                                const selection = window.getSelection();
-                                const range = document.createRange();
-                                range.selectNodeContents(e.currentTarget);
-                                selection.removeAllRanges();
-                                selection.addRange(range);
-                                // add to clipboard.
-                                document.execCommand('copy');
-                            }}
+                            onClick={this.copyText}
                         >
                             stagge@kth.se
-                        </div>
-                    </div>
-                    <div className="flex text-lg py-2">
-                        <div>
-                            Secondary email:&nbsp;
-                        </div>
-                        <div className="select-text font-bold"
-                            onClick={e => {
-                                const selection = window.getSelection();
-                                const range = document.createRange();
-                                range.selectNodeContents(e.currentTarget);
-                                selection.removeAllRanges();
-                                selection.addRange(range);
-                                // add to clipboard.
-                                document.execCommand('copy');
-                            }}
-                        >
-                            antonstagge95@gmail.com
                         </div>
                     </div>
                     <div className="text-3xl text-grey-dark pt-4 pb-2">
@@ -172,28 +159,28 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
                         />
                     </div>
                     <div className="flex justify-between pt-2">
-                        <div className="flex-1">
-                            captcha
-                        </div>
+                        <Captcha 
+                            setCaptchaValid={(valid) => {
+                                if (valid) {
+                                    this.setState({canSend: this.state.canSend & ~CanSend.Captcha})
+                                } else {
+                                    this.setState({canSend: this.state.canSend | CanSend.Captcha});
+                                }
+                                
+                            }}
+                        />
+                    </div>
+                    <div className="flex justify-end">
                         {this.state.sending
                             ? <div>sending...</div>
                             : this.state.success === null
-                                ? <div    
-                                    className={"w-16 h-10 border border-black flex flex-col justify-center text-center font-semibold " + 
-                                        (this.state.canSend === CanSend.True
-                                            ? "cursor-pointer " + (this.state.hover
-                                                ? "text-black bg-white"
-                                                : "bg-black text-white")
-                                            : "text-black bg-grey-lighter"
-                                        )
-                                    
-                                    }
+                                ? <Button
+                                    className="mt-2 w-1/4"
+                                    valid={this.state.canSend === CanSend.True}
                                     onClick={() => this.state.canSend === CanSend.True ? this.sendMessage() : null}
-                                    onMouseEnter={() => this.setState({hover: true})}
-                                    onMouseLeave={() => this.setState({hover: false})}
                                     >
                                         Send
-                                    </div>
+                                    </Button>
                                 : this.state.success
                                     ? <div className="text-lg h-10 text-green-dark flex flex-col justify-center text-center font-semibold">
                                         Success!

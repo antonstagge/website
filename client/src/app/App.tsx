@@ -3,7 +3,7 @@ import AboutMe from 'src/aboutme/AboutMe';
 import Resume from 'src/resume/Resume';
 import Portfolio from 'src/portfolio/Portfolio';
 import Contact from 'src/contact/Contact';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 import * as React from 'react'; 
 import './App.css';
 

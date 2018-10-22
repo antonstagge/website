@@ -47,18 +47,18 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
                 )}
 
                 <div className="text-3xl pt-8 pb-4 text-grey-dark">Experience</div>
-                {this.CVItem('Software developer', 'SIPRI - Stockholm International Peace Research Institute' , 'spring 2016',
+                {this.CVItem('Software developer', 'SIPRI - Stockholm International Peace Research Institute' , 'Spring 2016',
                     "As part of a school project to recreate a database and web application used at SIPRI, I was front-end lead. We created the front-end using React."
                 )}
-                {this.CVItem('Software developer', 'Windfall VR' , 'summer 2017',
+                {this.CVItem('Software developer', 'Windfall VR' , 'Summer 2017',
                     "Developed a game in VR using Unity Engine and C#. This was the early phases of the game."
                 )}
-                {this.CVItem('Software developer/consultant', 'Decerno' , 'summer 2018',
-                    "I was a fullstack developer, working as a summer consultant. I made a web application using a C# back-end with Domain Driven Design and a React front-end using redux."
+                {this.CVItem('Software developer/consultant', 'Decerno' , 'Summer 2018',
+                    "I was a fullstack developer, working as a consultant. I made a web application using a C# back-end with Domain Driven Design and a React front-end using redux."
                 )}
 
                 <div className="text-3xl pt-8 pb-4 text-grey-dark">Volunteer Experience</div>
-                {this.CVItem('Reception', 'KTH' , 'summer 2017',
+                {this.CVItem('Reception', 'KTH' , 'Summer 2017',
                     "I was part of the 1 month long reception for the new students to KTH. I was a mentor to a group of 13 new students."
                 )}
 
