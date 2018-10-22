@@ -7,6 +7,7 @@ import { MenuChoice, getMenuItem } from 'src/home/Home';
 interface MenuProps {
     titles: string[];
     active: MenuChoice;
+    className?: string;
     changeLocation(path: string): void;
 }
 interface MenuState {
@@ -79,11 +80,11 @@ class Menu extends React.Component<MenuProps, MenuState> {
         </div>
 
         return <div 
-            className="absolute pin-t pin-r z-10 pt-6 pr-6 flex flex-col justify-center"
+            className={"absolute pin-t pin-r z-10 pt-6 pr-6 flex flex-col justify-center " + this.props.className}
             onMouseEnter={() => this.setState({inside: true})}
             onMouseLeave={() => this.setState({inside: false})}
         >
-            <div className="flex-no-grow cursor-pointer h-12 w-12 flex flex-col justify-center z-20 fadeIn"
+            <div className="flex-no-grow cursor-pointer h-12 w-12 flex flex-col justify-center z-20 "
                 onMouseEnter={() => this.setState({hover: true})}
                 onMouseLeave={() => this.setState({hover: false})}
                 onClick={() => this.setState({show: !this.state.show})}

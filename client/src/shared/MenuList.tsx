@@ -21,7 +21,7 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
     }
     public render() {
         const {titles, active,className, onClick, onDoubleClick} = this.props;
-        return (<div className={"flex flex-col justify-center text-right " + className}>
+        return (<div className={"flex flex-col justify-center text-right fadeIn " + className}>
             {titles.map((title, index) => (
                 <div 
                 key={"menulist_" + index}

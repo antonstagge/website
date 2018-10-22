@@ -210,7 +210,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                             onMouseLeave={() => this.setState({hover: false})}
                         >
                              <div 
-                                className={"flex-no-grow text-5xl tracking-tighter font-bold flex " + 
+                                className={"flex-no-grow text-5xl tracking-tighter font-bold flex fadeIn" + 
                                 (this.state.changeTo !== -1 
                                     ? "fadeOutIn"
                                     : ""

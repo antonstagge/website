@@ -25,7 +25,7 @@ class Socials extends React.Component<SocialsProps, SocialsState> {
     }
 
     public render() {
-        return (<div className={this.props.className + " pl-16 pt-6"}>
+        return (<div className={this.props.className + " pl-16 pt-6 fadeIn"}>
             <a 
                 href="https://github.com/antonstagge"
                 className="mr-4"
