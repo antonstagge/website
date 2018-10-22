@@ -1,10 +1,9 @@
 import * as React from 'react';
-import vineyard from 'src/resources/images/vineyard.jpg';
-import BackgroundImage from 'src/home/BackgroundImage';
-import Menu from 'src/shared/Menu';
 import { MenuChoice, numItems , getMenuItem} from 'src/home/Home';
 import { RouteComponentProps } from 'react-router-dom';
 import * as api from 'src/api/api';
+import { debounce } from 'ts-debounce';
+import Header from 'src/shared/Header';
 
 enum InputType {
     Name,
@@ -43,6 +42,8 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
             error: '',
             canSend: CanSend.NameMissing | CanSend.EmailMissing | CanSend.MessageMissing,
         }
+
+        this.handleInput = debounce(this.handleInput, 200);
     }
 
     public sendMessage = () => {
@@ -67,7 +68,7 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
             case InputType.Email:
                 this.setState({
                     email: value,
-                    canSend: value !== "" ? this.state.canSend & ~CanSend.EmailMissing : this.state.canSend | CanSend.EmailMissing
+                    canSend: value.includes('@') ? this.state.canSend & ~CanSend.EmailMissing : this.state.canSend | CanSend.EmailMissing
                 });
                 return;
             case InputType.Message:
@@ -102,26 +103,10 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
 
     public render() {
         return <div className="flex-1 flex flex-col relative">
-            <div className="overflow-hidden shrinkHeight">
-                <BackgroundImage 
-                    backgroundImage={vineyard}
-                />
-            </div>
-           
-            <div className="absolute text-white text-5xl tracking-tighter font-bold pin-t pin-l z-10 pt-6 pl-16 fadeIn">
-                <div>
-                    {'CONTACT'}
-                </div>
-                <div className="text-lg tracking-normal cursor-pointer"
-                    onClick={() => this.props.history.push("/")}
-                >
-                    {'back'}
-                </div>
-            </div>
-            <Menu 
-                changeLocation={this.props.history.push}
-                active={MenuChoice.Contact}
+            <Header 
+                type={MenuChoice.Contact}
                 titles={Array.from(Array(numItems).keys()).map(choice => getMenuItem(choice).title)}
+                route={this.props.history.push}
             />
             <div className="m-4 text-lg flex">
                 <div  className="w-1/5"/>

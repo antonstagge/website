@@ -1,10 +1,8 @@
 import * as React from 'react';
-import computer from 'src/resources/images/computer.jpg';
 import onepong from 'src/resources/images/onepong.gif';
-import BackgroundImage from 'src/home/BackgroundImage';
-import Menu from 'src/shared/Menu';
 import { MenuChoice, numItems , getMenuItem} from 'src/home/Home';
 import { RouteComponentProps } from 'react-router-dom';
+import Header from 'src/shared/Header';
 
 interface PortfolioState {
 }
@@ -21,26 +19,10 @@ class Portfolio extends React.Component<RouteComponentProps, PortfolioState> {
 
     public render() {
         return <div className="flex-1 flex flex-col relative">
-            <div className="overflow-hidden shrinkHeight">
-                <BackgroundImage 
-                    backgroundImage={computer}
-                />
-            </div>
-           
-            <div className="absolute text-white text-5xl tracking-tighter font-bold pin-t pin-l z-10 pt-6 pl-16 fadeIn">
-                <div>
-                    {'PORTFOLIO'}
-                </div>
-                <div className="text-lg tracking-normal cursor-pointer"
-                    onClick={() => this.props.history.push("/")}
-                >
-                    {'back'}
-                </div>
-            </div>
-            <Menu 
-                changeLocation={this.props.history.push}
-                active={MenuChoice.Portfolio}
+            <Header 
+                type={MenuChoice.Portfolio}
                 titles={Array.from(Array(numItems).keys()).map(choice => getMenuItem(choice).title)}
+                route={this.props.history.push}
             />
             <div className="m-4">
                 <div className="text-3xl pt-2 pb-4 text-grey-dark">Double Deep Q-Learning Onepong</div>

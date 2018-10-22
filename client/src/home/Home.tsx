@@ -3,7 +3,7 @@ import mainimage from 'src/resources/images/main.jpg';
 import oland from 'src/resources/images/oland.jpg';
 import vineyard from 'src/resources/images/vineyard.jpg';
 import computer from 'src/resources/images/computer.jpg';
-import BackgroundImage from './BackgroundImage';
+import BackgroundImage from 'src/shared/BackgroundImage';
 import MenuList from 'src/shared/MenuList';
 import Socials from './Socials';
 import NoStyleLink from 'src/shared/NoStyleLink';
@@ -78,13 +78,12 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
     constructor(props: RouteComponentProps) {
         super(props);
         this.state = {
-            title: getMenuItem(MenuChoice.AboutMe).title,
-            active: MenuChoice.AboutMe,
+            title: getMenuItem(this.props.location.state | 0).title,
+            active: this.props.location.state | 0,
             changeTo: -1,
             changeDirection: ChangeDirection.UP,
             hover: false,
         };
-        // this.handleScroll = debounce(this.handleScroll, 40);
     }
 
     public componentDidMount() {
