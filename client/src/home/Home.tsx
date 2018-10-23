@@ -1,15 +1,12 @@
 import * as React from 'react';
 import grassoland from 'src/resources/images/grassoland.jpg';
-// import grassoland from 'src/resources/images/grassoland_big_border.jpg';
-// import grassoland from 'src/resources/images/grassoland_border.jpg';
-
-// import oland from 'src/resources/images/oland_border.jpg';
 import oland from 'src/resources/images/oland_no_border.jpg';
 
 import vineyard from 'src/resources/images/vineyard.jpg';
 
 import computer from 'src/resources/images/computer.jpg';
 
+import logowhite from 'src/resources/images/logowhite.png';
 import BackgroundImage from 'src/shared/BackgroundImage';
 import MenuList from 'src/shared/MenuList';
 import Socials from './Socials';
@@ -206,13 +203,26 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
             })}
             <div className="absolute z-10 pin overflow-hidden">
                 <div className="flex text-white h-full">
-                    <div className="flex-1 flex flex-col">
-                        <Socials 
-                            className="flex-1"
-                        />
+                    <div className="flex-1 flex flex-col pl-16">
+                        <div className="fadeIn flex-no-grow flex items-center overflow-visible pt-6">
+                            <img src={logowhite} alt=""
+                                className="h-32"
+                            />
+                            <div className="flex">
+                                <div className="w-1 ml-2 bg-white"/>
+                                <div className="flex flex-col  text-xl tracking-tighter font-semibold">
+                                    <div>
+                                        ANTON 
+                                    </div>
+                                    <div>
+                                        STAGGE
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <NoStyleLink 
                             to={getMenuItem(this.state.active).link}
-                            className="flex-5 pl-16 cursor-pointer flex flex-col justify-end"
+                            className="flex-1 cursor-pointer flex flex-col justify-end mb-16"
                             onMouseEnter={() => this.setState({hover: true})}
                             onMouseLeave={() => this.setState({hover: false})}
                         >
@@ -230,7 +240,6 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                                 <div className="flex-1"/>
                             </div>
                         </NoStyleLink>
-                        <div className="flex-1"/>
                     </div>
                     <MenuList 
                         className="flex-no-grow"
@@ -241,6 +250,9 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                     />
                 </div>
             </div>
+            <Socials 
+                className="absolute pin-t pin-r pr-10 pt-10 z-10"
+            />
         </div>
     }
 }

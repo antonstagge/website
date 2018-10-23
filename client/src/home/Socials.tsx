@@ -25,19 +25,7 @@ class Socials extends React.Component<SocialsProps, SocialsState> {
     }
 
     public render() {
-        return (<div className={this.props.className + " pl-16 pt-6 fadeIn"}>
-            <a 
-                href="https://github.com/antonstagge"
-                className="mr-4"
-            >
-                <img 
-                    src={this.state.hover === SocialType.github ? githubmark : githubmarkLight}
-                    alt="github"
-                    onMouseEnter={() => this.setState({hover: SocialType.github})}
-                    onMouseLeave={() => this.setState({hover: null})}
-                    className={"cursor-pointer rounded " + (this.state.hover === SocialType.github ? "bg-white" : "")}
-                />
-            </a>
+        return (<div className={this.props.className + " fadeIn"}>
             <a 
                 href="https://www.linkedin.com/in/anton-stagge-763290168/"
                 className="mr-4"
@@ -48,6 +36,18 @@ class Socials extends React.Component<SocialsProps, SocialsState> {
                     onMouseEnter={() => this.setState({hover: SocialType.linkedin})}
                     onMouseLeave={() => this.setState({hover: null})}
                     className={"cursor-pointer "}
+                />
+            </a>
+            <a 
+                href="https://github.com/antonstagge"
+                className=""
+            >
+                <img 
+                    src={this.state.hover === SocialType.github ? githubmark : githubmarkLight}
+                    alt="github"
+                    onMouseEnter={() => this.setState({hover: SocialType.github})}
+                    onMouseLeave={() => this.setState({hover: null})}
+                    className={"cursor-pointer rounded " + (this.state.hover === SocialType.github ? "bg-white" : "")}
                 />
             </a>
         </div>)

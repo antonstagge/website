@@ -6,7 +6,7 @@ interface BackgroundImageProps {
 }
 
 const BackgroundImage: React.SFC<BackgroundImageProps> = ({backgroundImage, className}) => {
-    return (<div className={className}>
+    return (<div className={className + " "}>
         <img 
             src={backgroundImage} alt=""
             className="w-full"

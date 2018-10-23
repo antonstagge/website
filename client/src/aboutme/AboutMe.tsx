@@ -1,5 +1,6 @@
 import * as React from 'react';
 import me from 'src/resources/images/me.jpg';
+import logoblack from 'src/resources/images/logoblack.png';
 import { MenuChoice, numItems , getMenuItem, animTime} from 'src/home/Home';
 import { RouteComponentProps } from 'react-router-dom';
 import Header from 'src/shared/Header';
@@ -26,7 +27,7 @@ class AboutMe extends React.Component<RouteComponentProps, AboutMeState> {
     }
 
     public render() {
-        return <div className="flex-1 flex flex-col relative "
+        return <div className="flex-1 relative text-lg "
             style={this.state.headerAnim
                 ? {
                     height: 'calc(100vh - 3rem)',
@@ -39,16 +40,17 @@ class AboutMe extends React.Component<RouteComponentProps, AboutMeState> {
                 titles={Array.from(Array(numItems).keys()).map(choice => getMenuItem(choice).title)}
                 route={this.route}
             />
-            <div className="flex m-4">
+            <div className="flex m-4 ">
                 <div className="flex-no-grow">
                     <img 
                         src={me} alt="me"
-                        className="m-1 border border-black w-32"
+                        className=" border border-black h-64"
                     />
                 </div>
-                <div className="flex-1 pl-4 text-lg">
+                <div className="flex-1 pl-4">
+                    <p className="text-xl text-grey-dark pb-2">Who am I?</p>
                     <p>
-                    My name is Anton Stagge and I'm a social, outgoing and happy guy and I'm at the moment doing my masters studies in 
+                    My name is Anton Stagge and I'm a social, outgoing and happy guy. I'm at the moment doing my masters studies in 
                     engineering and computer science at the Royal Institute of Technology. 
                     I've completed my bachelors degree, where I did a bachelors thesis about on the 
                     subject of applying machine learning techniques on Automated Guided Vehicles in 
@@ -68,6 +70,10 @@ class AboutMe extends React.Component<RouteComponentProps, AboutMeState> {
                     I like to view programming as a big lego problem or puzzle. You have to connect the pieces together to 
                     build something new and exciting. 
                     </p>
+                </div>
+           </div>
+           <div className="flex m-4 ">
+                <div className="flex-1 pr-4">
                     <p>
                     The transition from legos to actual programming took place when I studied a year at a college 
                     in Silicon Valley after graduation. Ever since my first introduction to programming in C++ course
@@ -81,6 +87,12 @@ class AboutMe extends React.Component<RouteComponentProps, AboutMeState> {
                     there are so many things and skills that I want to learn and master. And the sensation you get when
                     creating something from scratch is too good to ever stop chasing after.
                     </p>
+                </div>
+                <div className="flex-no-grow border border-black">
+                    <img 
+                        src={logoblack} alt="logo"
+                        className="h-64 px-4"
+                    />
                 </div>
            </div>
         </div>
