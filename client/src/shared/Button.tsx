@@ -20,14 +20,14 @@ class Button extends React.Component<ButtonProps, ButtonState> {
     public render() {
         const {valid, onClick, children, className} = this.props;
         return (<div    
-            className={className + " w-16 h-10 border border-black flex flex-col justify-center text-center font-semibold " + 
+            className={"border border-black flex flex-col justify-center text-center font-semibold " +  
                 (valid
                     ? "cursor-pointer " + (this.state.hover
                         ? "text-black bg-white"
                         : "bg-black text-white")
                     : "text-black bg-grey-lighter"
                 )
-            
+                + " " + className 
             }
             onClick={onClick}
             onMouseEnter={() => this.setState({hover: true})}

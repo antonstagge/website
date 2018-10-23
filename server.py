@@ -37,8 +37,9 @@ def index():
 @cross_origin()
 def generate_captcha():
     if request.method == 'GET':
-        captcha_key = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+        captcha_key = ''.join(random.choices(string.ascii_lowercase + string.ascii_uppercase + string.digits, k=6))
         session['key'] = captcha_key
+        session['can_send'] = False
         session.modified = True
         # Create the ascii version of the key
         fig = Figlet(font='georgia11')
@@ -51,13 +52,39 @@ def generate_captcha():
             key = payload['key']
             session_key = session['key']
             if key == session_key:
+                session['can_send'] = True
                 return jsonify({}), 200
             else:
                 return jsonify({'error': 'Not a match.'}), 403
         except:
-            return jsonify({'error': 'No session key set.'}), 404
+            return jsonify({'error': 'No captch set to session.'}), 403
     else:
         return jsonify({'error': 'Wrong http method.'}), 405
+
+
+@app.route('/api/send_message', methods=['POST'])
+@cross_origin()
+def send_message():
+    try:
+        if session['can_send'] == True:
+            payload = request.json
+            name = payload['name']
+            email = payload['email']
+            message = payload['message']
+
+            # Add the message to the database
+            # as a safety measure so it's not lost.
+            cur = mysql.connection.cursor()
+            cur.execute('''INSERT INTO message(name, email, message) VALUES (%s, %s, %s);''', [name, email, message])
+            mysql.connection.commit()
+
+            return jsonify({}) , 200
+        else:
+            return jsonify({'error': 'You are a robot.'}), 403
+    except:
+        traceback.print_exc()
+        status_code = 403
+        return jsonify({'error': 'You are a robot.'}), 403
 
 
 @app.route("/api/get_all_messages")
@@ -80,27 +107,6 @@ def get_all_messages():
 
     return jsonify(messages), status_code
 
-@app.route('/api/send_message', methods=['POST'])
-@cross_origin()
-def send_message():
-    status_code = 200
-    try:
-        payload = request.json
-        name = payload['name']
-        email = payload['email']
-        message = payload['message']
-
-        # Add the message to the database
-        # as a safety measure so it's not lost.
-        cur = mysql.connection.cursor()
-        cur.execute('''INSERT INTO message(name, email, message) VALUES (%s, %s, %s);''', [name, email, message])
-        mysql.connection.commit()
-
-    except:
-        traceback.print_exc()
-        status_code = 500
-    return jsonify({}) , status_code
-
 
 if __name__ == "__main__":
     args = sys.argv[1:]
@@ -118,4 +124,4 @@ if __name__ == "__main__":
     # Start thread to send email every day
     _thread.start_new_thread(mail_checker, (my_mail, password, db, cursor,))
     # Run the app
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=5000)

@@ -57,7 +57,11 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
         api.post('send_message', this.state).then((resp) => {
             this.setState({sending: false, success: true})
         }).catch((badResp) => {
-            this.setState({sending: false, success: false, error: badResp.response.data.error})
+            if (badResp.response !== undefined) {
+                this.setState({sending: false, success: false, error: badResp.response.data.error})
+            } else {
+                this.setState({sending: false, success: false, error: 'Could not reach server.'});
+            }
         })
     }
 
@@ -92,7 +96,7 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
         </div>
 
     public styledInput = (title: string, type: InputType, canSendValue: CanSend, className: string) => 
-        <div className={"flex-1 flex flex-col pr-4 " + className}>
+        <div className={"flex-1 flex flex-col " + className}>
             <label htmlFor={title} className="text-sm text-grey-dark flex">
                 {title}&nbsp;
                 {(this.state.canSend & canSendValue)
@@ -193,7 +197,7 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
                             ? <div>sending...</div>
                             : this.state.success === null
                                 ? <Button
-                                    className="mt-2 w-1/4"
+                                    className="mt-2 w-1/4 py-2"
                                     valid={this.state.canSend === CanSend.True}
                                     onClick={() => this.state.canSend === CanSend.True ? this.sendMessage() : null}
                                     >
