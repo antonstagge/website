@@ -26,7 +26,7 @@ class App extends React.Component<AppProps, AppState> {
                     <Route path="/contact" component={Contact} />   
                 </div>
             </Router>
-            <div className="h-6 flex-no-grow text-grey text-right text-sm">
+            <div className="h-6-2px flex-no-grow text-grey text-right text-sm ">
                 Copyright &copy; 2018 Anton Stagge 
             </div>
         </div>

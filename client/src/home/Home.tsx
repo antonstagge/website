@@ -1,8 +1,15 @@
 import * as React from 'react';
-import mainimage from 'src/resources/images/main.jpg';
-import oland from 'src/resources/images/oland.jpg';
+import grassoland from 'src/resources/images/grassoland.jpg';
+// import grassoland from 'src/resources/images/grassoland_big_border.jpg';
+// import grassoland from 'src/resources/images/grassoland_border.jpg';
+
+// import oland from 'src/resources/images/oland_border.jpg';
+import oland from 'src/resources/images/oland_no_border.jpg';
+
 import vineyard from 'src/resources/images/vineyard.jpg';
+
 import computer from 'src/resources/images/computer.jpg';
+
 import BackgroundImage from 'src/shared/BackgroundImage';
 import MenuList from 'src/shared/MenuList';
 import Socials from './Socials';
@@ -36,7 +43,7 @@ interface HomeState {
     hover: boolean;
 };
 
-const animTime = 1000;
+export const animTime:number = 1000;
 export const numItems = 4;
 
 export const getMenuItem = (choice: MenuChoice): MenuItem => {
@@ -51,7 +58,7 @@ export const getMenuItem = (choice: MenuChoice): MenuItem => {
         case MenuChoice.Resume:
             return {
                 title: 'RESUME',
-                backgroundImage: mainimage,
+                backgroundImage: grassoland,
                 number: choice,
                 link: 'resume'
             }
@@ -197,7 +204,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                     className={this.getClassName(getMenuItem(choice).number)}
                 />
             })}
-            <div className="absolute z-10 pin">
+            <div className="absolute z-10 pin overflow-hidden">
                 <div className="flex text-white h-full">
                     <div className="flex-1 flex flex-col">
                         <Socials 
@@ -210,13 +217,13 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                             onMouseLeave={() => this.setState({hover: false})}
                         >
                              <div 
-                                className={"flex-no-grow text-5xl tracking-tighter font-bold flex fadeIn" + 
+                                className={"flex-no-grow text-5xl tracking-tighter font-bold flex " + 
                                 (this.state.changeTo !== -1 
                                     ? "fadeOutIn"
                                     : ""
                                 )
                             }>
-                                <div className="flex-no-grow">
+                                <div className="flex-no-grow fadeIn ">
                                         {this.state.title}
                                     <div className={"bg-white h-3 hoverBar " + (this.state.hover ? "w-full": "w-0") } />
                                 </div>

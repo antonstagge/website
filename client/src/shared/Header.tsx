@@ -2,6 +2,7 @@ import * as React from 'react';
 import BackgroundImage from './BackgroundImage';
 import { MenuChoice, getMenuItem } from 'src/home/Home';
 import Menu from './Menu';
+// import {animTime} from 'src/home/Home';
 
 interface HeaderProps {
     type: MenuChoice;
@@ -37,10 +38,10 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                 + (this.state.shrink ? "fadeIn" : "fadeOut")}
                 onClick={() => {
                     this.setState({shrink: false});
-                    setTimeout(() => route({
+                    route({
                         pathname: "/",
                         state: type
-                    }), 500);
+                    });
                 }}
                 onMouseEnter={() => this.setState({hoverBack: true})}
                 onMouseLeave={() => this.setState({hoverBack: false})}

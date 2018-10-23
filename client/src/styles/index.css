@@ -2,6 +2,10 @@
 @tailwind utilities;
 /* Your custom CSS here */
 
+.h-6-2px {
+    height: 1.4rem;
+}
+
 .flex-2 {
     flex-grow: 2;
 }
@@ -197,6 +201,25 @@
 
     100% {
         height: calc(100vh - 3rem);
+    }
+}
+
+.noScrollDuringAnim {
+    animation-name: noScroll;
+    animation-duration:  0.5s;
+}
+@keyframes noScroll {
+    0% {
+        height: calc(100vh - 3rem);
+        overflow: hidden;
+    }
+    99% {
+        height: calc(100vh - 3rem);
+        overflow: hidden;
+    }
+    100% {
+        height: auto;
+        overflow: auto;
     }
 }
 

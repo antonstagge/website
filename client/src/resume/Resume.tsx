@@ -1,14 +1,18 @@
 import * as React from 'react';
-import { MenuChoice, numItems , getMenuItem} from 'src/home/Home';
+import { MenuChoice, numItems , getMenuItem, animTime} from 'src/home/Home';
 import { RouteComponentProps } from 'react-router-dom';
 import Header from 'src/shared/Header';
 
 interface ResumeState {
+    headerAnim: boolean;
 }
 
 class Resume extends React.Component<RouteComponentProps, ResumeState> {
     constructor(props: RouteComponentProps) {
         super(props);
+        this.state = {
+            headerAnim: true,
+        }
     }
 
     public CVItem = (name: string, place:string, year:string, comment?:string, optional?:string) => <div className="flex">
@@ -29,12 +33,28 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
             </div>     
         </div>
 
+    public componentDidMount() {
+        setTimeout(() => this.setState({headerAnim: false}), animTime/2);
+    }
+
+    public route = (location: any) => {
+        this.setState({headerAnim: true});
+        setTimeout(() => this.props.history.push(location), animTime/2);
+    }
+
     public render() {
-        return <div className="flex-1 flex flex-col relative">
+        return <div className="flex-1 flex flex-col relative "
+            style={this.state.headerAnim
+                ? {
+                    height: 'calc(100vh - 3rem)',
+                    overflow: 'hidden',
+                }
+                : {}}
+        >
             <Header 
                 type={MenuChoice.Resume}
                 titles={Array.from(Array(numItems).keys()).map(choice => getMenuItem(choice).title)}
-                route={this.props.history.push}
+                route={this.route}
             />
            <div className="m-4">
                <div className="text-3xl pt-2 pb-4 text-grey-dark">Education</div>

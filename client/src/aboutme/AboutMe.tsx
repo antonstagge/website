@@ -1,23 +1,43 @@
 import * as React from 'react';
 import me from 'src/resources/images/me.jpg';
-import { MenuChoice, numItems , getMenuItem} from 'src/home/Home';
+import { MenuChoice, numItems , getMenuItem, animTime} from 'src/home/Home';
 import { RouteComponentProps } from 'react-router-dom';
 import Header from 'src/shared/Header';
 
 interface AboutMeState {
+    headerAnim: boolean;
 }
 
 class AboutMe extends React.Component<RouteComponentProps, AboutMeState> {
     constructor(props: RouteComponentProps) {
         super(props);
+        this.state = {
+            headerAnim: true,
+        }
+    }
+
+    public componentDidMount() {
+        setTimeout(() => this.setState({headerAnim: false}), animTime/2);
+    }
+
+    public route = (location: any) => {
+        this.setState({headerAnim: true});
+        setTimeout(() => this.props.history.push(location), animTime/2);
     }
 
     public render() {
-        return <div className="flex-1 flex flex-col relative">
+        return <div className="flex-1 flex flex-col relative "
+            style={this.state.headerAnim
+                ? {
+                    height: 'calc(100vh - 3rem)',
+                    overflow: 'hidden',
+                }
+                : {}}
+        >
             <Header 
                 type={MenuChoice.AboutMe}
                 titles={Array.from(Array(numItems).keys()).map(choice => getMenuItem(choice).title)}
-                route={this.props.history.push}
+                route={this.route}
             />
             <div className="flex m-4">
                 <div className="flex-no-grow">

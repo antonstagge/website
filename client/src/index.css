@@ -6242,6 +6242,10 @@ table {
 
 /* Your custom CSS here */
 
+.h-6-2px {
+  height: 1.4rem;
+}
+
 .flex-2 {
   flex-grow: 2;
 }
@@ -6630,6 +6634,47 @@ table {
 
   100% {
     height: calc(100vh - 3rem);
+  }
+}
+
+.noScrollDuringAnim {
+  -webkit-animation-name: noScroll;
+          animation-name: noScroll;
+  -webkit-animation-duration: .5s;
+          animation-duration: .5s;
+}
+
+@-webkit-keyframes noScroll {
+  0% {
+    height: calc(100vh - 3rem);
+    overflow: hidden;
+  }
+
+  99% {
+    height: calc(100vh - 3rem);
+    overflow: hidden;
+  }
+
+  100% {
+    height: auto;
+    overflow: auto;
+  }
+}
+
+@keyframes noScroll {
+  0% {
+    height: calc(100vh - 3rem);
+    overflow: hidden;
+  }
+
+  99% {
+    height: calc(100vh - 3rem);
+    overflow: hidden;
+  }
+
+  100% {
+    height: auto;
+    overflow: auto;
   }
 }
 

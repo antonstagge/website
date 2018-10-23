@@ -1,15 +1,19 @@
 import * as React from 'react';
 import onepong from 'src/resources/images/onepong.gif';
-import { MenuChoice, numItems , getMenuItem} from 'src/home/Home';
+import { MenuChoice, numItems , getMenuItem, animTime} from 'src/home/Home';
 import { RouteComponentProps } from 'react-router-dom';
 import Header from 'src/shared/Header';
 
 interface PortfolioState {
+    headerAnim: boolean;
 }
 
 class Portfolio extends React.Component<RouteComponentProps, PortfolioState> {
     constructor(props: RouteComponentProps) {
         super(props);
+        this.state = {
+            headerAnim: true,
+        }
     }
 
     public listItem = (title: string, descr:string) => <div className="flex py-1 pl-2">
@@ -17,12 +21,28 @@ class Portfolio extends React.Component<RouteComponentProps, PortfolioState> {
             <div>&nbsp;{descr}</div>
         </div>
 
+    public componentDidMount() {
+        setTimeout(() => this.setState({headerAnim: false}), animTime/2);
+    }
+
+    public route = (location: any) => {
+        this.setState({headerAnim: true});
+        setTimeout(() => this.props.history.push(location), animTime/2);
+    }
+
     public render() {
-        return <div className="flex-1 flex flex-col relative">
+        return <div className="flex-1 flex flex-col relative "
+            style={this.state.headerAnim
+                ? {
+                    height: 'calc(100vh - 3rem)',
+                    overflow: 'hidden',
+                }
+                : {}}
+        >
             <Header 
                 type={MenuChoice.Portfolio}
                 titles={Array.from(Array(numItems).keys()).map(choice => getMenuItem(choice).title)}
-                route={this.props.history.push}
+                route={this.route}
             />
             <div className="m-4">
                 <div className="text-3xl pt-2 pb-4 text-grey-dark">Double Deep Q-Learning Onepong</div>
@@ -58,8 +78,9 @@ class Portfolio extends React.Component<RouteComponentProps, PortfolioState> {
                     <div className="flex-1">
                         <p>
                             This project was supposed to be a single page with my resume only, 
-                            but as usual I had too much fun and got carried away. If you want to check out 
-                            the source you can find it&nbsp; <a href="https://github.com/antonstagge/website">here.</a> 
+                            but as usual I had too much fun and got carried away. I even implemented
+                            my own captcha. If you want to check out the source you can find 
+                            it&nbsp; <a href="https://github.com/antonstagge/website">here.</a> 
                         </p>
                     </div>
                     <div className="flex-1"/>

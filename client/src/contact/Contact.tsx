@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as api from 'src/api/api';
 import Captcha from './Captcha';
-import { MenuChoice, numItems , getMenuItem} from 'src/home/Home';
+import { MenuChoice, numItems , getMenuItem, animTime} from 'src/home/Home';
 import { RouteComponentProps } from 'react-router-dom';
 import { debounce } from 'ts-debounce';
 import Header from 'src/shared/Header';
@@ -30,6 +30,7 @@ interface ContactState {
     success: boolean | null;
     error: string;
     canSend: CanSend;
+    headerAnim: boolean;
 }
 
 class Contact extends React.Component<RouteComponentProps, ContactState> {
@@ -44,6 +45,7 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
             success: null,
             error: '',
             canSend: CanSend.NameMissing | CanSend.EmailMissing | CanSend.MessageMissing | CanSend.Captcha,
+            headerAnim: true,
         }
 
         this.handleInput = debounce(this.handleInput, 200);
@@ -114,12 +116,28 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
         document.execCommand('copy');
     }
 
+    public componentDidMount() {
+        setTimeout(() => this.setState({headerAnim: false}), animTime/2);
+    }
+
+    public route = (location: any) => {
+        this.setState({headerAnim: true});
+        setTimeout(() => this.props.history.push(location), animTime/2);
+    }
+
     public render() {
-        return <div className="flex-1 flex flex-col relative">
+        return <div className="flex-1 flex flex-col relative "
+            style={this.state.headerAnim
+                ? {
+                    height: 'calc(100vh - 3rem)',
+                    overflow: 'hidden',
+                }
+                : {}}
+        >
             <Header 
                 type={MenuChoice.Contact}
                 titles={Array.from(Array(numItems).keys()).map(choice => getMenuItem(choice).title)}
-                route={this.props.history.push}
+                route={this.route}
             />
             <div className="m-4 text-lg flex">
                 <div  className="w-1/5"/>
