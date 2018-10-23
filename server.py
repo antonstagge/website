@@ -57,7 +57,7 @@ def generate_captcha():
             else:
                 return jsonify({'error': 'Not a match.'}), 403
         except:
-            return jsonify({'error': 'No captch set to session.'}), 403
+            return jsonify({'error': 'No captcha set to session.'}), 403
     else:
         return jsonify({'error': 'Wrong http method.'}), 405
 

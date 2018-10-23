@@ -3,6 +3,8 @@ import * as React from 'react';
 interface ButtonProps {
     className?: string;
     valid: boolean;
+    childNormal: string | JSX.Element;
+    childHover: string | JSX.Element;
     onClick():void;
 };
 interface ButtonState {
@@ -18,7 +20,7 @@ class Button extends React.Component<ButtonProps, ButtonState> {
     }
 
     public render() {
-        const {valid, onClick, children, className} = this.props;
+        const {valid, onClick, childHover, childNormal, className} = this.props;
         return (<div    
             className={"border border-black flex flex-col justify-center text-center font-semibold " +  
                 (valid
@@ -33,7 +35,10 @@ class Button extends React.Component<ButtonProps, ButtonState> {
             onMouseEnter={() => this.setState({hover: true})}
             onMouseLeave={() => this.setState({hover: false})}
             >
-                {children}
+                {this.state.hover
+                    ? childHover
+                    : childNormal
+                }
             </div>)
     }
 }

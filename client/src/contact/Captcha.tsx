@@ -3,6 +3,8 @@ import * as api from 'src/api/api';
 import Button from 'src/shared/Button';
 import { debounce } from 'ts-debounce';
 import check from 'src/resources/images/check.png';
+import redowhite from 'src/resources/images/redowhite.png';
+import redoblack from 'src/resources/images/redoblack.png';
 
 interface CaptchaProps {
     className?: string;
@@ -29,6 +31,7 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
         }
         this.handleInput = debounce(this.handleInput, 200);
         this.reCaptcha = debounce(this.reCaptcha, 200);
+        this.tryCaptcha = debounce(this.tryCaptcha, 200);
     }
 
 
@@ -110,7 +113,8 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
                                 ? <img src={check} alt="Hello human!"
                                     className="h-6 w-6 fadeIn"
                                 />
-                                : this.state.error}
+                                : <div className="text-sm">{this.state.error}</div>
+                            }
                         </div>
                     </div>
                     <div className="flex-no-grow flex">
@@ -118,19 +122,23 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
                             <Button
                                 className="text-xs mt-1 py-1 px-2"
                                 valid={true}
-                                onClick={this.reCaptcha}
-                            >
-                                Another
-                            </Button>
+                                onClick={this.tryCaptcha}
+                                childNormal={<img src={redowhite} alt="redo"
+                                    className="h-4 w-4"
+                                />}
+                                childHover={<img src={redoblack} alt="redo"
+                                    className="h-4 w-4"
+                                />}
+                            />
                         </div>
                         <div className="flex justify-end">
                             <Button
                                 className="text-xs mt-1 py-1 px-2"
                                 valid={true}
-                                onClick={this.tryCaptcha}
-                            >
-                                Validate
-                            </Button>
+                                onClick={this.reCaptcha}
+                                childHover="Validate"
+                                childNormal="Validate"
+                            />
                         </div>
                     </div>
                 </div>

@@ -200,9 +200,9 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
                                     className="mt-2 w-1/4 py-2"
                                     valid={this.state.canSend === CanSend.True}
                                     onClick={() => this.state.canSend === CanSend.True ? this.sendMessage() : null}
-                                    >
-                                        Send
-                                    </Button>
+                                    childHover="Send"
+                                    childNormal="Send"
+                                    />
                                 : this.state.success
                                     ? <div className="text-lg h-10 text-green-dark flex flex-col justify-center text-center font-semibold">
                                         Success!
