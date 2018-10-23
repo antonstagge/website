@@ -211,7 +211,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                             <div className="flex">
                                 <div className="w-1 ml-2 bg-white"/>
                                 <div className="flex flex-col justify-end pl-px text-xl font-semibold">
-                                    <div className="flex-no-grow -mb-1">
+                                    <div className="flex-no-grow -mb-1 leading-normal">
                                         ANTON 
                                     </div>
                                     <div className="flex-no-grow">
@@ -234,7 +234,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                                 )
                             }>
                                 <div className="flex-no-grow fadeIn ">
-                                        {this.state.title}
+                                    <div className="-mb-2">{this.state.title}</div>
                                     <div className={"bg-white h-3 hoverBar " + (this.state.hover ? "w-full": "w-0") } />
                                 </div>
                                 <div className="flex-1"/>
