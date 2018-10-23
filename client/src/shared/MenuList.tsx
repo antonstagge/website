@@ -38,13 +38,13 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
                 className={"flex-no-grow  h-6 flex cursor-pointer " 
             }>
                 <div className="flex-1 flex flex-col justify-center">
-                    <div className={"flex-no-grow tracking-tighter font-semibold whitespace-no-wrap MenuList " + 
+                    <div className={"flex-no-grow font-semibold whitespace-no-wrap MenuList " + 
                         (this.state.hover === -1 
                             ? index === active
-                                ? "text-3xl"
+                                ? "text-4xl"
                                 : "text-half"
                             : index === this.state.hover
-                                ? "text-3xl"
+                                ? "text-4xl"
                                 : "text-half"
                         )
                     } >

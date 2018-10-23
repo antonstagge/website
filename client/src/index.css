@@ -5850,8 +5850,16 @@ table {
   font-size: 3rem;
 }
 
-.text-title {
-  font-size: 100px;
+.text-6xl {
+  font-size: 4rem;
+}
+
+.text-7xl {
+  font-size: 5rem;
+}
+
+.text-8xl {
+  font-size: 6rem;
 }
 
 .text-half {
@@ -6268,10 +6276,6 @@ table {
   flex-grow: 5;
   flex-basis: 0%;
   flex-shrink: 1;
-}
-
-.font-default {
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .bgAnimDown {
@@ -11918,8 +11922,16 @@ table {
     font-size: 3rem;
   }
 
-  .sm\:text-title {
-    font-size: 100px;
+  .sm\:text-6xl {
+    font-size: 4rem;
+  }
+
+  .sm\:text-7xl {
+    font-size: 5rem;
+  }
+
+  .sm\:text-8xl {
+    font-size: 6rem;
   }
 
   .sm\:text-half {
@@ -17512,8 +17524,16 @@ table {
     font-size: 3rem;
   }
 
-  .md\:text-title {
-    font-size: 100px;
+  .md\:text-6xl {
+    font-size: 4rem;
+  }
+
+  .md\:text-7xl {
+    font-size: 5rem;
+  }
+
+  .md\:text-8xl {
+    font-size: 6rem;
   }
 
   .md\:text-half {
@@ -23106,8 +23126,16 @@ table {
     font-size: 3rem;
   }
 
-  .lg\:text-title {
-    font-size: 100px;
+  .lg\:text-6xl {
+    font-size: 4rem;
+  }
+
+  .lg\:text-7xl {
+    font-size: 5rem;
+  }
+
+  .lg\:text-8xl {
+    font-size: 6rem;
   }
 
   .lg\:text-half {
@@ -28700,8 +28728,16 @@ table {
     font-size: 3rem;
   }
 
-  .xl\:text-title {
-    font-size: 100px;
+  .xl\:text-6xl {
+    font-size: 4rem;
+  }
+
+  .xl\:text-7xl {
+    font-size: 5rem;
+  }
+
+  .xl\:text-8xl {
+    font-size: 6rem;
   }
 
   .xl\:text-half {

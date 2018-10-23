@@ -28,10 +28,6 @@
     flex-shrink: 1;
 }
 
-.font-default {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 .bgAnimDown {
     animation-name: slide-down;
     animation-duration:  1s;

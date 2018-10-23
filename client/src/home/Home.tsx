@@ -189,7 +189,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
 
     public render() {
         return <div
-            className="flex-1 max-h-full relative overflow-hidden"
+            className="flex-1 max-h-full relative overflow-hidden font-header "
             style={{
                 height: 'calc(100vh - 3rem)'
             }}
@@ -210,11 +210,11 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                             />
                             <div className="flex">
                                 <div className="w-1 ml-2 bg-white"/>
-                                <div className="flex flex-col  text-xl tracking-tighter font-semibold">
-                                    <div>
+                                <div className="flex flex-col justify-end pl-px text-xl font-semibold">
+                                    <div className="flex-no-grow -mb-1">
                                         ANTON 
                                     </div>
-                                    <div>
+                                    <div className="flex-no-grow">
                                         STAGGE
                                     </div>
                                 </div>
@@ -227,7 +227,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                             onMouseLeave={() => this.setState({hover: false})}
                         >
                              <div 
-                                className={"flex-no-grow text-5xl tracking-tighter font-bold flex " + 
+                                className={"flex-no-grow text-7xl font-bold flex " + 
                                 (this.state.changeTo !== -1 
                                     ? "fadeOutIn"
                                     : ""

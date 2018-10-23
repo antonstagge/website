@@ -1,0 +1,21 @@
+@font-face {
+    font-family: Hanisef;
+    src: url('./Hanisef.otf');
+}
+
+@font-face {
+    font-family: HighLife;
+    src: url('./HighLife.otf');
+}
+@font-face {
+    font-family: BebasNeue-Regular;
+    src: url('./BebasNeue-Regular.otf');
+}
+
+.font-header {
+    font-family: BebasNeue-Regular, Arial;
+}
+
+.font-default {
+    font-family: Arial, Helvetica, sans-serif;
+}

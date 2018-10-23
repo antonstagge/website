@@ -27,13 +27,13 @@ class Header extends React.Component<HeaderProps, HeaderState> {
 
     public render () {
         const {type, titles, route} = this.props;
-        return <div>
+        return <div className="font-header">
             <div className={"overflow-hidden " + (this.state.shrink ? "shrinkHeight" : "growHeight")}>
                 <BackgroundImage 
                     backgroundImage={getMenuItem(type).backgroundImage}
                 />
             </div>
-            <div className={"absolute text-white text-5xl tracking-tighter font-bold pin-t "
+            <div className={"absolute text-white text-5xl font-bold pin-t "
                 + "pin-l z-10 w-full pt-6 px-16 h-64 flex flex-col justify-between cursor-pointer " 
                 + (this.state.shrink ? "fadeIn" : "fadeOut")}
                 onClick={() => {
@@ -49,7 +49,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                 <div>
                     {getMenuItem(type).title}
                 </div>
-                <div className="text-lg tracking-normal cursor-pointer flex pb-2 "> 
+                <div className="text-lg cursor-pointer flex pb-2 "> 
                     <div 
                         className={"flex flex-col justify-center"}
                     >

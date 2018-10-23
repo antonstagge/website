@@ -144,7 +144,7 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
                 </div>
             </div>
             <div className="flex justify-center flex-1 bg-black">
-                <pre className="text-xxs font-bold  text-white tracking-normal">
+                <pre className="text-xxs font-bold  text-white ">
                     {this.state.captcha}
                 </pre>
             </div>
