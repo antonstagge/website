@@ -122,7 +122,7 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
                             <Button
                                 className="text-xs mt-1 py-1 px-2"
                                 valid={true}
-                                onClick={this.tryCaptcha}
+                                onClick={this.reCaptcha}
                                 childNormal={<img src={redowhite} alt="redo"
                                     className="h-4 w-4"
                                 />}
@@ -135,7 +135,7 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
                             <Button
                                 className="text-xs mt-1 py-1 px-2"
                                 valid={true}
-                                onClick={this.reCaptcha}
+                                onClick={this.tryCaptcha}
                                 childHover="Validate"
                                 childNormal="Validate"
                             />

@@ -1,13 +1,13 @@
 import axios from 'axios';
 
 export const get = (path: string, payload?: any) => {
-    return axios.get('http://' + window.location.hostname + ':5000/api/' + path)
+    return axios.get('/api/' + path)
 }
 
 export const post = (path: string, payload: any) => {
-    return axios.post('http://' + window.location.hostname + ':5000/api/' + path, payload)
+    return axios.post('/api/' + path, payload)
 }
 
 export const put = (path: string, payload: any) => {
-    return axios.put('http://' + window.location.hostname + ':5000/api/' + path, payload)
+    return axios.put('/api/' + path, payload)
 }

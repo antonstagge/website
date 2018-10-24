@@ -124,4 +124,4 @@ if __name__ == "__main__":
     # Start thread to send email every day
     _thread.start_new_thread(mail_checker, (my_mail, password, db, cursor,))
     # Run the app
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=80)
