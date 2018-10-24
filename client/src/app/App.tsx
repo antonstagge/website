@@ -5,7 +5,7 @@ import Portfolio from 'src/portfolio/Portfolio';
 import Contact from 'src/contact/Contact';
 import { HashRouter as Router, Route } from "react-router-dom";
 import * as React from 'react'; 
-import './App.css';
+import './font-faces.css';
 
 const App: React.SFC<{}> = () => {
     return (<div className="min-h-screen p-6 pb-0 select-none font-default flex flex-col">
