@@ -130,92 +130,86 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
     }
 
     public render() {
-        return <div className="flex-1 flex flex-col relative "
-            style={this.state.headerAnim
-                ? {
-                    height: 'calc(100vh - 3rem)',
-                    overflow: 'hidden',
-                }
-                : {}}
-        >
+        return (
             <Header 
                 type={MenuChoice.Contact}
                 titles={Array.from(Array(numItems).keys()).map(choice => getMenuItem(choice).title)}
                 route={this.route}
-            />
-            <div className="m-4 text-lg flex">
-                <div  className="w-1/5"/>
-                <div className="w-3/5">
-                    <div className="text-3xl text-grey-dark">
-                        Contact info
-                    </div>
-                    <div className="flex text-lg py-2">
-                        <div>
-                            Email:&nbsp;
+            >
+                <div className="m-4 text-lg flex">
+                    <div  className="w-1/5"/>
+                    <div className="w-3/5">
+                        <div className="text-3xl text-grey-dark">
+                            Contact info
                         </div>
-                        <div className="select-text font-bold"
-                            onClick={this.copyText}
-                        >
-                            stagge@kth.se
+                        <div className="flex text-lg py-2">
+                            <div>
+                                Email:&nbsp;
+                            </div>
+                            <div className="select-text font-bold"
+                                onClick={this.copyText}
+                            >
+                                stagge@kth.se
+                            </div>
                         </div>
-                    </div>
-                    <div className="text-3xl text-grey-dark pt-4 pb-2">
-                        Reach out to me here
-                    </div>
-                    <div className="flex">
-                        {this.styledInput("Name", InputType.Name, CanSend.NameMissing, "pr-4")}
-                        {this.styledInput("Email", InputType.Email, CanSend.EmailMissing, "pl-4")}
-                    </div>
-                    <div className="pt-2 flex flex-col">
-                        <label htmlFor={"Message"} className="text-sm text-grey-dark flex">
-                            {"Message"}&nbsp;
-                            {(this.state.canSend & CanSend.MessageMissing)
-                                ? <div className="text-red-light text-xs flex flex-col justify-center">(required)</div>
-                                : null
-                            }
-                        </label>
-                        <textarea name="Message" id="Message"
-                            maxLength={249} 
-                            className="border border-black resize-none h-32"
-                            onChange={(e) => this.handleInput(InputType.Message, e.target.value)}
-                        />
-                    </div>
-                    <div className="flex justify-between pt-2">
-                        <Captcha 
-                            setCaptchaValid={(valid) => {
-                                if (valid) {
-                                    this.setState({canSend: this.state.canSend & ~CanSend.Captcha})
-                                } else {
-                                    this.setState({canSend: this.state.canSend | CanSend.Captcha});
+                        <div className="text-3xl text-grey-dark pt-4 pb-2">
+                            Reach out to me here
+                        </div>
+                        <div className="flex">
+                            {this.styledInput("Name", InputType.Name, CanSend.NameMissing, "pr-4")}
+                            {this.styledInput("Email", InputType.Email, CanSend.EmailMissing, "pl-4")}
+                        </div>
+                        <div className="pt-2 flex flex-col">
+                            <label htmlFor={"Message"} className="text-sm text-grey-dark flex">
+                                {"Message"}&nbsp;
+                                {(this.state.canSend & CanSend.MessageMissing)
+                                    ? <div className="text-red-light text-xs flex flex-col justify-center">(required)</div>
+                                    : null
                                 }
-                                
-                            }}
-                        />
+                            </label>
+                            <textarea name="Message" id="Message"
+                                maxLength={249} 
+                                className="border border-black resize-none h-32"
+                                onChange={(e) => this.handleInput(InputType.Message, e.target.value)}
+                            />
+                        </div>
+                        <div className="flex justify-between pt-2">
+                            <Captcha 
+                                setCaptchaValid={(valid) => {
+                                    if (valid) {
+                                        this.setState({canSend: this.state.canSend & ~CanSend.Captcha})
+                                    } else {
+                                        this.setState({canSend: this.state.canSend | CanSend.Captcha});
+                                    }
+                                    
+                                }}
+                            />
+                        </div>
+                        <div className="flex justify-end">
+                            {this.state.sending
+                                ? <div>sending...</div>
+                                : this.state.success === null
+                                    ? <Button
+                                        className="mt-2 w-1/4 py-2"
+                                        valid={this.state.canSend === CanSend.True}
+                                        onClick={() => this.state.canSend === CanSend.True ? this.sendMessage() : null}
+                                        childHover="Send"
+                                        childNormal="Send"
+                                        />
+                                    : this.state.success
+                                        ? <div className="text-lg h-10 text-green-dark flex flex-col justify-center text-center font-semibold">
+                                            Success!
+                                        </div>
+                                        : <div className="text-lg h-10 text-red flex flex-col justify-center text-center font-semibold">
+                                            {this.state.error}
+                                        </div>
+                            }
+                        </div>
                     </div>
-                    <div className="flex justify-end">
-                        {this.state.sending
-                            ? <div>sending...</div>
-                            : this.state.success === null
-                                ? <Button
-                                    className="mt-2 w-1/4 py-2"
-                                    valid={this.state.canSend === CanSend.True}
-                                    onClick={() => this.state.canSend === CanSend.True ? this.sendMessage() : null}
-                                    childHover="Send"
-                                    childNormal="Send"
-                                    />
-                                : this.state.success
-                                    ? <div className="text-lg h-10 text-green-dark flex flex-col justify-center text-center font-semibold">
-                                        Success!
-                                    </div>
-                                    : <div className="text-lg h-10 text-red flex flex-col justify-center text-center font-semibold">
-                                        {this.state.error}
-                                    </div>
-                        }
-                    </div>
+                    <div  className="w-1/5"/>
                 </div>
-                <div  className="w-1/5"/>
-            </div>
-        </div>
+            </Header>
+        )
     }
 }
 
