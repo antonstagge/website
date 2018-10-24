@@ -6649,47 +6649,6 @@ table {
   }
 }
 
-.noScrollDuringAnim {
-  -webkit-animation-name: noScroll;
-          animation-name: noScroll;
-  -webkit-animation-duration: .5s;
-          animation-duration: .5s;
-}
-
-@-webkit-keyframes noScroll {
-  0% {
-    height: calc(100vh - 3rem);
-    overflow: hidden;
-  }
-
-  99% {
-    height: calc(100vh - 3rem);
-    overflow: hidden;
-  }
-
-  100% {
-    height: auto;
-    overflow: auto;
-  }
-}
-
-@keyframes noScroll {
-  0% {
-    height: calc(100vh - 3rem);
-    overflow: hidden;
-  }
-
-  99% {
-    height: calc(100vh - 3rem);
-    overflow: hidden;
-  }
-
-  100% {
-    height: auto;
-    overflow: auto;
-  }
-}
-
 .MenuList {
   transition: font-size .5s;
 }

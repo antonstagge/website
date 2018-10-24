@@ -15,7 +15,6 @@ interface SocialsProps {
 interface SocialsState {
     hover: SocialType | null,
 }
-
 class Socials extends React.Component<SocialsProps, SocialsState> {
     constructor(props: SocialsProps) {
         super(props);

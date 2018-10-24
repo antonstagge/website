@@ -2,20 +2,17 @@ import * as React from 'react';
 import BackgroundImage from './BackgroundImage';
 import { MenuChoice, getMenuItem, animTime } from 'src/home/Home';
 import Menu from './Menu';
-// import {animTime} from 'src/home/Home';
 
 interface HeaderProps {
     type: MenuChoice;
     titles: string[];
     route(state: any):void;
 }
-
 interface HeaderState {
     headerAnim: boolean;
     shrink: boolean;
     hoverBack: boolean;
 }
-
 class Header extends React.Component<HeaderProps, HeaderState> {
     constructor(props: HeaderProps) {
         super(props);

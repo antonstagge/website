@@ -11,7 +11,6 @@ export interface MenuListProps {
 interface MenuListState {
     hover: number;
 }
-
 class MenuList extends React.Component<MenuListProps, MenuListState> {
     constructor(props: MenuListProps) {
         super(props);

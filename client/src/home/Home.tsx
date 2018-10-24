@@ -19,30 +19,14 @@ export enum MenuChoice {
     Portfolio = 2,
     Contact = 3,
 }
-
-export enum ChangeDirection {
-    UP,
-    DOWN,
-}
-
 interface MenuItem {
     title: string;
     backgroundImage: string;
     number: MenuChoice;
     link: string;
 }
-
-interface HomeState {
-    title: string;
-    active: MenuChoice;
-    changeTo: MenuChoice | -1;
-    changeDirection: ChangeDirection;
-    hover: boolean;
-};
-
 export const animTime:number = 1000;
 export const numItems = 4;
-
 export const getMenuItem = (choice: MenuChoice): MenuItem => {
     switch(choice) {
         case MenuChoice.AboutMe: 
@@ -76,6 +60,17 @@ export const getMenuItem = (choice: MenuChoice): MenuItem => {
     }
 }
 
+enum ChangeDirection {
+    UP,
+    DOWN,
+}
+interface HomeState {
+    title: string;
+    active: MenuChoice;
+    changeTo: MenuChoice | -1;
+    changeDirection: ChangeDirection;
+    hover: boolean;
+};
 class Home extends React.Component<RouteComponentProps, HomeState> {
     public toggleTwice: boolean = false;
     public toggleTwiceRender: boolean = false;
@@ -109,10 +104,8 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
             } else {
                 this.changeUp();
             }
-        } else if (this.state.changeTo === -1) {
-            this.toggleTwice = true;
         } else {
-            this.toggleTwice = false;
+            this.state.changeTo === -1 ? this.toggleTwice = true : this.toggleTwice = false;
         }
     }
 

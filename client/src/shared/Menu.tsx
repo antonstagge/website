@@ -15,7 +15,6 @@ interface MenuState {
     show: boolean;
     inside: boolean;
 }
-
 class Menu extends React.Component<MenuProps, MenuState> {
     constructor(props: MenuProps) {
         super(props);

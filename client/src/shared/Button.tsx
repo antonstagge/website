@@ -10,7 +10,6 @@ interface ButtonProps {
 interface ButtonState {
     hover: boolean;
 };
-
 class Button extends React.Component<ButtonProps, ButtonState> {
     constructor(props: ButtonProps) {
         super(props);
