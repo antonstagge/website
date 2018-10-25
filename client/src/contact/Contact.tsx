@@ -22,14 +22,13 @@ export enum CanSend {
 }
 
 interface ContactState {
-    name: string;
-    email: string;
-    message: string;
-    hover: boolean;
-    sending: boolean;
-    success: boolean | null;
-    error: string;
-    canSend: CanSend;
+    name: string; // Value of the name input.
+    email: string; // Value of the email input.
+    message: string; // Value of the message textarea.
+    sending: boolean; // Value of the name input.
+    status: boolean | null; // Status of message sending.
+    error: string | null; // Error message if something goes wrong.
+    canSend: CanSend; // Value of the name input.
 }
 
 class Contact extends React.Component<RouteComponentProps, ContactState> {
@@ -39,10 +38,9 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
             name: '',
             email: '',
             message: '',
-            hover: false,
             sending: false,
-            success: null,
-            error: '',
+            status: null,
+            error: null,
             canSend: CanSend.NameMissing | CanSend.EmailMissing | CanSend.MessageMissing | CanSend.Captcha,
         }
 
@@ -53,12 +51,12 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
         if (this.state.sending) {return;}
         this.setState({sending: true});
         api.post('send_message', this.state).then((resp) => {
-            this.setState({sending: false, success: true})
+            this.setState({sending: false, status: true})
         }).catch((badResp) => {
             if (badResp.response !== undefined) {
-                this.setState({sending: false, success: false, error: badResp.response.data.error})
+                this.setState({sending: false, status: false, error: badResp.response.data.error})
             } else {
-                this.setState({sending: false, success: false, error: 'Could not reach server.'});
+                this.setState({sending: false, status: false, error: 'Could not reach server.'});
             }
         })
     }
@@ -176,7 +174,7 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
                         <div className="flex justify-end">
                             {this.state.sending
                                 ? <div>sending...</div>
-                                : this.state.success === null
+                                : this.state.status === null
                                     ? <Button
                                         className="mt-2 w-1/4 py-2"
                                         valid={this.state.canSend === CanSend.True}
@@ -184,9 +182,9 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
                                         childHover="Send"
                                         childNormal="Send"
                                         />
-                                    : this.state.success
+                                    : this.state.status
                                         ? <div className="text-lg h-10 text-green-dark flex flex-col justify-center text-center font-semibold">
-                                            Success!
+                                            status!
                                         </div>
                                         : <div className="text-lg h-10 text-red flex flex-col justify-center text-center font-semibold">
                                             {this.state.error}

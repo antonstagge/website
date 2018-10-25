@@ -1,7 +1,10 @@
 import axios from 'axios';
+/*
+    Convert api calls into axios with the right settings.
+ */
 
 export const get = (path: string, payload?: any) => {
-    return axios.get('/api/' + path)
+    return axios.get('/api/' + path, payload);
 }
 
 export const post = (path: string, payload: any) => {
