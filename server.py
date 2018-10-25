@@ -47,7 +47,7 @@ def download():
         with open(picture_filepath, "rb") as image_file:
             encoded_string = base64.b64encode(image_file.read())
         personal = personal.replace("IMAGE_PATH", "data:image/jpeg;base64," + encoded_string.decode("utf-8"))
-        document = "<div>" + personal + resume + "</div>"
+        document = personal + resume
         css_filepath = os.path.join(app.root_path, 'client/build/static/css/main.css')
         HTML(string=document).write_pdf('resume.pdf', stylesheets=[CSS(filename=css_filepath)])
         return send_from_directory(directory=app.root_path, filename="resume.pdf"), 200

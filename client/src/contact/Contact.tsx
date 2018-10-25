@@ -184,7 +184,7 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
                                         />
                                     : this.state.status
                                         ? <div className="text-lg h-10 text-green-dark flex flex-col justify-center text-center font-semibold">
-                                            status!
+                                            Success!
                                         </div>
                                         : <div className="text-lg h-10 text-red flex flex-col justify-center text-center font-semibold">
                                             {this.state.error}
