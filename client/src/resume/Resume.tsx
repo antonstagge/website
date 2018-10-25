@@ -7,14 +7,14 @@ const Resume: React.SFC<RouteComponentProps> = ({history}) => {
     
     const CVItem = (name: string, place:string, year:string, comment?:string, optional?:string) => <div className="flex">
             <div className="w-4/5">
-                <div className="flex text-xl">
+                <div className="flex text-2xl">
                     <div className="font-bold">{name}</div>
                     <div>,&nbsp;</div>
                     <div className="italic">{place}</div>
                     {optional !== undefined ? <div>,&nbsp;</div> : null}
                     {optional !== undefined ? <div className="">{optional}</div> : null}
                 </div>
-                <div className="pb-4 text-lg">
+                <div className="pb-4 text-xl">
                     {comment}
                 </div>
             </div>

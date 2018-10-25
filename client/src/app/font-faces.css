@@ -4,8 +4,8 @@
 }
 
 @font-face {
-    font-family: Sk-Modernist-Regular;
-    src: url('./Sk-Modernist-Regular.otf');
+    font-family: Inconsolata;
+    src: url('./Inconsolata.otf');
 }
 
 .font-header {
@@ -13,5 +13,5 @@
 }
 
 .font-default {
-    font-family: Sk-Modernist-Regular, Arial, Helvetica, sans-serif;
+    font-family: Inconsolata, Arial, Helvetica, sans-serif;
 }
