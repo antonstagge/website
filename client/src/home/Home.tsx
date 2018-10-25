@@ -72,8 +72,8 @@ interface HomeState {
     hover: boolean;
 };
 class Home extends React.Component<RouteComponentProps, HomeState> {
-    public toggleTwice: boolean = false;
-    public toggleTwiceRender: boolean = false;
+    private toggleTwice: boolean = false;
+    private firstTimeOutId = setTimeout(() => {/**/}, 0) as unknown as number;
     constructor(props: RouteComponentProps) {
         super(props);
         this.state = {
@@ -86,17 +86,21 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
     }
 
     public componentDidMount() {
-        window.addEventListener('wheel', this.handleScroll);
-        window.addEventListener('keydown', this.handleKeyDown);
+        console.log(this.firstTimeOutId);
+        window.addEventListener('wheel', this.handleScroll, {passive: true});
+        window.addEventListener('keydown', this.handleKeyDown, {passive: true});
     }
 
     public componentWillUnmount() {
         window.removeEventListener('wheel', this.handleScroll);
         window.removeEventListener('keydown', this.handleKeyDown);
+        const lastTimeOutId = setTimeout(() => {/**/}, 0) as unknown as number;
+        while (this.firstTimeOutId !== lastTimeOutId) {
+            clearTimeout(++this.firstTimeOutId);
+        }
     }
 
     public handleScroll = (e: WheelEvent) => {
-        e.preventDefault();
         if (this.state.changeTo === -1 && this.toggleTwice) {
             this.toggleTwice = false;
             if (e.deltaY > 0) {
@@ -138,10 +142,11 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
     }
 
     public delayChange = (nextChange: MenuChoice) => {
-        setTimeout(() => this.setState({title: getMenuItem(nextChange).title}), animTime/2)
+        setTimeout(() => this.setState({title: getMenuItem(nextChange).title}), animTime/2);
+        
         setTimeout(() => {
             this.setState({active: nextChange});
-            setTimeout(() => this.setState({changeTo: -1}), 500);
+            setTimeout(() => this.setState({changeTo: -1}), animTime/2);
         }, animTime);
     }
 
