@@ -86,7 +86,6 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
     }
 
     public componentDidMount() {
-        console.log(this.firstTimeOutId);
         window.addEventListener('wheel', this.handleScroll, {passive: true});
         window.addEventListener('keydown', this.handleKeyDown, {passive: true});
     }

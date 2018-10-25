@@ -34,7 +34,7 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
                         onDoubleClick(index);
                     }
                 }}
-                className={"flex-no-grow  h-6 flex cursor-pointer " 
+                className={"flex-no-grow  h-8 flex cursor-pointer " 
             }>
                 <div className="flex-1 flex flex-col justify-center">
                     <div className={"flex-no-grow font-semibold whitespace-no-wrap MenuList " + 

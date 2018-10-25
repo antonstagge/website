@@ -1,5 +1,5 @@
 # server.py
-from flask import Flask, render_template, jsonify, request, session
+from flask import Flask, render_template, send_from_directory, jsonify, request, session
 from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
 import json
@@ -11,6 +11,9 @@ import MySQLdb
 from pyfiglet import Figlet
 import random
 import string
+from weasyprint import HTML, CSS
+import os
+import base64
 
 
 # The front-end
@@ -32,6 +35,25 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 @cross_origin()
 def index():
     return render_template("index.html")
+
+@app.route("/download", methods=['POST'])
+@cross_origin()
+def download():
+    try:
+        payload = request.json
+        personal = payload['personal']
+        resume = payload['resume']
+        picture_filepath = os.path.join(app.root_path, 'client/build/static/media/me.jpg')
+        with open(picture_filepath, "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read())
+        personal = personal.replace("IMAGE_PATH", "data:image/jpeg;base64," + encoded_string.decode("utf-8"))
+        document = "<div>" + personal + resume + "</div>"
+        css_filepath = os.path.join(app.root_path, 'client/build/static/css/main.css')
+        HTML(string=document).write_pdf('resume.pdf', stylesheets=[CSS(filename=css_filepath)])
+        return send_from_directory(directory=app.root_path, filename="resume.pdf"), 200
+    except:
+        return jsonify({}), 500
+
 
 @app.route("/api/generate_captcha", methods=['GET', 'POST'])
 @cross_origin()

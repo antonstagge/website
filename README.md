@@ -28,3 +28,6 @@ start server:
 `> python3 server.py yourmailaddr yourmailtokenpassword yourdatabasepassword`
 
 you are now done!
+
+# weasyprint
+brew install python3 cairo pango gdk-pixbuf libffi
