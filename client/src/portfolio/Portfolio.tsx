@@ -50,7 +50,7 @@ const Portfolio: React.SFC<RouteComponentProps> = ({history}) => {
                         <p>
                             This project was supposed to be a single page with my resume only, 
                             but as usual I had too much fun and got carried away. I even implemented
-                            my own captcha. If you want to check out the source you can find 
+                            my own captcha. If you want to check out the source code you can find 
                             it&nbsp; <a href="https://github.com/antonstagge/website">here.</a> 
                         </p>
                     </div>
