@@ -19,6 +19,7 @@ import base64
 # The front-end
 app = Flask(__name__, static_folder="client/build/static", template_folder="client/build")
 app.secret_key = 'vXsB4qbqsfbXS2Ss'
+app.config['UPLOAD_FOLDER'] = app.static_folder + '/upload'
 
 # CORS configuration
 # For dev mode only
@@ -39,18 +40,21 @@ def index():
 @app.route("/download", methods=['POST'])
 @cross_origin()
 def download():
+    if os.path.isfile(os.path.join(app.config['UPLOAD_FOLDER'],'resume.pdf')):
+        return send_from_directory(directory=app.config['UPLOAD_FOLDER'], filename="resume.pdf"), 200
     try:
         payload = request.json
         personal = payload['personal']
         resume = payload['resume']
-        picture_filepath = os.path.join(app.root_path, 'client/build/static/media/me.jpg')
+        picture_filepath = os.path.join(app.config['UPLOAD_FOLDER'],'me.jpg')
         with open(picture_filepath, "rb") as image_file:
             encoded_string = base64.b64encode(image_file.read())
         personal = personal.replace("IMAGE_PATH", "data:image/jpeg;base64," + encoded_string.decode("utf-8"))
         document = personal + resume
-        css_filepath = os.path.join(app.root_path, 'client/build/static/css/main.css')
-        HTML(string=document).write_pdf('resume.pdf', stylesheets=[CSS(filename=css_filepath)])
-        return send_from_directory(directory=app.root_path, filename="resume.pdf"), 200
+        css_filepath = os.path.join(app.config['UPLOAD_FOLDER'],'main.css')
+        output_filepath = os.path.join(app.config['UPLOAD_FOLDER'],'resume.pdf')
+        HTML(string=document).write_pdf(output_filepath, stylesheets=[CSS(filename=css_filepath)])
+        return send_from_directory(directory=app.config['UPLOAD_FOLDER'], filename="resume.pdf"), 200
     except:
         return jsonify({}), 500
 

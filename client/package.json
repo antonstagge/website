@@ -14,8 +14,8 @@
     "build:css": "postcss src/styles/index.css -o src/index.css",
     "watch:css": "postcss src/styles/index.css -o src/index.css -w",
     "start": "npm run watch:css & react-scripts-ts start",
-    "build": "npm run build:css && react-scripts-ts build && npm run build:clean",
-    "build:clean": "cp build/static/css/*.css build/static/css/main.css && cp build/static/media/me.*.jpg build/static/media/me.jpg",
+    "build": "npm run build:css && react-scripts-ts build && npm run build:upload",
+    "build:upload": "python3 create_upload.py",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
   },
