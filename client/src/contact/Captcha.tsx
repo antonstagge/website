@@ -97,7 +97,7 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
                 <label htmlFor={"captcha"} className="text-sm text-grey-dark flex">
                     {"CAPTCHA"}&nbsp;
                     {(!this.state.valid)
-                        ? <div className="text-red-light text-xs flex flex-col justify-center">(required)</div>
+                        ? <div className="text-red-light text-xs flex flex-col justify-center">*</div>
                         : null
                     }
                 </label>

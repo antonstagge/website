@@ -46,6 +46,7 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
                         <div className="font-bold">Telephone: 0702412556</div>
                         <div className="font-bold">Email: stagge@kth.se</div>
                         <div className="font-bold">Address: Slottsvägen 3, 18352 TÄBY</div>
+                        <div className="font-bold">Website: antonstagge.com</div>
                     </div>
             </td>
         </tr>
@@ -74,7 +75,7 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
         }
     }
 
-    public CVItem = (name: string, place:string, year:string, comment?:string, optional?:string) => <table className="w-full">
+    public CVItem = (name: string, place:string, year:string, comment?:string, optional?:string) => <table className="w-full mb-2">
     <tbody>
         <tr>
             <td className="w-4/5">
@@ -106,17 +107,7 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
             >
                 <div className="m-4">
                     <div id="resume-text">
-                    <div className="text-3xl pt-2 pb-4 text-grey-dark">Education</div>
-                    {this.CVItem('KTH', 'Royal Institute of Technology', '2015-',
-                            "Currently in my fouth year doing my masters in computer science with a track in Data analysis.", "Computer Science and Engineering"
-                        )}
-                    {this.CVItem('Foothill College', 'Community college in California (USA)', '2014-2015',
-                            "Intermediate and advanced cource in C++, pre-calculus and Introduction to engineering."
-                        )}
-                    {this.CVItem('Åva gymnasium', 'Natural science programme', '2011-2014')}
-                    
-
-                    <div className="text-3xl pt-8 pb-4 text-grey-dark">Experience</div>
+                    <div className="text-3xl pb-3 text-grey-dark">Experience</div>
                     {this.CVItem('Software developer/consultant', 'Decerno' , 'Summer 2018',
                         "I was a fullstack developer, working as a consultant. I made a web application using a C# back-end with Domain Driven Design and a React front-end using redux."
                     )}
@@ -126,14 +117,22 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
                     {this.CVItem('Software developer', 'SIPRI - Stockholm International Peace Research Institute' , 'Spring 2016',
                         "As part of a school project to recreate a database and web application used at SIPRI, I was front-end lead. We created the front-end using React."
                     )}
-                    
 
-                    <div className="text-3xl pt-8 pb-4 text-grey-dark">Volunteer Experience</div>
+                    <div className="text-3xl pt-8 pb-3 text-grey-dark">Education</div>
+                    {this.CVItem('KTH', 'Royal Institute of Technology', '2015-',
+                            "Currently in my fouth year doing my masters in computer science with a track in Data analysis.", "Computer Science and Engineering"
+                        )}
+                    {this.CVItem('Foothill College', 'Community college in California (USA)', '2014-2015',
+                            "Intermediate and advanced cource in C++, pre-calculus and Introduction to engineering."
+                        )}
+                    {this.CVItem('Åva gymnasium', 'Natural science programme', '2011-2014')}
+
+                    <div className="text-3xl pt-8 pb-3 text-grey-dark">Volunteer Experience</div>
                     {this.CVItem('Reception', 'KTH' , 'Summer 2017',
                         "I was part of the 1 month long reception for the new students to KTH. I was a mentor to a group of 13 new students."
                     )}
 
-                    <div className="text-3xl pt-8 pb-4 text-grey-dark">Computer languages, frameworks and general skills</div>
+                    <div className="text-3xl pt-8 pb-3 text-grey-dark">Computer languages, frameworks and general skills</div>
                     <div className="text-xl font-bold">
                         Java,
                         C++,

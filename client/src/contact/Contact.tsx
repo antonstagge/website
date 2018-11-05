@@ -96,7 +96,7 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
             <label htmlFor={title} className="text-sm text-grey-dark flex">
                 {title}&nbsp;
                 {(this.state.canSend & canSendValue)
-                    ? <div className="text-red-light text-xs flex flex-col justify-center">(required)</div>
+                    ? <div className="text-red-light text-xs flex flex-col justify-center">*</div>
                     : null
                 }
             </label>
@@ -141,6 +141,14 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
                         <div className="text-3xl text-grey-dark pt-4 pb-2">
                             Reach out to me here
                         </div>
+                        <div className="text-sm pb-2">
+                            <div>
+                                Your email will not be saved other than in my email-inbox.
+                            </div>
+                            <div>
+                                Required uncomplete fields are marked with a {<span className="text-red">*</span>}.
+                            </div>
+                        </div>
                         <div className="flex">
                             {this.styledInput("Name", InputType.Name, CanSend.NameMissing, "pr-4")}
                             {this.styledInput("Email", InputType.Email, CanSend.EmailMissing, "pl-4")}
@@ -149,7 +157,7 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
                             <label htmlFor={"Message"} className="text-sm text-grey-dark flex">
                                 {"Message"}&nbsp;
                                 {(this.state.canSend & CanSend.MessageMissing)
-                                    ? <div className="text-red-light text-xs flex flex-col justify-center">(required)</div>
+                                    ? <div className="text-red-light text-xs flex flex-col justify-center">*</div>
                                     : null
                                 }
                             </label>
