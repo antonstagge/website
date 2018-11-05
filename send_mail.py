@@ -46,7 +46,8 @@ def send_mails(my_mail, pw, messages):
 
         server.sendmail(my_mail, my_mail, text_msg)
         return True
-    except smtplib.SMTPException:
+    except smtplib.SMTPException as e:
+        print(str(e))
         return False
 
 def mail_checker(my_mail, password, db, cursor):
