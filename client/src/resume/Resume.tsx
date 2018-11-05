@@ -55,21 +55,21 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
         if (resumeText) {
             let personalData = ReactDOMServer.renderToString(personalDetails);
             let resumeData = resumeText.innerHTML;
-            personalData = personalData.replace(/text-xl/g, "text-sm")
-            personalData = personalData.replace(/text-2xl/g, "text-base")
+            personalData = personalData.replace(/text-xl/g, "text-sm");
+            personalData = personalData.replace(/text-2xl/g, "text-base");
             
-            resumeData = resumeData.replace(/text-xl/g, "text-sm")
-            resumeData = resumeData.replace(/text-2xl/g, "text-base")
-            resumeData = resumeData.replace(/text-3xl/g, "text-xl")
+            resumeData = resumeData.replace(/text-base/g, "text-xs");
+            resumeData = resumeData.replace(/text-xl/g, "text-sm");
+            resumeData = resumeData.replace(/text-2xl/g, "text-base");
+            resumeData = resumeData.replace(/text-3xl/g, "text-xl");
             
             api.download({
                 personal: personalData,
                 resume: resumeData,
             } as api.PDFdata).then(resp => {
-                this.clickDownload(resp.data)
+                this.clickDownload(resp.data);
                 this.setState({download: true});
             }, badResp => {
-                console.error(badResp);
                 this.setState({download: false});
             })
         }
@@ -112,7 +112,7 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
                         "I was a fullstack developer, working as a consultant. I made a web application using a C# back-end with Domain Driven Design and a React front-end using redux."
                     )}
                     {this.CVItem('Software developer', 'Windfall VR' , 'Summer 2017',
-                        "Developed a game in VR using Unity Engine and C#. was the early phases of the game."
+                        "Developed a game in VR using Unity Engine and C#. It was the early phases of the game, and I got to develop some of the core mechanics."
                     )}
                     {this.CVItem('Software developer', 'SIPRI - Stockholm International Peace Research Institute' , 'Spring 2016',
                         "As part of a school project to recreate a database and web application used at SIPRI, I was front-end lead. We created the front-end using React."
@@ -120,16 +120,16 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
 
                     <div className="text-3xl pt-8 pb-3 text-grey-dark">Education</div>
                     {this.CVItem('KTH', 'Royal Institute of Technology', '2015-',
-                            "Currently in my fouth year doing my masters in computer science with a track in Data analysis.", "Computer Science and Engineering"
+                            "Currently in my fourth year doing my masters in computer science with a track in Data analysis.", "Computer Science and Engineering"
                         )}
-                    {this.CVItem('Foothill College', 'Community college in California (USA)', '2014-2015',
-                            "Intermediate and advanced cource in C++, pre-calculus and Introduction to engineering."
+                    {this.CVItem('Foothill College', 'Silicon Valley, California, (USA)', '2014-2015',
+                            "Intermediate and advanced courses in C++, pre-calculus and Introduction to Engineering."
                         )}
                     {this.CVItem('Åva gymnasium', 'Natural science programme', '2011-2014')}
 
                     <div className="text-3xl pt-8 pb-3 text-grey-dark">Volunteer Experience</div>
                     {this.CVItem('Reception', 'KTH' , 'Summer 2017',
-                        "I was part of the 1 month long reception for the new students to KTH. I was a mentor to a group of 13 new students."
+                        "I was part of the 1 month long reception for the new students at KTH. I was a mentor to a group of 13 new students."
                     )}
 
                     <div className="text-3xl pt-8 pb-3 text-grey-dark">Computer languages, frameworks and general skills</div>

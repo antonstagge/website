@@ -61,6 +61,6 @@ Ubuntu 16.04 or higher:
 Then go and verify the gmail account at:
 https://accounts.google.com/b/0/DisplayUnlockCaptcha
 
-`> python3 server.py yourmailaddr yourmailtokenpassword yourdatabasepassword > outputs/date.out &`
+`> nohup python3 server.py yourmailaddr yourmailtokenpassword yourdatabasepassword > outputs/date.out &`
 
 you are now done!

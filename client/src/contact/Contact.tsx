@@ -143,10 +143,10 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
                         </div>
                         <div className="text-sm pb-2">
                             <div>
-                                Your email will not be saved other than in my email-inbox.
+                                Your email will not be saved other than in my inbox.
                             </div>
                             <div>
-                                Required uncomplete fields are marked with a {<span className="text-red">*</span>}.
+                                Required and incomplete fields are marked with a {<span className="text-red">*</span>}.
                             </div>
                         </div>
                         <div className="flex">

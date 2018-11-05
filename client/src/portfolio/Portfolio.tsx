@@ -24,7 +24,7 @@ const Portfolio: React.SFC<RouteComponentProps> = ({history}) => {
                     <div className="flex-1 flex flex-col justify-center">
                         <div>
                             <p>
-                                This is a Double Deep Q-learning Network with a implementation of a small game I made called Onepong.
+                                This is a Double Deep Q-learning Network with an implementation of a small game I made called Onepong.
                                 Onepong is very much like pong except that it's only for one player. Much like playing tennis against a wall.
                             </p>
                             <p>&nbsp;</p>
