@@ -40,11 +40,7 @@ class Menu extends React.Component<MenuProps, MenuState> {
     }
 
     public handleClicked = (clicked: MenuChoice) => {
-        if (clicked === 0) {
-            this.props.changeLocation("/");
-        } else {
-            this.props.changeLocation(getMenuItem(clicked - 1).link);
-        }
+        this.props.changeLocation(getMenuItem(clicked).link);
     }
 
     public render() {
@@ -101,9 +97,10 @@ class Menu extends React.Component<MenuProps, MenuState> {
             >
                 <MenuList 
                     className="flex-no-grow"
-                    titles={['HOME'].concat(this.props.titles)}
-                    active={this.props.active + 1}
+                    titles={this.props.titles}
+                    active={this.props.active}
                     onClick={this.handleClicked}
+                    onTouch={this.handleClicked}
                 />
             </div>
         </div>

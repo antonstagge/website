@@ -9,7 +9,7 @@
     ]
   },
   "rules": {
-    "no-console": true,
+    "no-console": false,
     "interface-name": false,
     "no-empty-interface": false,
     "ordered-imports": false,

@@ -33,7 +33,7 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
         this.setState({download: null});
         const resumeText = document.getElementById("resume-text");
 
-        const personalDetails = <table><tbody>
+        const personalDetails = <table className="mb-6"><tbody>
         <tr>
             <td className="w-32">
                 <img src="IMAGE_PATH" alt="me"
@@ -41,7 +41,7 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
                 />
             </td>
             <td className="pb-0">
-                    <div className=" pt-20 mt-1" >
+                    <div className=" pt-20" >
                         <div className="font-header text-4xl">Anton Stagge</div>
                         <div className="font-bold">Telephone: 0702412556</div>
                         <div className="font-bold">Email: stagge@kth.se</div>
@@ -56,7 +56,6 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
             const personalData = ReactDOMServer.renderToString(personalDetails);
             let resumeData = resumeText.innerHTML;
             
-            // TODO
             resumeData = resumeData.replace(/lg:text-base/g, "text-xs");
             resumeData = resumeData.replace(/lg:text-xl/g, "text-sm");
             resumeData = resumeData.replace(/lg:text-2xl/g, "text-base");
@@ -73,6 +72,7 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
                 this.clickDownload(resp.data);
                 this.setState({download: true});
             }, badResp => {
+                console.error(badResp);
                 this.setState({download: false});
             })
         }
@@ -102,6 +102,7 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
         </tr>  
     </tbody>       
     </table>
+
     public render() { 
         return (<Header 
                 type={MenuChoice.Resume}

@@ -28,10 +28,14 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         setTimeout(() => this.setState({headerAnim: false}), animTime/2);
     }
 
-    public route = (location: any) => {
-        this.setState({headerAnim: true});
-        setTimeout(() => this.props.route(location), animTime/2);
+    public delayRoute = (type: MenuChoice) => {
+        this.setState({headerAnim: true, shrink: false});
+        setTimeout(() => this.props.route({
+            pathname: "/",
+            state: type
+        }), animTime/2);
     }
+
 
 
     public render () {
@@ -47,13 +51,8 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                 <div className={"absolute text-white text-5xl font-bold pin-t "
                     + "pin-l z-10 w-full pt-6 xs:px-4 lg:px-16 xs:h-48 lg:h-64 flex flex-col justify-between cursor-pointer " 
                     + (this.state.shrink ? "fadeIn" : "fadeOut")}
-                    onClick={() => {
-                        this.setState({shrink: false});
-                        this.route({
-                            pathname: "/",
-                            state: type
-                        });
-                    }}
+                    onClick={() => this.delayRoute(type)}
+                    onTouchEnd={() => this.delayRoute(type)}
                     onMouseEnter={() => this.setState({hoverBack: true})}
                     onMouseLeave={() => this.setState({hoverBack: false})}
                 >
@@ -73,7 +72,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                 </div>
                 <Menu 
                     className={(this.state.shrink ? "fadeIn" : "fadeOut")}
-                    changeLocation={this.route}
+                    changeLocation={this.props.route}
                     active={type}
                     titles={titles}
                 />

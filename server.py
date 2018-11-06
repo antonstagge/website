@@ -1,6 +1,6 @@
 # server.py
 from flask import Flask, render_template, send_from_directory, jsonify, request, session
-from flask_cors import CORS, cross_origin
+# from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
 import json
 import traceback
@@ -23,8 +23,9 @@ app.config['UPLOAD_FOLDER'] = app.static_folder + '/upload'
 
 # CORS configuration
 # For dev mode only
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
+# cors = CORS(app)
+# app.config['CORS_HEADERS'] = 'Content-Type'
+# add @cross_origin() to all routes
 
 # MySQL configuration
 mysql = MySQL(app)
@@ -33,14 +34,13 @@ app.config['MYSQL_DB'] = 'website'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 @app.route("/")
-@cross_origin()
 def index():
     return render_template("index.html")
 
 @app.route("/download", methods=['POST'])
-@cross_origin()
 def download():
     if os.path.isfile(os.path.join(app.config['UPLOAD_FOLDER'],'resume.pdf')):
+        print(app.config['UPLOAD_FOLDER']);
         return send_from_directory(directory=app.config['UPLOAD_FOLDER'], filename="resume.pdf"), 200
     try:
         payload = request.json
@@ -60,7 +60,6 @@ def download():
 
 
 @app.route("/api/generate_captcha", methods=['GET', 'POST'])
-@cross_origin()
 def generate_captcha():
     if request.method == 'GET':
         captcha_key = ''.join(random.choices(string.ascii_lowercase + string.ascii_uppercase + string.digits, k=6))
@@ -89,7 +88,6 @@ def generate_captcha():
 
 
 @app.route('/api/send_message', methods=['POST'])
-@cross_origin()
 def send_message():
     try:
         if session['can_send'] == True:
@@ -114,7 +112,6 @@ def send_message():
 
 
 @app.route("/api/get_all_messages")
-@cross_origin()
 def get_all_messages():
     status_code = 200
     messages = []

@@ -258,7 +258,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                         </div>
                         <NoStyleLink 
                             to={getMenuItem(this.state.active).link}
-                            className="flex-1 cursor-pointer flex flex-col justify-end mb-16"
+                            className="flex-1 cursor-pointer flex flex-col justify-end xs:mb-8 lg:mb-16"
                             onMouseEnter={() => this.setState({hover: true})}
                             onMouseLeave={() => this.setState({hover: false})}
                         >
@@ -280,6 +280,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                     <MenuList 
                         className="flex-no-grow"
                         onClick={this.clickedChoice}
+                        onTouch={this.doubleClickedChoice}
                         onDoubleClick={this.doubleClickedChoice}
                         titles={Array.from(Array(numItems).keys()).map(choice => getMenuItem(choice).title)}
                         active={this.state.changeTo === -1 ? this.state.active : this.state.changeTo}

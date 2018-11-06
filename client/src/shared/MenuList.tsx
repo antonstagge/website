@@ -6,6 +6,7 @@ export interface MenuListProps {
     active: number;
     className?: string;
     onClick(choice: MenuChoice): void;
+    onTouch?(choice: MenuChoice): void;
     onDoubleClick?(choice: MenuChoice):void;
 }
 interface MenuListState {
@@ -19,7 +20,7 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
         }
     }
     public render() {
-        const {titles, active,className, onClick, onDoubleClick} = this.props;
+        const {titles, active,className, onClick, onTouch, onDoubleClick} = this.props;
         return (<div className={"flex flex-col justify-center text-right fadeIn " + className}>
             {titles.map((title, index) => (
                 <div 
@@ -27,7 +28,7 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
                 onMouseEnter={() => this.setState({hover: index})}
                 onMouseLeave={() => this.setState({hover: -1})}
                 onClick={() => onClick(index)}
-                onTouchStart={() => onClick(index)}
+                onTouchStart={() => onTouch ? onTouch(index) : null}
                 onDoubleClick={(e: React.MouseEvent) => {
                     if (onDoubleClick !== undefined) {
                         e.preventDefault();
