@@ -115,9 +115,9 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
     public swipeCheck=() =>{
         const changeY = this.pStart.y - this.pStop.y;
         if (this.state.changeTo === -1) {
-            if (changeY < -100) {
+            if (changeY < -50) {
                 this.changeUp()
-            } else if (changeY > 100) {
+            } else if (changeY > 50) {
                 this.changeDown();
             }
         }

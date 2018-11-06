@@ -18,7 +18,7 @@ const Portfolio: React.SFC<RouteComponentProps> = ({history}) => {
             <div className="m-4">
                 <div className="xs:text-xl lg:text-3xl pt-2 pb-4 text-grey-dark">Double Deep Q-Learning Onepong</div>
                 <div className="flex flex-wrap">
-                    <div className="flex-1 pr-4 min-w-32">
+                    <div className="flex-1 pr-4 min-w-48">
                         <img src={onepong} alt="onepong"/>
                     </div>
                     <div className="flex-1 flex flex-col justify-center xs:text-sm lg:text-lg">
