@@ -50,6 +50,15 @@ Ubuntu 16.04 or higher:
 `sudo apt-get install build-essential python3-dev python3-pip python3-cffi libcairo2 libpango-1.0-0 libpangocairo-1.0-0 libgdk-pixbuf2.0-0 libffi-dev shared-mime-info
 `
 
+
+### environment
+go to ~/.profile and write
+```
+export MAIL_ADDR=yourmail@gmail.com
+export MAIL_PWD=yourmailpwdtoken
+export DB_PWD=yourdatabasepassword
+```
+
 ### Start server:
 
 `> sudo apt-get python3-pip`
@@ -61,6 +70,6 @@ Ubuntu 16.04 or higher:
 Then go and verify the gmail account at:
 https://accounts.google.com/b/0/DisplayUnlockCaptcha
 
-`> nohup python3 server.py yourmailaddr yourmailtokenpassword yourdatabasepassword > outputs/date.out &`
+`> nohup python3 server.py > outputs/date.out &`
 
 you are now done!

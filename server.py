@@ -5,7 +5,7 @@ from flask_mysqldb import MySQL
 import json
 import traceback
 from send_mail import mail_checker
-import sys
+# import sys
 import _thread
 import MySQLdb
 from pyfiglet import Figlet
@@ -39,7 +39,7 @@ def index():
 
 @app.route("/download", methods=['POST'])
 def download():
-    if os.path.isfile(os.path.join(app.config['UPLOAD_FOLDER'],'resume.pdf')):
+    if os.path.isfile(os.path.join(app.config['UPLOAD_FOLDER'],'resume.pdf')) and False:
         return send_from_directory(directory=app.config['UPLOAD_FOLDER'], filename="resume.pdf"), 200
     try:
         payload = request.json
@@ -131,13 +131,9 @@ def get_all_messages():
 
 
 if __name__ == "__main__":
-    args = sys.argv[1:]
-    if len(args) != 3:
-        print("specify server gmail addr and password and then databse password!")
-        sys.exit(-1)
-    my_mail = args[0]
-    password = args[1]
-    db_pw = args[2]
+    my_mail = os.environ['MAIL_ADDR']
+    password = os.environ["MAIL_PWD"]
+    db_pw = os.environ["DB_PWD"]
     app.config['MYSQL_PASSWORD'] = db_pw
     # Open database connection
     db = MySQLdb.connect("localhost","website", db_pw, "website")
