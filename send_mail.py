@@ -1,8 +1,9 @@
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
-import sys
+import MySQLdb
 import sched, time
+import os
 
 
 # for sending mail every day
@@ -70,12 +71,18 @@ def mail_checker(my_mail, password, db, cursor):
                 cursor.execute('''DELETE FROM message;''')
                 db.commit()
     except:
-        traceback.print_exc()
+        print("Could not send mail on " + time.strftime("%d/%m/%Y"))
 
     s.enter(86400, 1, mail_checker, argument=(my_mail, password,))
     s.run()
 
 if __name__ == "__main__":
-    args = sys.argv[1:]
-    res = send_mail("antonstagge95@gmail.com", args[0], args[1],args[2])
-    print(res)
+    my_mail = os.environ['MAIL_ADDR']
+    password = os.environ["MAIL_PWD"]
+    db_pw = os.environ["DB_PWD"]
+    # Open database connection
+    db = MySQLdb.connect("localhost","website", db_pw, "website")
+    # prepare a cursor object using cursor() method
+    cursor = db.cursor()
+    # Start thread to send email every day
+    mail_checker(my_mail, password, db, cursor)

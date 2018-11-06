@@ -21,7 +21,7 @@ launch at boot:
 
 ```
 scp -r database/ root@176.58.97.219:/home/website/
-scp -r requirements.txt server.py send_mail.py root@176.58.97.219:/home/website/
+scp -r *.* root@176.58.97.219:/home/website/
 scp -r client/build/ root@176.58.97.219:/home/website/client/
 ```
 
@@ -65,11 +65,24 @@ export DB_PWD=yourdatabasepassword
 
 `> sudo apt-get install libmysqlclient-dev`
 
+`> sudo apt-get install python-twisted-core`
+
 `> pip3 install -r requirements.txt`
 
 Then go and verify the gmail account at:
 https://accounts.google.com/b/0/DisplayUnlockCaptcha
 
-`> nohup python3 server.py > outputs/date.out &`
+grant execute PRIVILEGES
+
+```
+chmod +x start_server.sh
+chmod +x watchdog.sh
+```
+
+#### actually run the server
+```
+nohup ./start_server.sh > output/date.out &
+nohup python3 ./send_mail.py > output/mail-date.out &
+```
 
 you are now done!

@@ -4,10 +4,6 @@ from flask import Flask, render_template, send_from_directory, jsonify, request,
 from flask_mysqldb import MySQL
 import json
 import traceback
-from send_mail import mail_checker
-# import sys
-import _thread
-import MySQLdb
 from pyfiglet import Figlet
 import random
 import string
@@ -15,11 +11,10 @@ from weasyprint import HTML, CSS
 import os
 import base64
 
-
 # The front-end
-app = Flask(__name__, static_folder="client/build/static", template_folder="client/build")
+app = Flask(__name__, static_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/static"), template_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/"))
 app.secret_key = 'vXsB4qbqsfbXS2Ss'
-app.config['UPLOAD_FOLDER'] = app.static_folder + '/upload'
+app.config['UPLOAD_FOLDER'] = os.path.join(app.static_folder, 'upload')
 
 # CORS configuration
 # For dev mode only
@@ -32,6 +27,7 @@ mysql = MySQL(app)
 app.config['MYSQL_USER'] = 'website'
 app.config['MYSQL_DB'] = 'website'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+app.config['MYSQL_PASSWORD'] = os.environ["DB_PWD"]
 
 @app.route("/")
 def index():
@@ -39,7 +35,7 @@ def index():
 
 @app.route("/download", methods=['POST'])
 def download():
-    if os.path.isfile(os.path.join(app.config['UPLOAD_FOLDER'],'resume.pdf')) and False:
+    if os.path.isfile(os.path.join(app.config['UPLOAD_FOLDER'],'resume.pdf')):
         return send_from_directory(directory=app.config['UPLOAD_FOLDER'], filename="resume.pdf"), 200
     try:
         payload = request.json
@@ -54,7 +50,8 @@ def download():
         output_filepath = os.path.join(app.config['UPLOAD_FOLDER'],'resume.pdf')
         HTML(string=document).write_pdf(output_filepath, stylesheets=[CSS(filename=css_filepath)])
         return send_from_directory(directory=app.config['UPLOAD_FOLDER'], filename="resume.pdf"), 200
-    except:
+    except Exception as e:
+        print(str(e))
         return jsonify({}), 500
 
 
@@ -131,15 +128,6 @@ def get_all_messages():
 
 
 if __name__ == "__main__":
-    my_mail = os.environ['MAIL_ADDR']
-    password = os.environ["MAIL_PWD"]
-    db_pw = os.environ["DB_PWD"]
-    app.config['MYSQL_PASSWORD'] = db_pw
-    # Open database connection
-    db = MySQLdb.connect("localhost","website", db_pw, "website")
-    # prepare a cursor object using cursor() method
-    cursor = db.cursor()
-    # Start thread to send email every day
-    _thread.start_new_thread(mail_checker, (my_mail, password, db, cursor,))
     # Run the app
-    app.run(host='0.0.0.0', port=80)
+    print(app.template_folder)
+    app.run(host='0.0.0.0', port=5000)
