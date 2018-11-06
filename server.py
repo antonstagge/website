@@ -40,7 +40,6 @@ def index():
 @app.route("/download", methods=['POST'])
 def download():
     if os.path.isfile(os.path.join(app.config['UPLOAD_FOLDER'],'resume.pdf')):
-        print(app.config['UPLOAD_FOLDER']);
         return send_from_directory(directory=app.config['UPLOAD_FOLDER'], filename="resume.pdf"), 200
     try:
         payload = request.json
