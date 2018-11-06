@@ -41,7 +41,7 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
                 />
             </td>
             <td className="pb-0">
-                    <div className=" pt-20 mt-2" >
+                    <div className=" pt-20 mt-1" >
                         <div className="font-header text-4xl">Anton Stagge</div>
                         <div className="font-bold">Telephone: 0702412556</div>
                         <div className="font-bold">Email: stagge@kth.se</div>
@@ -53,15 +53,18 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
         </tbody></table>
 
         if (resumeText) {
-            let personalData = ReactDOMServer.renderToString(personalDetails);
+            const personalData = ReactDOMServer.renderToString(personalDetails);
             let resumeData = resumeText.innerHTML;
-            personalData = personalData.replace(/text-xl/g, "text-sm");
-            personalData = personalData.replace(/text-2xl/g, "text-base");
             
-            resumeData = resumeData.replace(/text-base/g, "text-xs");
-            resumeData = resumeData.replace(/text-xl/g, "text-sm");
-            resumeData = resumeData.replace(/text-2xl/g, "text-base");
-            resumeData = resumeData.replace(/text-3xl/g, "text-xl");
+            // TODO
+            resumeData = resumeData.replace(/lg:text-base/g, "text-xs");
+            resumeData = resumeData.replace(/lg:text-xl/g, "text-sm");
+            resumeData = resumeData.replace(/lg:text-2xl/g, "text-base");
+            resumeData = resumeData.replace(/lg:text-3xl/g, "text-xl");
+
+            resumeData = resumeData.replace(/xs:text-xs/g, "");
+            resumeData = resumeData.replace(/xs:text-xl/g, "");
+            resumeData = resumeData.replace(/xs:text-sm/g, "");
             
             api.download({
                 personal: personalData,
@@ -75,25 +78,25 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
         }
     }
 
-    public CVItem = (name: string, place:string, year:string, comment?:string, optional?:string) => <table className="w-full mb-2">
+    public CVItem = (name: string, place:string, year:string, comment?:string, optional?:string) => <table className="w-full mb-2 xs:text-xs lg:text-2xl">
     <tbody>
         <tr>
             <td className="w-4/5">
-            <span className="font-bold text-2xl">{name}</span>
+            <span className="font-bold ">{name}</span>
             <span>,&nbsp;</span>
-            <span className="italic text-2xl">{place}</span>
+            <span className="italic ">{place}</span>
             {optional !== undefined ? <span>,&nbsp;</span> : null}
-            {optional !== undefined ? <span className="text-2xl">{optional}</span> : null}
+            {optional !== undefined ? <span className="">{optional}</span> : null}
             </td>
-            <td className="w-1/5 text-right font-bold whitespace-no-wrap text-2xl">
+            <td className="w-1/5 text-right font-bold whitespace-no-wrap ">
                 {year}
             </td>
         </tr>
-        <tr className="pb-4 text-xl">
+        <tr className="pb-4 xs:text-xs lg:text-xl">
             <td className="w-4/5">
                 {comment}
             </td>
-            <td className="w-1/5 text-right font-bold whitespace-no-wrap text-2xl">
+            <td className="w-1/5 text-right font-bold whitespace-no-wrap ">
                 &nbsp;
             </td>
         </tr>  
@@ -107,7 +110,7 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
             >
                 <div className="m-4">
                     <div id="resume-text">
-                    <div className="text-3xl pb-3 text-grey-dark">Experience</div>
+                    <div className="xs:text-xl lg:text-3xl pb-3 text-grey-dark">Experience</div>
                     {this.CVItem('Software developer/consultant', 'Decerno' , 'Summer 2018',
                         "I was a fullstack developer, working as a consultant. I made a web application using a C# back-end with Domain Driven Design and a React front-end using redux."
                     )}
@@ -118,7 +121,7 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
                         "As part of a school project to recreate a database and web application used at SIPRI, I was front-end lead. We created the front-end using React."
                     )}
 
-                    <div className="text-3xl pt-8 pb-3 text-grey-dark">Education</div>
+                    <div className="xs:text-xl lg:text-3xl pt-8 pb-3 text-grey-dark">Education</div>
                     {this.CVItem('KTH', 'Royal Institute of Technology', '2015-',
                             "Currently in my fourth year doing my masters in computer science with a track in Data analysis.", "Computer Science and Engineering"
                         )}
@@ -127,13 +130,13 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
                         )}
                     {this.CVItem('Åva gymnasium', 'Natural science programme', '2011-2014')}
 
-                    <div className="text-3xl pt-8 pb-3 text-grey-dark">Volunteer Experience</div>
+                    <div className="xs:text-xl lg:text-3xl pt-8 pb-3 text-grey-dark">Volunteer Experience</div>
                     {this.CVItem('Reception', 'KTH' , 'Summer 2017',
                         "I was part of the 1 month long reception for the new students at KTH. I was a mentor to a group of 13 new students."
                     )}
 
-                    <div className="text-3xl pt-8 pb-3 text-grey-dark">Computer languages, frameworks and general skills</div>
-                    <div className="text-xl font-bold">
+                    <div className="xs:text-xl lg:text-3xl pt-8 pb-3 text-grey-dark">Computer languages, frameworks and general skills</div>
+                    <div className="xs:text-xs lg:text-xl font-bold">
                         Java,
                         C++,
                         SQL,
@@ -142,20 +145,20 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
                         TypeScript,
                         React Redux
                     </div>
-                    <div className="text-xl text-grey-dark py-2">Also familiar with:</div>
-                    <div className="text-xl font-bold">
+                    <div className="xs:text-sm lg:text-xl text-grey-dark py-2">Also familiar with:</div>
+                    <div className="xs:text-xs lg:text-xl font-bold">
                         Haskell,
                         Prolog,
                         Unity Engine,
                         C#,
                         C
                     </div>
-                    <div className="text-xl text-grey-dark py-2">General skills:</div>
-                    <div className="text-xl font-bold">
+                    <div className="xs:text-sm lg:text-xl text-grey-dark py-2">General skills:</div>
+                    <div className="xs:text-xs lg:text-xl font-bold">
                         Github,
                         Bash,
                         Latex
-                        <div className="text-grey-dark text-base pt-2">
+                        <div className="text-grey-dark xs:text-xs lg:text-base pt-2">
                             References can be provided upon request.
                         </div>
                     </div>
@@ -171,12 +174,12 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
                                     className=""
                                     childNormal={
                                         <img src={downloadwhite} alt="Download"
-                                            className="h-12"
+                                            className="xs:h-6 lg:h-12"
                                         />
                                     }
                                     childHover={
                                         <img src={download} alt="Download"
-                                            className="h-12"
+                                            className="xs:h-6 lg:h-12"
                                         />
                                     }
                                     onClick={this.downloadResume}

@@ -6,6 +6,7 @@ import Menu from './Menu';
 interface HeaderProps {
     type: MenuChoice;
     titles: string[];
+    className?:string;
     route(state: any):void;
 }
 interface HeaderState {
@@ -34,23 +35,17 @@ class Header extends React.Component<HeaderProps, HeaderState> {
 
 
     public render () {
-        const {type, titles} = this.props;
-        return <div className="flex-1 relative text-lg "
-            style={this.state.headerAnim
-                ? {
-                    height: 'calc(100vh - 3rem)',
-                    overflow: 'hidden',
-                }
-                : {}}
+        const {type, titles, className} = this.props;
+        return <div className={className + " flex-1 relative " + (this.state.headerAnim ? "xs:h-middle lg:h-middle overflow-hidden" : "")}
         >
             <div className="font-header">
-                <div className={"overflow-hidden " + (this.state.shrink ? "shrinkHeight" : "growHeight")}>
+                <div className={"overflow-hidden " + (this.state.shrink ? "xs:shrinkHeight lg:shrinkHeight" : "xs:growHeight lg:growHeight")}>
                     <BackgroundImage 
                         backgroundImage={getMenuItem(type).backgroundImage}
                     />
                 </div>
                 <div className={"absolute text-white text-5xl font-bold pin-t "
-                    + "pin-l z-10 w-full pt-6 px-16 h-64 flex flex-col justify-between cursor-pointer " 
+                    + "pin-l z-10 w-full pt-6 xs:px-4 lg:px-16 xs:h-48 lg:h-64 flex flex-col justify-between cursor-pointer " 
                     + (this.state.shrink ? "fadeIn" : "fadeOut")}
                     onClick={() => {
                         this.setState({shrink: false});

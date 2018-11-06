@@ -92,8 +92,8 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
 
 
     public render() {
-        return(<div className={this.props.className + " flex-1 flex justify-center "}>
-            <div className="pr-2 flex-1 flex flex-col justify-end">
+        return(<div className={this.props.className + " justify-center "}>
+            <div className="flex-1 flex flex-col justify-end">
                 <label htmlFor={"captcha"} className="text-sm text-grey-dark flex">
                     {"CAPTCHA"}&nbsp;
                     {(!this.state.valid)
@@ -103,7 +103,7 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
                 </label>
                 <input type="text" id={"captcha"}
                     placeholder="Are you a robot?"
-                    className="border border-black p-px pl-1"
+                    className="border border-black p-px"
                     onChange={(e) => this.handleInput(e.target.value)}
                 />
                 <div className="flex justify-between">
@@ -143,7 +143,7 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
                     </div>
                 </div>
             </div>
-            <div className="flex justify-center flex-1 bg-black">
+            <div className="flex justify-center flex-1 bg-black min-h-16 min-w-32 xs:ml-0 lg:ml-2">
                 <pre className="text-xxs font-bold  text-white ">
                     {this.state.captcha}
                 </pre>

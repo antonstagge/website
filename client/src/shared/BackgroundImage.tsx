@@ -9,10 +9,8 @@ const BackgroundImage: React.SFC<BackgroundImageProps> = ({backgroundImage, clas
     return (<div className={className + " "}>
         <img 
             src={backgroundImage} alt=""
-            className="w-full"
-            style={{
-                height: 'calc(100vh - 3rem)'
-            }}/>
+            className="w-full xs:h-middle lg:h-middle "
+            />
     </div>)
 }
 

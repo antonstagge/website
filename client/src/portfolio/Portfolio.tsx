@@ -16,12 +16,12 @@ const Portfolio: React.SFC<RouteComponentProps> = ({history}) => {
             route={history.push}
         >
             <div className="m-4">
-                <div className="text-3xl pt-2 pb-4 text-grey-dark">Double Deep Q-Learning Onepong</div>
-                <div className="flex">
-                    <div className="flex-1 pr-4">
+                <div className="xs:text-xl lg:text-3xl pt-2 pb-4 text-grey-dark">Double Deep Q-Learning Onepong</div>
+                <div className="flex flex-wrap">
+                    <div className="flex-1 pr-4 min-w-32">
                         <img src={onepong} alt="onepong"/>
                     </div>
-                    <div className="flex-1 flex flex-col justify-center">
+                    <div className="flex-1 flex flex-col justify-center xs:text-sm lg:text-lg">
                         <div>
                             <p>
                                 This is a Double Deep Q-learning Network with an implementation of a small game I made called Onepong.
@@ -44,8 +44,8 @@ const Portfolio: React.SFC<RouteComponentProps> = ({history}) => {
                         </div>
                     </div>
                 </div>
-                <div className="text-3xl pt-10 pb-4 text-grey-dark">This website</div>
-                <div className="flex pb-8">
+                <div className="xs:text-xl lg:text-3xl pt-10 pb-4 text-grey-dark">This website</div>
+                <div className="flex flex-wrap pb-8 xs:text-sm lg:text-lg">
                     <div className="flex-1">
                         <p>
                             This project was supposed to be a single page with my resume only, 
@@ -54,7 +54,7 @@ const Portfolio: React.SFC<RouteComponentProps> = ({history}) => {
                             it&nbsp;<a href="https://github.com/antonstagge/website">here.</a> 
                         </p>
                     </div>
-                    <div className="flex-1"/>
+                    <div className="xs:flex-no-grow lg:flex-1"/>
                 </div>
             </div>
         </Header>

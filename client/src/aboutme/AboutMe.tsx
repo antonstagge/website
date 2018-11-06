@@ -11,16 +11,17 @@ const AboutMe: React.SFC<RouteComponentProps>  = ({history}) => {
             type={MenuChoice.AboutMe}
             titles={Array.from(Array(numItems).keys()).map(choice => getMenuItem(choice).title)}
             route={history.push}
+            className="xs:text-sm lg:text-base"
         >
-            <div className="flex m-4 ">
+            <div className="flex xs:m-2 lg:m-4">
                 <div className="flex-no-grow">
                     <img 
                         src={me} alt="me"
-                        className=" border border-black h-64"
+                        className=" border border-black xs:h-32 lg:h-64"
                     />
                 </div>
                 <div className="flex-1 pl-4">
-                    <p className="text-xl text-grey-dark pb-2">Who am I?</p>
+                    <p className="xs:text-lg lg:text-xl text-grey-dark pb-2">Who am I?</p>
                     <p>
                     My name is Anton Stagge and I'm a social, outgoing and happy guy. At the moment, I am doing my masters studies in 
                     engineering and computer science at the Royal Institute of Technology. 
@@ -44,7 +45,7 @@ const AboutMe: React.SFC<RouteComponentProps>  = ({history}) => {
                     </p>
                 </div>
             </div>
-            <div className="flex m-4 ">
+            <div className="flex xs:m-2 lg:m-4 ">
                 <div className="flex-1 pr-4">
                     <p>
                     The transition from legos to actual programming took place when I studied a year at a college 
@@ -60,10 +61,10 @@ const AboutMe: React.SFC<RouteComponentProps>  = ({history}) => {
                     creating something from scratch is too good to ever stop chasing after.
                     </p>
                 </div>
-                <div className="flex-no-grow border border-black">
+                <div className="flex-no-grow ">
                     <img 
                         src={logoblack} alt="logo"
-                        className="h-64 px-4"
+                        className="xs:h-32 lg:h-64 p-4 border border-black"
                     />
                 </div>
             </div>

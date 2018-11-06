@@ -8,7 +8,7 @@ import * as React from 'react';
 import './font-faces.css';
 
 const App: React.SFC<{}> = () => {
-    return (<div className="min-h-screen p-6 pb-0 select-none font-default flex flex-col">
+    return (<div className="min-h-screen xs:pb-0 xs:p-3 lg:p-6 lg:pb-0 select-none font-default flex flex-col">
         <Router>
             <div className="flex-1 flex flex-col border border-black shadow-md">
                 <Route exact={true} path="/" component={Home} />
@@ -18,7 +18,7 @@ const App: React.SFC<{}> = () => {
                 <Route path="/contact" component={Contact} />   
             </div>
         </Router>
-        <div className="h-6-2px flex-no-grow text-grey text-right text-sm ">
+        <div className="lg:h-6-2px sm:h-3 flex-no-grow text-grey text-right xs:text-xs lg:text-sm ">
             Copyright &copy; 2018 Anton Stagge 
         </div>
     </div>

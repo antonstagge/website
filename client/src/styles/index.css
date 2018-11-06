@@ -6,6 +6,92 @@
     height: 1.4rem;
 }
 
+@media (min-width: 320px) {
+    .xs\:h-middle {
+        height: calc(100vh - 1.5rem);
+    }
+
+    .xs\:shrinkHeight {
+        animation-name: xsShrinkHeight;
+        animation-duration:  0.5s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+    }
+
+    .xs\:growHeight {
+        animation-name: xsGrowHeight;
+        animation-duration:  0.5s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+    }
+}
+
+@media (min-width: 992px) {
+    .lg\:h-6-2px {
+        height: 1.4rem !important;
+    }
+
+    .lg\:h-middle {
+        height: calc(100vh - 3rem);
+    }
+
+    .lg\:shrinkHeight {
+        animation-name: lgShrinkHeight;
+        animation-duration:  0.5s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+    }
+
+    .lg\:growHeight {
+        animation-name: lgGrowHeight;
+        animation-duration:  0.5s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+    }
+}
+
+
+
+@keyframes lgShrinkHeight {
+    0% {
+        height: calc(100vh - 3rem);
+    }
+
+    100% {
+        height: 16rem;
+    }
+}
+
+@keyframes lgGrowHeight {
+    0% {
+        height: 16rem;
+    }
+
+    100% {
+        height: calc(100vh - 3rem);
+    }
+}
+
+@keyframes xsShrinkHeight {
+    0% {
+        height: calc(100vh - 1.5rem);
+    }
+
+    100% {
+        height: 12rem;
+    }
+}
+
+@keyframes xsGrowHeight {
+    0% {
+        height: 12rem;
+    }
+
+    100% {
+        height: calc(100vh - 1.5rem);
+    }
+}
+
 .flex-2 {
     flex-grow: 2;
     flex-basis: 0%;
@@ -172,39 +258,6 @@
 
     100% {
         opacity: 0;
-    }
-}
-
-.shrinkHeight {
-    animation-name: shrinkHeight;
-    animation-duration:  0.5s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-}
-
-@keyframes shrinkHeight {
-    0% {
-        height: calc(100vh - 3rem);
-    }
-
-    100% {
-        height: 16rem;
-    }
-}
-
-.growHeight {
-    animation-name: growHeight;
-    animation-duration:  0.5s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-}
-@keyframes growHeight {
-    0% {
-        height: 16rem;
-    }
-
-    100% {
-        height: calc(100vh - 3rem);
     }
 }
 

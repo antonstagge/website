@@ -74,6 +74,8 @@ interface HomeState {
 class Home extends React.Component<RouteComponentProps, HomeState> {
     private toggleTwice: boolean = false;
     private firstTimeOutId = setTimeout(() => {/**/}, 0) as unknown as number;
+    private pStart = {x: 0, y:0};
+    private pStop = {x:0, y:0};
     constructor(props: RouteComponentProps) {
         super(props);
         this.state = {
@@ -85,14 +87,54 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
         };
     }
 
+
+    public swipeStart = (e:any) => {
+        if (typeof e.targetTouches !== "undefined"){
+            const touch = e.targetTouches[0];
+            this.pStart.x = touch.screenX;
+            this.pStart.y = touch.screenY;
+        } else {
+            this.pStart.x = e.screenX;
+            this.pStart.y = e.screenY;
+        }
+    }
+
+    public swipeEnd = (e:any) => {
+        if (e.changedTouches !== "undefined"){
+            const touch = e.changedTouches[0];
+            this.pStop.x = touch.screenX;
+            this.pStop.y = touch.screenY;
+        } else {
+            this.pStop.x = e.screenX;
+            this.pStop.y = e.screenY;
+        }
+
+        this.swipeCheck();
+    }
+
+    public swipeCheck=() =>{
+        const changeY = this.pStart.y - this.pStop.y;
+        if (this.state.changeTo === -1) {
+            if (changeY < -100) {
+                this.changeUp()
+            } else if (changeY > 100) {
+                this.changeDown();
+            }
+        }
+    }
+
     public componentDidMount() {
         window.addEventListener('wheel', this.handleScroll, {passive: true});
         window.addEventListener('keydown', this.handleKeyDown, {passive: true});
+        window.addEventListener('touchstart', this.swipeStart, false);
+        window.addEventListener('touchend', this.swipeEnd, false);
     }
 
     public componentWillUnmount() {
         window.removeEventListener('wheel', this.handleScroll);
         window.removeEventListener('keydown', this.handleKeyDown);
+        window.removeEventListener('touchstart', this.swipeStart, false);
+        window.removeEventListener('touchend', this.swipeEnd, false);
         const lastTimeOutId = setTimeout(() => {/**/}, 0) as unknown as number;
         while (this.firstTimeOutId !== lastTimeOutId) {
             clearTimeout(++this.firstTimeOutId);
@@ -186,10 +228,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
 
     public render() {
         return <div
-            className="flex-1 max-h-full relative overflow-hidden font-header "
-            style={{
-                height: 'calc(100vh - 3rem)'
-            }}
+            className="flex-1 max-h-full relative overflow-hidden font-header xs:h-middle lg:h-middle"
         >
             {Array.from(Array(numItems).keys()).map(choice => {
                 return <BackgroundImage
@@ -200,14 +239,14 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
             })}
             <div className="absolute z-10 pin overflow-hidden">
                 <div className="flex text-white h-full">
-                    <div className="flex-1 flex flex-col pl-16">
+                    <div className="flex-1 flex flex-col xs:pl-8 lg:pl-16">
                         <div className="fadeIn flex-no-grow flex items-center overflow-visible pt-6">
                             <img src={logowhite} alt=""
-                                className="h-32"
+                                className="xs:h-16 lg:h-32"
                             />
                             <div className="flex">
-                                <div className="w-1 ml-2 bg-white"/>
-                                <div className="flex flex-col justify-end pl-px text-xl font-semibold">
+                                <div className="xs:w-px xs:px-px lg:px-0 lg:w-1 xs:ml-1 lg:ml-2 bg-white"/>
+                                <div className="flex flex-col justify-end pl-px xs:text-xs lg:text-xl font-semibold">
                                     <div className="flex-no-grow -mb-1 leading-normal">
                                         ANTON 
                                     </div>
@@ -224,7 +263,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                             onMouseLeave={() => this.setState({hover: false})}
                         >
                              <div 
-                                className={"flex-no-grow text-7xl font-bold flex " + 
+                                className={"flex-no-grow xs:text-4xl lg:text-7xl font-bold flex " + 
                                 (this.state.changeTo !== -1 
                                     ? "fadeOutIn"
                                     : ""
@@ -248,7 +287,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                 </div>
             </div>
             <Socials 
-                className="absolute pin-t pin-r pr-10 pt-10 z-10"
+                className="absolute pin-t pin-r xs:pr-5 lg:pr-10 pt-10 xs:mt-1 lg:mt-0 z-10"
             />
         </div>
     }
