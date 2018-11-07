@@ -10,6 +10,7 @@ import string
 from weasyprint import HTML, CSS
 import os
 import base64
+import config
 
 # The front-end
 app = Flask(__name__, static_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/static"), template_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/"))
@@ -27,7 +28,7 @@ mysql = MySQL(app)
 app.config['MYSQL_USER'] = 'website'
 app.config['MYSQL_DB'] = 'website'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-app.config['MYSQL_PASSWORD'] = os.environ["DB_PWD"]
+app.config['MYSQL_PASSWORD'] = config.DB_PWD
 
 @app.route("/")
 def index():
@@ -129,5 +130,4 @@ def get_all_messages():
 
 if __name__ == "__main__":
     # Run the app
-    print(app.template_folder)
     app.run(host='0.0.0.0', port=5000)

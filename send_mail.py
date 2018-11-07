@@ -2,12 +2,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
 import MySQLdb
-import sched, time
 import os
-
-
-# for sending mail every day
-s = sched.scheduler(time.time, time.sleep)
+import time
+import config
 
 def send_mail(my_mail, pw, from_addr, message):
     msg = MIMEMultipart()
@@ -73,13 +70,11 @@ def mail_checker(my_mail, password, db, cursor):
     except:
         print("Could not send mail on " + time.strftime("%d/%m/%Y"))
 
-    s.enter(86400, 1, mail_checker, argument=(my_mail, password,))
-    s.run()
 
 if __name__ == "__main__":
-    my_mail = os.environ['MAIL_ADDR']
-    password = os.environ["MAIL_PWD"]
-    db_pw = os.environ["DB_PWD"]
+    my_mail = config.MAIL_ADDR
+    password = config.MAIL_PWD
+    db_pw = config.DB_PWD
     # Open database connection
     db = MySQLdb.connect("localhost","website", db_pw, "website")
     # prepare a cursor object using cursor() method
