@@ -25,7 +25,7 @@ interface MenuItem {
     number: MenuChoice;
     link: string;
 }
-export const animTime:number = 1000;
+export const animTime:number = 500;
 export const numItems = 4;
 export const getMenuItem = (choice: MenuChoice): MenuItem => {
     switch(choice) {
@@ -187,7 +187,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
         
         setTimeout(() => {
             this.setState({active: nextChange});
-            setTimeout(() => this.setState({changeTo: -1}), animTime/2);
+            setTimeout(() => this.setState({changeTo: -1}), 1.5*animTime);
         }, animTime);
     }
 

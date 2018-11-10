@@ -13,14 +13,14 @@
 
     .xs\:shrinkHeight {
         animation-name: xsShrinkHeight;
-        animation-duration:  0.5s;
+        animation-duration:  250ms;
         animation-timing-function: ease-in-out;
         animation-fill-mode: forwards;
     }
 
     .xs\:growHeight {
         animation-name: xsGrowHeight;
-        animation-duration:  0.5s;
+        animation-duration:  250ms;
         animation-timing-function: ease-in-out;
         animation-fill-mode: forwards;
     }
@@ -37,14 +37,14 @@
 
     .lg\:shrinkHeight {
         animation-name: lgShrinkHeight;
-        animation-duration:  0.5s;
+        animation-duration:  250ms;
         animation-timing-function: ease-in-out;
         animation-fill-mode: forwards;
     }
 
     .lg\:growHeight {
         animation-name: lgGrowHeight;
-        animation-duration:  0.5s;
+        animation-duration:  250ms;
         animation-timing-function: ease-in-out;
         animation-fill-mode: forwards;
     }
@@ -116,7 +116,7 @@
 
 .bgAnimDown {
     animation-name: slide-down;
-    animation-duration:  1s;
+    animation-duration:  500ms;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
 }
@@ -132,7 +132,7 @@
 
 .bgAnimUp {
     animation-name: slide-up;
-    animation-duration:  1s;
+    animation-duration:  500ms;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
 }
@@ -148,7 +148,7 @@
 
 .bgAnimDownLast {
     animation-name: slide-down-last;
-    animation-duration:  1s;
+    animation-duration:  500ms;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
 }
@@ -163,7 +163,7 @@
 }
 .bgAnimDownFirst {
     animation-name: slide-down-first;
-    animation-duration:  1s;
+    animation-duration:  500ms;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
 }
@@ -179,7 +179,7 @@
 
 .bgAnimUpLast {
     animation-name: slide-up-last;
-    animation-duration:  1s;
+    animation-duration:  500ms;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
 }
@@ -194,7 +194,7 @@
 }
 .bgAnimUpFirst {
     animation-name: slide-up-first;
-    animation-duration:  1s;
+    animation-duration:  500ms;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
 }
@@ -210,7 +210,7 @@
 
 .fadeOutIn {
     animation-name: fade;
-    animation-duration:  1s;
+    animation-duration:  500ms;
     animation-timing-function: ease-in-out;
 }
 
@@ -230,7 +230,7 @@
 
 .fadeIn {
     animation-name: fadeIn;
-    animation-duration:  0.5s;
+    animation-duration:  250ms;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
 }
@@ -247,7 +247,7 @@
 
 .fadeOut {
     animation-name: fadeOut;
-    animation-duration:  0.5s;
+    animation-duration:  250ms;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
 }
@@ -262,11 +262,11 @@
 }
 
 .MenuList {
-    transition: font-size 0.5s;
+    transition: font-size 250ms;
 }
 
 .hoverBar {
-    transition: width 1s;
+    transition: width 500ms;
 }
 
 .w-0 {

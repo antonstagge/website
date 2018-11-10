@@ -2,7 +2,7 @@ import * as React from 'react';
 import oneham from 'src/resources/images/oneham.png';
 import onehamblack from 'src/resources/images/onehamblack.png';
 import MenuList from './MenuList';
-import { MenuChoice, getMenuItem } from 'src/home/Home';
+import { MenuChoice, getMenuItem, animTime } from 'src/home/Home';
 
 interface MenuProps {
     titles: string[];
@@ -90,7 +90,7 @@ class Menu extends React.Component<MenuProps, MenuState> {
                 className={"absolute pin-r pin-t xs:h-48 lg:h-64 flex flex-col justify-end bg-white overflow-hidden border-black "}
                 style={{
                     width: (this.state.show ? '240%' : '0%'),
-                    transition: 'width 1s'
+                    transition: 'width ' + animTime + 'ms'
                 }}
                 onMouseEnter={() => this.setState({inside: true})}
                 onMouseLeave={() => this.setState({inside: false})}
