@@ -1,4 +1,4 @@
-# Website template with flask server MySQL db and TypeScript create-react-app
+# Website template with Flask backend, MySQL db and TypeScript create-react-app frontend - hosted with a nginx web server together with uWSGI.
 
 ## Set up server
 https://linode.com/docs/getting-started/
@@ -6,12 +6,13 @@ https://linode.com/docs/getting-started/
 ## Set up nginx
 https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uswgi-and-nginx-on-ubuntu-18-04
 
-Follow the guide up to step 3 then:
-### Set up mysql
+Follow the guide up to step 3 continue with this guide until further notice.
+## Set up mysql
 install mysql
 
 ```
 sudo apt-get install mysql-server
+sudo apt-get install libmysqlclient-dev
 ```
 
 start mysql service
@@ -51,7 +52,7 @@ then type
 GRANT ALL PRIVILEGES ON website.* To 'website'@'localhost' IDENTIFIED BY 'yourdatabasepassword';
 ```
 
-### Install weasyprint
+## Install weasyprint
 https://weasyprint.readthedocs.io/en/stable/install.html
 
 Mac OS:
@@ -64,33 +65,29 @@ sudo apt-get install build-essential python3-dev python3-pip python3-cffi libcai
 ```
 
 
-### Environment variables
-go to ~/.profile and write
+## Edit the config file
+edit the config.py file to contain the nessesary information.
 ```
-export MAIL_ADDR=yourmail@gmail.com
-export MAIL_PWD=yourmailpwdtoken
-export DB_PWD=yourdatabasepassword
+MAIL_ADDR=yourmail@gmail.com
+MAIL_PWD=yourmailpwdtoken
+DB_PWD=yourdatabasepassword
 ```
 
-### Install server requirements:
-
-```
-sudo apt-get install libmysqlclient-dev
-```
-make sure tou are in virtual env!
+## Install all server requirements:
+make sure you are in virtual env!
 ```
 pip install -r requirements.txt
 ```
 
 
-### Allow gmail account access
+## Allow gmail account access
 Then go and verify the gmail account at:
 https://accounts.google.com/b/0/DisplayUnlockCaptcha
 
-### Now go back to the guide
+## Now go back to the guide
+After completing the guide. Follow the steps below to add SSL to the communication.
 
-
-## HTTPS SSL
+### HTTPS SSL
 
 https://www.linode.com/docs/security/ssl/install-lets-encrypt-to-create-ssl-certificates/
 
@@ -122,7 +119,7 @@ server {
 Then go to /etc/nginx/sites-available/ and rename default to default.txt or something
 Then go to sites-enabled/ and remove default.
 
-## update certificate and run send_mail script using cron
+## Update certificate and run send_mail script using cron
 
 edit the crontab file using
 
@@ -136,3 +133,5 @@ to look like this:
 0 0 1 * * /opt/letsencrypt/letsencrypt-auto renew
 0 18 * * * /home/anton/website/websiteenv/bin/python3 /home/anton/website/send_mail.py
 ```
+
+## You are now done! Congratulations. 
