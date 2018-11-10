@@ -119,6 +119,9 @@ server {
 }
 ```
 
+Then go to /etc/nginx/sites-available/ and rename default to default.txt or something
+Then go to sites-enabled/ and remove default.
+
 ## update certificate and run send_mail script using cron
 
 edit the crontab file using
