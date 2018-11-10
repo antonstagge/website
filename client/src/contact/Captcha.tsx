@@ -17,8 +17,11 @@ interface CaptchaState {
     error: string | null;
 };
 
-const loadString = "\n\n\n\n\nL O A D I N G . . .";
-const humanString = "\n\n\n\n\nH E L L O   H U M A N !";
+enum CaptchaStrings {
+    loadString = "loading",
+    humanString = "human",
+    errorString = "error",
+}
 
 class Captcha extends React.Component<CaptchaProps, CaptchaState> {
     constructor(props: CaptchaProps) {
@@ -41,7 +44,7 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
 
     public reCaptcha = () => {
         this.setState({
-            captcha: loadString,
+            captcha: CaptchaStrings.loadString,
             error: null,
             valid: false,
         })
@@ -49,7 +52,7 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
             this.setState({captcha: resp.data, valid: false, error: null});
         }, badResp => {
             this.setState({
-                captcha: null,
+                captcha: CaptchaStrings.errorString,
                 valid: false, 
                 error: 'Could not reach server.'
             });
@@ -58,7 +61,7 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
 
     public tryCaptcha = () => {
         this.setState({
-            captcha: loadString,
+            captcha: CaptchaStrings.loadString,
             error: null,
             valid: false,
         });
@@ -66,7 +69,7 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
             this.setState({
                 valid: true, 
                 error: null,
-                captcha: humanString,
+                captcha: CaptchaStrings.humanString,
             });
             this.props.setCaptchaValid(true);
         }, badResp => {
@@ -74,13 +77,13 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
                 this.setState({
                     error: badResp.response.data.error,
                     valid: false,
-                    captcha: null,
+                    captcha: CaptchaStrings.errorString,
                 });
             } else {
                 this.setState({
                   error: 'Could not reach server.',
                   valid: false,
-                  captcha: null, 
+                  captcha: CaptchaStrings.errorString, 
                 });
             }
             this.props.setCaptchaValid(false);
@@ -90,10 +93,24 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
         this.setState({input: value});
     }
 
+    public captchaValue = () => {
+        switch(this.state.captcha) {
+            case CaptchaStrings.loadString:
+                return <div className="text-white flex items-center">LOADING...</div>;
+            case CaptchaStrings.humanString:
+                return <div className="text-white flex items-center">HELLO HUMAN!</div>;
+            case CaptchaStrings.errorString:
+                return <div className="text-white flex items-center">ERROR</div>;
+            default:
+                return <pre className="text-xxs font-bold  text-white ">
+                        {this.state.captcha}
+                    </pre>
+        }
+    }
 
     public render() {
         return(<div className={this.props.className + " justify-center "}>
-            <div className="flex-1 flex flex-col justify-end">
+            <div className="flex-1 flex flex-col justify-end xs:pr-0 lg:pr-8">
                 <label htmlFor={"captcha"} className="text-sm text-grey-dark flex">
                     {"CAPTCHA"}&nbsp;
                     {(!this.state.valid)
@@ -143,10 +160,8 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
                     </div>
                 </div>
             </div>
-            <div className="flex justify-center flex-1 bg-black min-h-16 min-w-32 xs:ml-0 lg:ml-2">
-                <pre className="text-xxs font-bold  text-white ">
-                    {this.state.captcha}
-                </pre>
+            <div className="flex justify-center flex-1 bg-black min-h-16 min-w-32">
+                {this.captchaValue()}
             </div>
             
         </div>)

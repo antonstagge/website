@@ -180,7 +180,7 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
                         />
                         <div className="flex justify-end">
                             {this.state.sending
-                                ? <div>sending...</div>
+                                ? <div className="text-lg h-10 flex flex-col justify-center text-center font-semibold">Sending...</div>
                                 : this.state.status === null
                                     ? <Button
                                         className="mt-2 w-1/4 py-2"
