@@ -6,7 +6,7 @@ import vineyard from 'src/resources/images/vineyard.jpg';
 
 import computer from 'src/resources/images/computer.jpg';
 
-import logowhite from 'src/resources/images/logowhite.png';
+import logowhite from 'src/resources/logos/logowhite.png';
 import BackgroundImage from 'src/shared/BackgroundImage';
 import MenuList from 'src/shared/MenuList';
 import Socials from './Socials';

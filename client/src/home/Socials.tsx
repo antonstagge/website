@@ -1,8 +1,8 @@
 import * as React from 'react';
-import githubmarkLight from 'src/resources/images/githubmarklight.png';
-import githubmark from 'src/resources/images/githubmark.png';
-import linkedinwhite from 'src/resources/images/linkedinwhite.png';
-import linkedincolor from 'src/resources/images/linkedincolor.png';
+import githubmarkLight from 'src/resources/logos/githubmarklight.png';
+import githubmark from 'src/resources/logos/githubmark.png';
+import linkedinwhite from 'src/resources/logos/linkedinwhite.png';
+import linkedincolor from 'src/resources/logos/linkedincolor.png';
 
 enum SocialType {
     github,

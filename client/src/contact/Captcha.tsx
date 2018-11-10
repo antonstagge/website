@@ -2,9 +2,9 @@ import * as React from 'react';
 import * as api from 'src/api/api';
 import Button from 'src/shared/Button';
 import { debounce } from 'ts-debounce';
-import check from 'src/resources/images/check.png';
-import redowhite from 'src/resources/images/redowhite.png';
-import redoblack from 'src/resources/images/redoblack.png';
+import check from 'src/resources/logos/check.png';
+import redowhite from 'src/resources/logos/redowhite.png';
+import redoblack from 'src/resources/logos/redoblack.png';
 
 interface CaptchaProps {
     className?: string;

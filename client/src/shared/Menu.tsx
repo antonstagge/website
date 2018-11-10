@@ -1,6 +1,6 @@
 import * as React from 'react';
-import oneham from 'src/resources/images/oneham.png';
-import onehamblack from 'src/resources/images/onehamblack.png';
+import oneham from 'src/resources/logos/oneham.png';
+import onehamblack from 'src/resources/logos/onehamblack.png';
 import MenuList from './MenuList';
 import { MenuChoice, getMenuItem, animTime } from 'src/home/Home';
 
