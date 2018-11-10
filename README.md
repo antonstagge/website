@@ -134,4 +134,11 @@ to look like this:
 0 18 * * * /home/anton/website/websiteenv/bin/python3 /home/anton/website/send_mail.py
 ```
 
-## You are now done! Congratulations. 
+## You are now done! Congratulations.
+
+After you make any updates, reload by typing
+
+```
+sudo systemctl restart website
+sudo systemctl restart nginx
+```
