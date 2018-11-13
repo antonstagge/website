@@ -6,6 +6,7 @@
     "axios": "^0.18.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-dropzone": "^7.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "3.1.0",
     "ts-debounce": "^0.3.2"
@@ -20,11 +21,12 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
-    "@types/react-router-dom": "^4.3.1",
     "@types/jest": "^23.3.5",
     "@types/node": "^10.12.0",
     "@types/react": "^16.4.18",
     "@types/react-dom": "^16.0.9",
+    "@types/react-dropzone": "^4.2.2",
+    "@types/react-router-dom": "^4.3.1",
     "autoprefixer": "^9.2.1",
     "postcss-cli": "^6.0.1",
     "tailwindcss": "^0.6.6",

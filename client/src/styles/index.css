@@ -284,3 +284,10 @@
 .noStyleLink:focus, .noStyleLink:hover, .noStyleLink:visited, .noStyleLink:link, .noStyleLink:active {
     text-decoration: none;
 }
+
+.dropzone {
+    border-width: 1px;
+    border-color: #51d88a;
+    border-style: dashed;
+    border-radius: 5px;
+}

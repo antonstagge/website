@@ -2,6 +2,7 @@ import * as React from 'react';
 
 interface ButtonProps {
     className?: string;
+    unvalidClassName?: string;
     valid: boolean;
     childNormal: string | JSX.Element;
     childHover: string | JSX.Element;
@@ -19,19 +20,19 @@ class Button extends React.Component<ButtonProps, ButtonState> {
     }
 
     public render() {
-        const {valid, onClick, childHover, childNormal, className} = this.props;
+        const {valid, onClick, childHover, childNormal, className, unvalidClassName} = this.props;
         return (<div    
             className={"border border-black flex flex-col justify-center text-center font-semibold " +  
                 (valid
                     ? "cursor-pointer " + (this.state.hover
                         ? "text-black bg-white"
                         : "bg-black text-white")
-                    : "text-black bg-grey-lighter"
+                    : ( unvalidClassName !== undefined ? unvalidClassName : "text-black bg-grey-lighter")
                 )
                 + " " + className 
             }
-            onClick={onClick}
-            onMouseEnter={() => this.setState({hover: true})}
+            onClick={() => valid ? onClick() : null}
+            onMouseEnter={() => valid ? this.setState({hover: true}) : null}
             onMouseLeave={() => this.setState({hover: false})}
             >
                 {this.state.hover

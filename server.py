@@ -1,6 +1,6 @@
 # server.py
 from flask import Flask, render_template, send_from_directory, jsonify, request, session
-# from flask_cors import CORS, cross_origin
+from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
 import json
 import traceback
@@ -11,16 +11,18 @@ from weasyprint import HTML, CSS
 import os
 import base64
 import config
+import image_hiding
 
 # The front-end
-app = Flask(__name__, static_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/static"), template_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/"))
+app = Flask(__name__, static_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/build/static"), template_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/build"))
 app.secret_key = 'vXsB4qbqsfbXS2Ss'
 app.config['UPLOAD_FOLDER'] = os.path.join(app.static_folder, 'upload')
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 1024 # 1024 MB
 
 # CORS configuration
 # For dev mode only
-# cors = CORS(app)
-# app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 # add @cross_origin() to all routes
 
 # MySQL configuration
@@ -34,7 +36,7 @@ app.config['MYSQL_PASSWORD'] = config.DB_PWD
 def index():
     return render_template("index.html")
 
-@app.route("/download", methods=['POST'])
+@app.route("/api/download", methods=['POST'])
 def download():
     if os.path.isfile(os.path.join(app.config['UPLOAD_FOLDER'],'resume.pdf')):
         return send_from_directory(directory=app.config['UPLOAD_FOLDER'], filename="resume.pdf"), 200
@@ -127,6 +129,24 @@ def get_all_messages():
 
     return jsonify(messages), status_code
 
+@app.route("/api/conceal", methods=['POST'])
+@cross_origin()
+def conceal():
+    try:
+        carrier_bytes = request.files.get('carrier')
+        secret_bytes = request.files.get('secret')
+        level = int(request.form.get('level'))
+
+        carrier = image_hiding.convert_to_array(carrier_bytes)
+        secret = image_hiding.convert_to_array(secret_bytes)
+
+        hidden = image_hiding.encode(carrier, secret, n=level)
+
+        print(hidden)
+        return jsonify({}), 200
+    except Exception as e:
+        print(str(e))
+        return jsonify({'error': 'Conceal error.'}), 500
 
 if __name__ == "__main__":
     # Run the app
