@@ -225,7 +225,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
 
     public render() {
         return <div
-            className="flex-1 max-h-full relative overflow-hidden font-header xs:h-middle sm:h-middle"
+            className="flex-1 max-h-full relative overflow-hidden font-header xs:h-middle sm:h-middle bg-black"
         >
             {Array.from(Array(numItems).keys()).map(choice => {
                 return <BackgroundImage
