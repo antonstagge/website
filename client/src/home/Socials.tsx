@@ -34,7 +34,7 @@ class Socials extends React.Component<SocialsProps, SocialsState> {
                     alt="linkedin"
                     onMouseEnter={() => this.setState({hover: SocialType.linkedin})}
                     onMouseLeave={() => this.setState({hover: null})}
-                    className={"cursor-pointer xs:h-6 lg:h-full"}
+                    className={"cursor-pointer xs:h-6 sm:h-full"}
                 />
             </a>
             <a 
@@ -46,7 +46,7 @@ class Socials extends React.Component<SocialsProps, SocialsState> {
                     alt="github"
                     onMouseEnter={() => this.setState({hover: SocialType.github})}
                     onMouseLeave={() => this.setState({hover: null})}
-                    className={"cursor-pointer xs:h-6 lg:h-full rounded " + (this.state.hover === SocialType.github ? "bg-white" : "")}
+                    className={"cursor-pointer xs:h-6 sm:h-full rounded " + (this.state.hover === SocialType.github ? "bg-white" : "")}
                 />
             </a>
         </div>)

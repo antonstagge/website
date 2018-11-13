@@ -5926,6 +5926,10 @@ table {
   font-size: .1rem;
 }
 
+.text-captcha {
+  font-size: .25rem;
+}
+
 .text-xs {
   font-size: .75rem;
 }
@@ -6394,18 +6398,18 @@ table {
   }
 }
 
-@media (min-width: 992px) {
-  .lg\:h-6-2px {
+@media (min-width: 576px) {
+  .sm\:h-6-2px {
     height: 1.4rem !important;
   }
 
-  .lg\:h-middle {
+  .sm\:h-middle {
     height: calc(100vh - 3rem);
   }
 
-  .lg\:shrinkHeight {
-    -webkit-animation-name: lgShrinkHeight;
-            animation-name: lgShrinkHeight;
+  .sm\:shrinkHeight {
+    -webkit-animation-name: smShrinkHeight;
+            animation-name: smShrinkHeight;
     -webkit-animation-duration: 250ms;
             animation-duration: 250ms;
     -webkit-animation-timing-function: ease-in-out;
@@ -6414,9 +6418,9 @@ table {
             animation-fill-mode: forwards;
   }
 
-  .lg\:growHeight {
-    -webkit-animation-name: lgGrowHeight;
-            animation-name: lgGrowHeight;
+  .sm\:growHeight {
+    -webkit-animation-name: smGrowHeight;
+            animation-name: smGrowHeight;
     -webkit-animation-duration: 250ms;
             animation-duration: 250ms;
     -webkit-animation-timing-function: ease-in-out;
@@ -6426,7 +6430,7 @@ table {
   }
 }
 
-@-webkit-keyframes lgShrinkHeight {
+@-webkit-keyframes smShrinkHeight {
   0% {
     height: calc(100vh - 3rem);
   }
@@ -6436,7 +6440,7 @@ table {
   }
 }
 
-@keyframes lgShrinkHeight {
+@keyframes smShrinkHeight {
   0% {
     height: calc(100vh - 3rem);
   }
@@ -6446,7 +6450,7 @@ table {
   }
 }
 
-@-webkit-keyframes lgGrowHeight {
+@-webkit-keyframes smGrowHeight {
   0% {
     height: 16rem;
   }
@@ -6456,7 +6460,7 @@ table {
   }
 }
 
-@keyframes lgGrowHeight {
+@keyframes smGrowHeight {
   0% {
     height: 16rem;
   }
@@ -12145,6 +12149,10 @@ table {
 
   .xs\:text-xxs {
     font-size: .1rem;
+  }
+
+  .xs\:text-captcha {
+    font-size: .25rem;
   }
 
   .xs\:text-xs {
@@ -17861,6 +17869,10 @@ table {
     font-size: .1rem;
   }
 
+  .sm\:text-captcha {
+    font-size: .25rem;
+  }
+
   .sm\:text-xs {
     font-size: .75rem;
   }
@@ -23573,6 +23585,10 @@ table {
 
   .md\:text-xxs {
     font-size: .1rem;
+  }
+
+  .md\:text-captcha {
+    font-size: .25rem;
   }
 
   .md\:text-xs {
@@ -29289,6 +29305,10 @@ table {
     font-size: .1rem;
   }
 
+  .lg\:text-captcha {
+    font-size: .25rem;
+  }
+
   .lg\:text-xs {
     font-size: .75rem;
   }
@@ -35001,6 +35021,10 @@ table {
 
   .xl\:text-xxs {
     font-size: .1rem;
+  }
+
+  .xl\:text-captcha {
+    font-size: .25rem;
   }
 
   .xl\:text-xs {

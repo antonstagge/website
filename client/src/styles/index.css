@@ -26,24 +26,24 @@
     }
 }
 
-@media (min-width: 992px) {
-    .lg\:h-6-2px {
+@media (min-width: 576px) {
+    .sm\:h-6-2px {
         height: 1.4rem !important;
     }
 
-    .lg\:h-middle {
+    .sm\:h-middle {
         height: calc(100vh - 3rem);
     }
 
-    .lg\:shrinkHeight {
-        animation-name: lgShrinkHeight;
+    .sm\:shrinkHeight {
+        animation-name: smShrinkHeight;
         animation-duration:  250ms;
         animation-timing-function: ease-in-out;
         animation-fill-mode: forwards;
     }
 
-    .lg\:growHeight {
-        animation-name: lgGrowHeight;
+    .sm\:growHeight {
+        animation-name: smGrowHeight;
         animation-duration:  250ms;
         animation-timing-function: ease-in-out;
         animation-fill-mode: forwards;
@@ -52,7 +52,7 @@
 
 
 
-@keyframes lgShrinkHeight {
+@keyframes smShrinkHeight {
     0% {
         height: calc(100vh - 3rem);
     }
@@ -62,7 +62,7 @@
     }
 }
 
-@keyframes lgGrowHeight {
+@keyframes smGrowHeight {
     0% {
         height: 16rem;
     }

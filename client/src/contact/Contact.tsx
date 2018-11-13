@@ -92,8 +92,8 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
         </div>
 
     public styledInput = (title: string, type: InputType, canSendValue: CanSend, className: string) => 
-        <div className={"flex-1 flex flex-col " + className}>
-            <label htmlFor={title} className="xs:text-xs lg:text-sm text-grey-dark flex">
+        <div className={"flex-1 flex flex-col ml-8 " + className}>
+            <label htmlFor={title} className="xs:text-xs sm:text-sm text-grey-dark flex">
                 {title}&nbsp;
                 {(this.state.canSend & canSendValue)
                     ? <div className="text-red-light text-xs flex flex-col justify-center">*</div>
@@ -123,12 +123,12 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
                 route={this.props.history.push}
             >
                 <div className="m-4 text-lg flex">
-                    <div  className="xs:w-0 lg:w-1/5"/>
-                    <div className="xs:w-full lg:w-3/5">
-                        <div className="xs:text-lg lg:text-3xl text-grey-dark">
+                    <div  className="xs:w-0 sm:w-1/5"/>
+                    <div className="xs:w-full sm:w-3/5">
+                        <div className="xs:text-lg sm:text-3xl text-grey-dark">
                             Contact info
                         </div>
-                        <div className="flex xs:text-sm lg:text-lg py-2">
+                        <div className="flex xs:text-sm sm:text-lg py-2">
                             <div>
                                 Email:&nbsp;
                             </div>
@@ -138,10 +138,10 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
                                 stagge@kth.se
                             </div>
                         </div>
-                        <div className="xs:text-lg lg:text-3xl text-grey-dark pt-4 pb-2">
+                        <div className="xs:text-lg sm:text-3xl text-grey-dark pt-4 pb-2">
                             Reach out to me here
                         </div>
-                        <div className="xs:text-xs lg:text-sm pb-2">
+                        <div className="xs:text-xs sm:text-sm pb-2">
                             <div>
                                 Your email will not be saved other than in my inbox.
                             </div>
@@ -149,12 +149,12 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
                                 Required and incomplete fields are marked with a {<span className="text-red">*</span>}.
                             </div>
                         </div>
-                        <div className="flex flex-wrap">
-                            {this.styledInput("Name", InputType.Name, CanSend.NameMissing, "xs:pr-0 lg:pr-8")}
+                        <div className="flex flex-wrap -ml-8">
+                            {this.styledInput("Name", InputType.Name, CanSend.NameMissing, "")}
                             {this.styledInput("Email", InputType.Email, CanSend.EmailMissing, "")}
                         </div>
                         <div className="pt-2 flex flex-col">
-                            <label htmlFor={"Message"} className="xs:text-xs lg:text-sm text-grey-dark flex">
+                            <label htmlFor={"Message"} className="xs:text-xs sm:text-sm text-grey-dark flex">
                                 {"Message"}&nbsp;
                                 {(this.state.canSend & CanSend.MessageMissing)
                                     ? <div className="text-red-light text-xs flex flex-col justify-center">*</div>
@@ -199,7 +199,7 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
                             }
                         </div>
                     </div>
-                    <div  className="xs:w-0 lg:w-1/5"/>
+                    <div  className="xs:w-0 sm:w-1/5"/>
                 </div>
             </Header>
         )

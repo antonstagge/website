@@ -17,6 +17,7 @@ interface CaptchaState {
     error: string | null;
 };
 
+
 enum CaptchaStrings {
     loadString = "loading",
     humanString = "human",
@@ -96,21 +97,21 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
     public captchaValue = () => {
         switch(this.state.captcha) {
             case CaptchaStrings.loadString:
-                return <div className="text-white flex items-center">LOADING...</div>;
+                return <div>LOADING...</div>;
             case CaptchaStrings.humanString:
-                return <div className="text-white flex items-center">HELLO HUMAN!</div>;
+                return <div>HELLO HUMAN!</div>;
             case CaptchaStrings.errorString:
-                return <div className="text-white flex items-center">ERROR</div>;
+                return <div>ERROR</div>;
             default:
-                return <pre className="text-xxs font-bold  text-white ">
+                return <div className="flex-no-grow flex-no-shrink text-captcha whitespace-pre font-bold">
                         {this.state.captcha}
-                    </pre>
+                    </div>
         }
     }
 
     public render() {
-        return(<div className={this.props.className + " justify-center "}>
-            <div className="flex-1 flex flex-col justify-end xs:pr-0 lg:pr-8">
+        return(<div className={this.props.className + " -ml-8"}>
+            <div className="flex-1 flex flex-col justify-end ml-8">
                 <label htmlFor={"captcha"} className="text-sm text-grey-dark flex">
                     {"CAPTCHA"}&nbsp;
                     {(!this.state.valid)
@@ -160,7 +161,7 @@ class Captcha extends React.Component<CaptchaProps, CaptchaState> {
                     </div>
                 </div>
             </div>
-            <div className="flex justify-center flex-1 bg-black min-h-16 min-w-32">
+            <div className="flex-1 bg-black min-h-12 min-w-64 text-white ml-8 flex justify-center items-center">
                 {this.captchaValue()}
             </div>
             

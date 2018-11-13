@@ -225,7 +225,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
 
     public render() {
         return <div
-            className="flex-1 max-h-full relative overflow-hidden font-header xs:h-middle lg:h-middle"
+            className="flex-1 max-h-full relative overflow-hidden font-header xs:h-middle sm:h-middle"
         >
             {Array.from(Array(numItems).keys()).map(choice => {
                 return <BackgroundImage
@@ -236,14 +236,14 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
             })}
             <div className="absolute z-10 pin overflow-hidden">
                 <div className="flex text-white h-full">
-                    <div className="flex-1 flex flex-col xs:pl-8 lg:pl-16">
+                    <div className="flex-1 flex flex-col xs:pl-8 sm:pl-16">
                         <div className="fadeIn flex-no-grow flex items-center overflow-visible pt-6">
                             <img src={logowhite} alt=""
-                                className="xs:h-16 lg:h-32"
+                                className="xs:h-16 sm:h-32"
                             />
                             <div className="flex">
-                                <div className="xs:w-px xs:px-px lg:px-0 lg:w-1 xs:ml-1 lg:ml-2 bg-white"/>
-                                <div className="flex flex-col justify-end pl-px xs:text-xs lg:text-xl font-semibold">
+                                <div className="xs:w-px xs:px-px sm:px-0 sm:w-1 xs:ml-1 sm:ml-2 bg-white"/>
+                                <div className="flex flex-col justify-end pl-px xs:text-xs sm:text-xl font-semibold">
                                     <div className="flex-no-grow -mb-1 leading-normal">
                                         ANTON 
                                     </div>
@@ -255,12 +255,12 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                         </div>
                         <NoStyleLink 
                             to={getMenuItem(this.state.active).link}
-                            className="flex-1 cursor-pointer flex flex-col justify-end xs:mb-8 lg:mb-16"
+                            className="flex-1 cursor-pointer flex flex-col justify-end xs:mb-8 sm:mb-16"
                             onMouseEnter={() => this.setState({hover: true})}
                             onMouseLeave={() => this.setState({hover: false})}
                         >
                              <div 
-                                className={"flex-no-grow xs:text-4xl lg:text-7xl font-bold flex " + 
+                                className={"flex-no-grow xs:text-4xl sm:text-7xl font-bold flex " + 
                                 (this.state.changeTo !== -1 
                                     ? "fadeOutIn"
                                     : ""
@@ -285,7 +285,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                 </div>
             </div>
             <Socials 
-                className="absolute pin-t pin-r xs:pr-5 lg:pr-10 pt-10 xs:mt-1 lg:mt-0 z-10"
+                className="absolute pin-t pin-r xs:pr-5 sm:pr-10 pt-10 xs:mt-1 sm:mt-0 z-10"
             />
         </div>
     }

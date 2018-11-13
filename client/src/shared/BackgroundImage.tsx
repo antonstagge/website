@@ -9,14 +9,14 @@ const BackgroundImage: React.SFC<BackgroundImageProps> = ({backgroundImage, clas
     return (<div className={className + " relative"}>
         <img 
             src={fadeframe} alt="fadeframe"
-            className="absolute z-10 w-full xs:h-middle lg:h-middle "
+            className="absolute z-10 w-full xs:h-middle sm:h-middle "
             style={{
                 opacity: 0.6
             }}
         />
         <img 
             src={backgroundImage} alt="background"
-            className="min-w-full xs:h-middle lg:h-middle "
+            className="min-w-full xs:h-middle sm:h-middle "
             style={{
                 maxWidth: 'unset'
             }}

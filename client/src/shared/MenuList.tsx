@@ -36,24 +36,24 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
                         onDoubleClick(index);
                     }
                 }}
-                className={"flex-no-grow xs:h-6 lg:h-8 flex cursor-pointer " 
+                className={"flex-no-grow xs:h-6 sm:h-8 flex cursor-pointer " 
             }>
                 <div className="flex-1 flex flex-col justify-center">
                     <div className={"flex-no-grow font-semibold whitespace-no-wrap MenuList " + 
                         (this.state.hover === -1 
                             ? index === active
-                                ? "xs:text-lg lg:text-4xl"
-                                : "xs:text-xs lg:text-half"
+                                ? "xs:text-lg sm:text-4xl"
+                                : "xs:text-xs sm:text-half"
                             : index === this.state.hover
-                                ? "xs:text-lg lg:text-4xl"
-                                : "xs:text-xs lg:text-half"
+                                ? "xs:text-lg sm:text-4xl"
+                                : "xs:text-xs sm:text-half"
                         )
                     } >
                         {title}
                     </div>
                 </div>
-                <div className="flex-no-grow xs:w-5 lg:w-10 flex flex-col justify-center">
-                    <div className={"xs:pr-1 lg:pr-3 flex-no-grow text-xl font-bold " + 
+                <div className="flex-no-grow xs:w-5 sm:w-10 flex flex-col justify-center">
+                    <div className={"xs:pr-1 sm:pr-3 flex-no-grow text-xl font-bold " + 
                         (this.state.hover === -1 
                             ? index === active
                                 ? ""
