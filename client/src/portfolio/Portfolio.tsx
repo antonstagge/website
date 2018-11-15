@@ -54,30 +54,19 @@ const Portfolio: React.SFC<RouteComponentProps> = ({history}) => {
                         <p>
                             This project was supposed to be a single page with my resume only, 
                             but as usual I had too much fun and got carried away. I even implemented
-                            my own CAPTCHA. If you want to check out the source code you can find 
+                            my own CAPTCHA. The downloadable resume is generated from the information
+                            on this website and styled using the same CSS aswell.
+                            If you want to check out the source code you can find 
                             it&nbsp;<a href="https://github.com/antonstagge/website">here.</a> 
                         </p>
                     </div>
                     <div className="xs:flex-no-grow sm:flex-1"/>
                 </div>
                 
-                <div className="flex">
-                    <div className="flex-1"/>
-                    <div className="flex-1 xs:text-xl sm:text-3xl pt-10 pb-4 text-grey-dark">Steganography</div>
-                </div>
-                <div className="flex flex-wrap pb-8">
-                    <Steganography 
-                        className="flex-1 xs:text-lg sm:text-xl pr-4"
-                    />
-                    <div className="flex-1">
-                        <p>
-                            Steganography is the art and science of hiding secret data within other data,
-                            known as the carrier. Here you can upload two images, and the secret image will 
-                            be hidden within the carrier image. Or you can upload a single image to extract 
-                            any secret images hidden within. Try it out!
-                        </p>
-                    </div>
-                </div>
+                
+                <Steganography 
+                    className=""
+                />
                 
             </div>
         </Header>

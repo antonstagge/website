@@ -11,18 +11,16 @@ from weasyprint import HTML, CSS
 import os
 import base64
 import config
-import image_hiding
 
 # The front-end
-app = Flask(__name__, static_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/build/static"), template_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/build"))
+app = Flask(__name__, static_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/static"), template_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client"))
 app.secret_key = 'vXsB4qbqsfbXS2Ss'
 app.config['UPLOAD_FOLDER'] = os.path.join(app.static_folder, 'upload')
-app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 1024 # 1024 MB
 
 # CORS configuration
 # For dev mode only
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
+# cors = CORS(app)
+# app.config['CORS_HEADERS'] = 'Content-Type'
 # add @cross_origin() to all routes
 
 # MySQL configuration
@@ -109,44 +107,6 @@ def send_message():
         status_code = 403
         return jsonify({'error': 'You are a robot.'}), 403
 
-
-@app.route("/api/get_all_messages")
-def get_all_messages():
-    status_code = 200
-    messages = []
-    try:
-        # Fetch the Messages from the database
-        cur = mysql.connection.cursor()
-        cur.execute('''SELECT * FROM message;''')
-        results = cur.fetchall()
-
-        # Add the Messages to a list
-        for result in results:
-            messages.append(result)
-    except:
-        traceback.print_exc()
-        status_code = 500
-
-    return jsonify(messages), status_code
-
-@app.route("/api/conceal", methods=['POST'])
-@cross_origin()
-def conceal():
-    try:
-        carrier_bytes = request.files.get('carrier')
-        secret_bytes = request.files.get('secret')
-        level = int(request.form.get('level'))
-
-        carrier = image_hiding.convert_to_array(carrier_bytes)
-        secret = image_hiding.convert_to_array(secret_bytes)
-
-        hidden = image_hiding.encode(carrier, secret, n=level)
-
-        print(hidden)
-        return jsonify({}), 200
-    except Exception as e:
-        print(str(e))
-        return jsonify({'error': 'Conceal error.'}), 500
 
 if __name__ == "__main__":
     # Run the app
