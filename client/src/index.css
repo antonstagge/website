@@ -6872,6 +6872,13 @@ table {
   text-decoration: none;
 }
 
+.dropzone {
+  border-width: 1px;
+  border-color: #51d88a;
+  border-style: dashed;
+  border-radius: 5px;
+}
+
 @media (min-width: 320px) {
   .xs\:list-reset {
     list-style: none;

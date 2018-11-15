@@ -65,7 +65,7 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
             resumeData = resumeData.replace(/xs:text-xl/g, "");
             resumeData = resumeData.replace(/xs:text-sm/g, "");
             
-            api.download({
+            api.downloadCV({
                 personal: personalData,
                 resume: resumeData,
             } as api.PDFdata).then(resp => {

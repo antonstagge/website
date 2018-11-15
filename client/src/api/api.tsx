@@ -14,8 +14,8 @@ export interface PDFdata {
     personal: string;
     resume: string;
 }
-export const download  = (data: PDFdata ) => {
-    return axios.post('/download', data, {
+export const downloadCV  = (data: PDFdata ) => {
+    return axios.post('/api/download', data, {
         responseType: 'blob'
     });
 }

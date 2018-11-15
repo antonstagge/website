@@ -1,6 +1,6 @@
 # server.py
 from flask import Flask, render_template, send_from_directory, jsonify, request, session
-# from flask_cors import CORS, cross_origin
+from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
 import json
 import traceback
@@ -13,7 +13,7 @@ import base64
 import config
 
 # The front-end
-app = Flask(__name__, static_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/static"), template_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/"))
+app = Flask(__name__, static_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/static"), template_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client"))
 app.secret_key = 'vXsB4qbqsfbXS2Ss'
 app.config['UPLOAD_FOLDER'] = os.path.join(app.static_folder, 'upload')
 
@@ -34,7 +34,7 @@ app.config['MYSQL_PASSWORD'] = config.DB_PWD
 def index():
     return render_template("index.html")
 
-@app.route("/download", methods=['POST'])
+@app.route("/api/download", methods=['POST'])
 def download():
     if os.path.isfile(os.path.join(app.config['UPLOAD_FOLDER'],'resume.pdf')):
         return send_from_directory(directory=app.config['UPLOAD_FOLDER'], filename="resume.pdf"), 200
@@ -106,26 +106,6 @@ def send_message():
         traceback.print_exc()
         status_code = 403
         return jsonify({'error': 'You are a robot.'}), 403
-
-
-@app.route("/api/get_all_messages")
-def get_all_messages():
-    status_code = 200
-    messages = []
-    try:
-        # Fetch the Messages from the database
-        cur = mysql.connection.cursor()
-        cur.execute('''SELECT * FROM message;''')
-        results = cur.fetchall()
-
-        # Add the Messages to a list
-        for result in results:
-            messages.append(result)
-    except:
-        traceback.print_exc()
-        status_code = 500
-
-    return jsonify(messages), status_code
 
 
 if __name__ == "__main__":
