@@ -35,9 +35,9 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
 
         const personalDetails = <table className="mb-6"><tbody>
         <tr>
-            <td className="w-32">
+            <td className="w-48">
                 <img src="IMAGE_PATH" alt="me"
-                    className="h-48"
+                    className="h-48 border border-black"
                 />
             </td>
             <td className="pb-0">

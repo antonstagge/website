@@ -2,7 +2,7 @@ import * as React from 'react';
 import grassoland from 'src/resources/images/grassoland.jpg';
 import oland from 'src/resources/images/oland.jpg';
 import vineyard from 'src/resources/images/vineyard.jpg';
-import computer from 'src/resources/images/computer.jpg';
+import computer from 'src/resources/images/desk.jpg';
 import logowhite from 'src/resources/images/logowhite.png';
 import BackgroundImage from 'src/shared/BackgroundImage';
 import MenuList from 'src/shared/MenuList';
