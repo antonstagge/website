@@ -13,8 +13,9 @@ import base64
 import config
 
 # The front-end
-app = Flask(__name__, static_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/build/static"), template_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/build"))
-app.secret_key = 'vXsB4qbqsfbXS2Ss'
+file_path = os.path.dirname(os.path.realpath(__file__))
+app = Flask(__name__, static_folder=os.path.join(file_path, "client","build","static"), template_folder=os.path.join(file_path, "client","build"))
+app.secret_key = config.MY_SECRET
 app.config['UPLOAD_FOLDER'] = os.path.join(app.static_folder, 'upload')
 
 # CORS configuration

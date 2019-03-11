@@ -24,7 +24,7 @@ class BackgroundImage extends React.Component<BackgroundImageProps> {
         this.image = new Image();
         this.image.onload = () => {
             this.ctx.imageSmoothingEnabled = false;
-            this.scaledImageWidth = this.canvas.width;// Math.max(this.canvas.width, (this.canvas.height / this.image.height) * this.image.width);
+            this.scaledImageWidth = Math.max(this.canvas.width, (this.canvas.height / this.image.height) * this.image.width);
             this.ctx.drawImage(this.image, 0,0, this.scaledImageWidth, this.canvas.height);
         }
         this.image.src= this.props.backgroundImage;
@@ -58,6 +58,9 @@ class BackgroundImage extends React.Component<BackgroundImageProps> {
             <img 
                 src={this.props.backgroundImage} alt="background"
                 className={"min-w-full xs:h-middle sm:h-middle " + (className === "nothing" && this.props.interactive ? "hidden" : "")}
+                style={{
+                    maxWidth: 'unset'
+                }}
             />
             {this.props.interactive ? <canvas ref={c => c !== null ? this.canvas = c : null} className={"absolute pin z-10 " + ""}/> : null}
         </div>)
