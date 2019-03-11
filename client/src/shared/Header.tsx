@@ -33,7 +33,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         setTimeout(() => this.props.route({
             pathname: "/",
             state: type
-        }), animTime/2);
+        }), (animTime)/2);
     }
 
 

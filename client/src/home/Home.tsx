@@ -208,17 +208,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
     }
 
     public clickedChoice = (choice: MenuChoice) => {
-        if (this.state.active + 1 === choice) {
-            this.changeDown();
-        } else if (this.state.active - 1 === choice) {
-            this.changeUp();
-        } else {
-            this.setState({
-                changeTo: choice,
-                changeDirection: choice < this.state.active ? ChangeDirection.UP : ChangeDirection.DOWN,
-            });
-            this.delayChange(choice);
-        }
+        this.props.history.push(getMenuItem(choice).link);
     } 
 
     public doubleClickedChoice = (choice: MenuChoice) => {
@@ -287,8 +277,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                     <MenuList 
                         className="flex-no-grow"
                         onClick={this.clickedChoice}
-                        onTouch={this.doubleClickedChoice}
-                        onDoubleClick={this.doubleClickedChoice}
+                        onTouch={this.clickedChoice}
                         titles={Array.from(Array(numItems).keys()).map(choice => getMenuItem(choice).title)}
                         active={this.state.changeTo === -1 ? this.state.active : this.state.changeTo}
                     />

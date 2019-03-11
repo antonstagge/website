@@ -7,11 +7,22 @@ interface BackgroundImageProps {
     className?: string;
 }
 
-class BackgroundImage extends React.Component<BackgroundImageProps> {
+interface BackgroundImageState {
+    imageDone: boolean;
+}
+
+class BackgroundImage extends React.Component<BackgroundImageProps, BackgroundImageState> {
     private canvas: HTMLCanvasElement;
     private image: HTMLImageElement;
     private ctx: CanvasRenderingContext2D;
     private scaledImageWidth: number;
+    constructor(props: BackgroundImageProps) {
+        super(props);
+        this.state = {
+            imageDone: false,
+        }
+    }
+
     public componentDidMount() {
         if (!this.props.interactive) {return;}
         const tempctx = this.canvas.getContext("2d");
@@ -20,12 +31,14 @@ class BackgroundImage extends React.Component<BackgroundImageProps> {
         const w = window.innerWidth - (window.innerWidth < 550 ? 26 : 50);
         const h = window.innerHeight - (window.innerWidth < 550 ? 26 : 50);
         this.canvas.width = w;
-        this.canvas.height = h;
+        this.canvas.height = h + 2;
         this.image = new Image();
         this.image.onload = () => {
             this.ctx.imageSmoothingEnabled = false;
             this.scaledImageWidth = Math.max(this.canvas.width, (this.canvas.height / this.image.height) * this.image.width);
+            this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height);
             this.ctx.drawImage(this.image, 0,0, this.scaledImageWidth, this.canvas.height);
+            this.setState({imageDone: true});
         }
         this.image.src= this.props.backgroundImage;
     }
@@ -57,7 +70,7 @@ class BackgroundImage extends React.Component<BackgroundImageProps> {
             />
             <img 
                 src={this.props.backgroundImage} alt="background"
-                className={"min-w-full xs:h-middle sm:h-middle " + (className === "nothing" && this.props.interactive ? "hidden" : "")}
+                className={"min-w-full xs:h-middle sm:h-middle " + (className === "nothing" && this.props.interactive && this.state.imageDone ? "hidden" : "")}
                 style={{
                     maxWidth: 'unset'
                 }}

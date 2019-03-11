@@ -31,10 +31,6 @@ app.config['MYSQL_DB'] = 'website'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.config['MYSQL_PASSWORD'] = config.DB_PWD
 
-@app.route("/")
-def index():
-    return render_template("index.html")
-
 @app.route("/api/download", methods=['POST'])
 def download():
     if os.path.isfile(os.path.join(app.config['UPLOAD_FOLDER'],'resume.pdf')):
@@ -107,6 +103,11 @@ def send_message():
         traceback.print_exc()
         status_code = 403
         return jsonify({'error': 'You are a robot.'}), 403
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def index(path):
+    return render_template("index.html")
 
 
 if __name__ == "__main__":
