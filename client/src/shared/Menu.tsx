@@ -75,7 +75,7 @@ class Menu extends React.Component<MenuProps, MenuState> {
         </div>
 
         return <div 
-            className={"absolute pin-t pin-r z-10 xs:h-48 sm:h-64 pt-6 xs:pr-4 sm:pr-8 pl-2 flex flex-col justify-start " + this.props.className}
+            className={"absolute pin-t pin-r z-30 xs:h-48 sm:h-64 pt-6 xs:pr-4 sm:pr-8 pl-2 flex flex-col justify-start " + this.props.className}
             onMouseEnter={() => this.setState({inside: true})}
             onMouseLeave={() => this.setState({inside: false})}
         >

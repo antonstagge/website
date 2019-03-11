@@ -13,7 +13,7 @@ import base64
 import config
 
 # The front-end
-app = Flask(__name__, static_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/static"), template_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client"))
+app = Flask(__name__, static_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/build/static"), template_folder=os.path.join(os.path.dirname(os.path.realpath(__file__)), "client/build"))
 app.secret_key = 'vXsB4qbqsfbXS2Ss'
 app.config['UPLOAD_FOLDER'] = os.path.join(app.static_folder, 'upload')
 

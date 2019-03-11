@@ -45,11 +45,12 @@ class Header extends React.Component<HeaderProps, HeaderState> {
             <div className="font-header">
                 <div className={"overflow-hidden " + (this.state.shrink ? "xs:shrinkHeight sm:shrinkHeight" : "xs:growHeight sm:growHeight")}>
                     <BackgroundImage 
+                        interactive={false}
                         backgroundImage={getMenuItem(type).backgroundImage}
                     />
                 </div>
                 <div className={"absolute text-white text-5xl font-bold pin-t "
-                    + "pin-l z-10 w-full pt-6 xs:px-4 sm:px-16 xs:h-48 sm:h-64 flex flex-col justify-between cursor-pointer " 
+                    + "pin-l z-30 w-full pt-6 xs:px-4 sm:px-16 xs:h-48 sm:h-64 flex flex-col justify-between cursor-pointer " 
                     + (this.state.shrink ? "fadeIn" : "fadeOut")}
                     onClick={() => this.delayRoute(type)}
                     onTouchEnd={() => this.delayRoute(type)}

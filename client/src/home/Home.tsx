@@ -1,7 +1,7 @@
 import * as React from 'react';
-import grassoland from 'src/resources/images/grassoland.jpg';
-import oland from 'src/resources/images/oland.jpg';
-import vineyard from 'src/resources/images/vineyard.jpg';
+import resumePic from 'src/resources/images/yosemity-falls.jpg';
+import aboutMePic from 'src/resources/images/vineyard.jpg';
+import contactPic from 'src/resources/images/typewriter.jpg';
 import computer from 'src/resources/images/desk.jpg';
 import logowhite from 'src/resources/images/logowhite.png';
 import BackgroundImage from 'src/shared/BackgroundImage';
@@ -29,14 +29,14 @@ export const getMenuItem = (choice: MenuChoice): MenuItem => {
         case MenuChoice.AboutMe: 
             return {
                 title: 'ABOUT ME',
-                backgroundImage: oland,
+                backgroundImage: aboutMePic,
                 number: choice,
                 link: 'aboutme'
             }
         case MenuChoice.Resume:
             return {
                 title: 'RESUME',
-                backgroundImage: grassoland,
+                backgroundImage: resumePic,
                 number: choice,
                 link: 'resume'
             }
@@ -50,7 +50,7 @@ export const getMenuItem = (choice: MenuChoice): MenuItem => {
         case MenuChoice.Contact:
             return {
                 title: 'CONTACT',
-                backgroundImage: vineyard,
+                backgroundImage: contactPic,
                 number: choice,
                 link: 'contact'
             }
@@ -67,6 +67,7 @@ interface HomeState {
     changeTo: MenuChoice | -1;
     changeDirection: ChangeDirection;
     hover: boolean;
+    mousePos: {x: number, y: number}
 };
 class Home extends React.Component<RouteComponentProps, HomeState> {
     private toggleTwice: boolean = false;
@@ -81,6 +82,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
             changeTo: -1,
             changeDirection: ChangeDirection.UP,
             hover: false,
+            mousePos: {x: 0, y:0},
         };
     }
 
@@ -201,7 +203,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
             return (this.state.changeDirection !== ChangeDirection.UP ? "bgAnimUp" : "bgAnimDown");
         } else {
             // active or not
-            return (this.state.active === choice ? "" : "hidden")
+            return (this.state.active === choice ? "nothing" : "hidden")
         }
     }
 
@@ -232,9 +234,17 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                     key={choice}
                     backgroundImage={getMenuItem(choice).backgroundImage}
                     className={this.getClassName(getMenuItem(choice).number)}
+                    mousePos={this.state.mousePos}
+                    interactive={true}
                 />
             })}
-            <div className="absolute z-10 pin overflow-hidden">
+            <div className="absolute z-30 pin overflow-hidden"
+                onMouseMove={(e: React.MouseEvent<HTMLDivElement>) => {
+                    this.setState({
+                        mousePos: {x: e.pageX, y: e.pageY}
+                    });
+                }}
+            >
                 <div className="flex text-white h-full">
                     <div className="flex-1 flex flex-col xs:pl-8 sm:pl-16">
                         <div className="fadeIn flex-no-grow flex items-center overflow-visible pt-6">
@@ -285,7 +295,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                 </div>
             </div>
             <Socials 
-                className="absolute pin-t pin-r xs:pr-5 sm:pr-10 pt-10 xs:mt-1 sm:mt-0 z-10"
+                className="absolute pin-t pin-r xs:pr-5 sm:pr-10 pt-10 xs:mt-1 sm:mt-0 z-30"
             />
         </div>
     }

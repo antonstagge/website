@@ -136,6 +136,7 @@
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
 }
+
 @keyframes slide-up {
     0% {
         transform: translateY(0%);
