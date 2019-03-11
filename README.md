@@ -33,7 +33,7 @@ important to copy to user@server not to root@server!
 ```
 scp -r database/ anton@antonstagge.com:/home/anton/website/
 scp -r *.py *.txt anton@antonstagge.com:/home/anton/website/
-scp -r client/build/* anton@antonstagge.com:/home/anton/website/client/
+scp -r client/build/ anton@antonstagge.com:/home/anton/website/client
 ```
 
 ### Init database:
@@ -71,6 +71,7 @@ edit the config.py file to contain the nessesary information.
 MAIL_ADDR=yourmail@gmail.com
 MAIL_PWD=yourmailpwdtoken
 DB_PWD=yourdatabasepassword
+MY_SECRET = "topsecret here"
 ```
 
 ## Install all server requirements:
