@@ -6,12 +6,13 @@ export interface MenuListProps {
     active: number;
     className?: string;
     onClick(choice: MenuChoice): void;
-    onTouch?(choice: MenuChoice): void;
+    onTouch(choice: MenuChoice): void;
 }
 interface MenuListState {
     hover: number;
 }
 class MenuList extends React.Component<MenuListProps, MenuListState> {
+    private hasBeenTouched = false;
     constructor(props: MenuListProps) {
         super(props);
         this.state = {
@@ -26,8 +27,12 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
                 key={"menulist_" + index}
                 onMouseEnter={() => this.setState({hover: index})}
                 onMouseLeave={() => this.setState({hover: -1})}
-                onClick={() => onClick(index)}
-                onTouchStart={() => onTouch ? onTouch(index) : null}
+                onClick={() => !this.hasBeenTouched && onClick(index)}
+                onTouchStart={(e) => {
+                    this.hasBeenTouched=true;
+                    setTimeout(()=>this.hasBeenTouched=false, 500);
+                    onTouch(index);
+                }}
                 className={"flex-no-grow xs:h-6 sm:h-8 flex cursor-pointer " 
             }>
                 <div className="flex-1 flex flex-col justify-center">

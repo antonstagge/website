@@ -9,6 +9,7 @@ import MenuList from 'src/shared/MenuList';
 import Socials from './Socials';
 import NoStyleLink from 'src/shared/NoStyleLink';
 import { RouteComponentProps } from 'react-router-dom';
+import { debounce } from 'ts-debounce';
 
 export enum MenuChoice {
     AboutMe = 0, 
@@ -68,12 +69,16 @@ interface HomeState {
     changeDirection: ChangeDirection;
     hover: boolean;
     mousePos: {x: number, y: number}
+    tornado: boolean;
+    size: {x: number, y: number} | null;
 };
 class Home extends React.Component<RouteComponentProps, HomeState> {
     private toggleTwice: boolean = false;
     private firstTimeOutId = setTimeout(() => {/**/}, 0) as unknown as number;
     private pStart = {x: 0, y:0};
     private pStop = {x:0, y:0};
+
+    private cont: HTMLDivElement | null;
     constructor(props: RouteComponentProps) {
         super(props);
         this.state = {
@@ -83,7 +88,11 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
             changeDirection: ChangeDirection.UP,
             hover: false,
             mousePos: {x: 0, y:0},
+            tornado: false,
+            size: null
         };
+
+        this.handleMouseMove = debounce(this.handleMouseMove, 10);
     }
 
 
@@ -125,15 +134,18 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
     public componentDidMount() {
         window.addEventListener('wheel', this.handleScroll, {passive: true});
         window.addEventListener('keydown', this.handleKeyDown, {passive: true});
-        window.addEventListener('touchstart', this.swipeStart, false);
-        window.addEventListener('touchend', this.swipeEnd, false);
+        // window.addEventListener('touchstart', this.swipeStart, false);
+        // window.addEventListener('touchend', this.swipeEnd, false);
+        if (this.cont) {
+            this.setState({size: {x: this.cont.clientWidth, y: this.cont.clientHeight}})
+        }
     }
 
     public componentWillUnmount() {
         window.removeEventListener('wheel', this.handleScroll);
         window.removeEventListener('keydown', this.handleKeyDown);
-        window.removeEventListener('touchstart', this.swipeStart, false);
-        window.removeEventListener('touchend', this.swipeEnd, false);
+        // window.removeEventListener('touchstart', this.swipeStart, false);
+        // window.removeEventListener('touchend', this.swipeEnd, false);
         const lastTimeOutId = setTimeout(() => {/**/}, 0) as unknown as number;
         while (this.firstTimeOutId !== lastTimeOutId) {
             clearTimeout(++this.firstTimeOutId);
@@ -215,25 +227,45 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
         this.props.history.push(getMenuItem(choice).link);
     }
 
+    public handleMouseMove = (x:number,y:number) => {
+        this.setState({
+            mousePos: {x, y}
+        });
+    }
+
+    public handleTouch = (choice: MenuChoice) => {
+        if (this.state.active + 1 === choice) {    
+            this.changeDown();	
+        } else if (this.state.active - 1 === choice) {	
+            this.changeUp();	
+        } else {	
+            this.setState({	
+                changeTo: choice,	
+                changeDirection: choice < this.state.active ? ChangeDirection.UP : ChangeDirection.DOWN,	
+            });	
+            this.delayChange(choice);	
+        }	
+    } 
+
     public render() {
         return <div
             className="flex-1 max-h-full relative overflow-hidden font-header xs:h-middle sm:h-middle bg-black"
+            ref={cont => this.cont = cont}
         >
-            {Array.from(Array(numItems).keys()).map(choice => {
+            {this.state.size !== null ? Array.from(Array(numItems).keys()).map(choice => {
                 return <BackgroundImage
                     key={choice}
                     backgroundImage={getMenuItem(choice).backgroundImage}
                     className={this.getClassName(getMenuItem(choice).number)}
                     mousePos={this.state.mousePos}
                     interactive={true}
+                    showTornado={this.state.tornado}
+                    size={this.state.size || {x: 0, y: 0}}
                 />
-            })}
+            }) : null}
             <div className="absolute z-30 pin overflow-hidden"
-                onMouseMove={(e: React.MouseEvent<HTMLDivElement>) => {
-                    this.setState({
-                        mousePos: {x: e.pageX, y: e.pageY}
-                    });
-                }}
+                onMouseMove={(e: React.MouseEvent<HTMLDivElement>) => this.handleMouseMove(e.pageX, e.pageY)}
+                onTouchMove={(e) => {if (e.touches.length !== 1) {return};this.handleMouseMove(e.touches[0].pageX, e.touches[0].pageY)}}
             >
                 <div className="flex text-white h-full">
                     <div className="flex-1 flex flex-col xs:pl-8 sm:pl-16">
@@ -277,7 +309,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                     <MenuList 
                         className="flex-no-grow"
                         onClick={this.clickedChoice}
-                        onTouch={this.clickedChoice}
+                        onTouch={this.handleTouch}
                         titles={Array.from(Array(numItems).keys()).map(choice => getMenuItem(choice).title)}
                         active={this.state.changeTo === -1 ? this.state.active : this.state.changeTo}
                     />
@@ -286,6 +318,13 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
             <Socials 
                 className="absolute pin-t pin-r xs:pr-5 sm:pr-10 pt-10 xs:mt-1 sm:mt-0 z-30"
             />
+            <div className="absolute pin-b pin-r xs:pr-5 sm:pr-10 pt-10 xs:mt-1 sm:mt-0 z-30 text-white flex">
+                <div className="leading-tight">Tornado&nbsp;</div>
+                <input type="checkbox" 
+                    checked={this.state.tornado} onChange={() => this.setState({tornado: !this.state.tornado})}
+                    className="mb-2"
+                />
+            </div>
         </div>
     }
 }

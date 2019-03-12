@@ -16,6 +16,7 @@
     "object-literal-sort-keys": false,
     "jsx-no-bind": false,
     "jsx-no-lambda": false,
-    "no-bitwise": false
+    "no-bitwise": false,
+    "max-classes-per-file": [true, 2]
   }
 }
