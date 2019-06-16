@@ -70,7 +70,6 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
       active: this.props.location.state | 0,
       hover: false
     };
-    console.log(this.state.active);
     this.container = React.createRef();
   }
 
@@ -140,6 +139,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                 key={choice}
                 className="snap-point"
                 backgroundImage={getMenuItem(choice).backgroundImage}
+                big={true}
               />
             );
           })}
@@ -147,11 +147,13 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
             key={"extra0"}
             className="snap-point"
             backgroundImage={getMenuItem(0).backgroundImage}
+            big={true}
           />
           <BackgroundImage
             key={"extra1"}
             className=""
             backgroundImage={getMenuItem(1).backgroundImage}
+            big={true}
           />
         </div>
         <div className="absolute pin overflow-hidden">
@@ -177,8 +179,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
               >
                 <div
                   className={
-                    "flex-no-grow xs:text-4xl sm:text-7xl font-bold flex " +
-                    (this.state.active !== -1 ? "fadeOutIn" : "TODO")
+                    "flex-no-grow xs:text-4xl sm:text-7xl font-bold flex "
                   }
                 >
                   <div className="flex-no-grow fadeIn ">

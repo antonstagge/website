@@ -6902,6 +6902,10 @@ table {
   display: none;
 }
 
+.-mt-02 {
+  margin-top: -0.2rem;
+}
+
 @media (min-width: 320px) {
   .xs\:list-reset {
     list-style: none;
