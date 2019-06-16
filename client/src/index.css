@@ -597,6 +597,12 @@ textarea::-webkit-input-placeholder {
   opacity: .5;
 }
 
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: inherit;
+  opacity: .5;
+}
+
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
   color: inherit;
@@ -6877,6 +6883,23 @@ table {
   border-color: #51d88a;
   border-style: dashed;
   border-radius: 5px;
+}
+
+.scroll-snap {
+  -ms-scroll-snap-type: y mandatory;
+      scroll-snap-type: y mandatory;
+}
+
+.snap-point {
+  scroll-snap-align: center;
+}
+
+.invisible-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.invisible-scrollbar::scrollbar {
+  display: none;
 }
 
 @media (min-width: 320px) {

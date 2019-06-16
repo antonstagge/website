@@ -57,19 +57,67 @@ export const getMenuItem = (choice: MenuChoice): MenuItem => {
   }
 };
 interface HomeState {
-  title: string;
   active: MenuChoice;
   hover: boolean;
 }
 class Home extends React.Component<RouteComponentProps, HomeState> {
+  private container: React.RefObject<HTMLDivElement>;
+  private childHeight: number = 0;
+  private disableScroll: boolean = false;
   constructor(props: RouteComponentProps) {
     super(props);
     this.state = {
-      title: getMenuItem(this.props.location.state | 0).title,
       active: this.props.location.state | 0,
       hover: false
     };
+    console.log(this.state.active);
+    this.container = React.createRef();
   }
+
+  public componentDidMount() {
+    if (this.container.current) {
+      this.childHeight = this.container.current.children[1].clientHeight;
+      if (this.props.location.state !== 0) {
+        this.container.current.children[
+          this.props.location.state
+        ].scrollIntoView({ block: "center" });
+      } else {
+        this.container.current.scrollTop = 1;
+      }
+    }
+  }
+
+  public loopScroll = () => {
+    if (!this.container.current) {
+      return;
+    }
+
+    const lowerLimit =
+      this.childHeight * numItems + this.container.current.children.length;
+
+    if (!this.disableScroll) {
+      if (this.container.current.scrollTop >= lowerLimit) {
+        this.container.current.scrollTop = 1;
+        this.disableScroll = true;
+      } else if (this.container.current.scrollTop <= 0) {
+        this.container.current.scrollTop = lowerLimit - 3;
+        this.disableScroll = true;
+      }
+    } else {
+      setTimeout(() => {
+        this.disableScroll = false;
+      }, 100);
+    }
+
+    const chosen =
+      Math.round(this.container.current.scrollTop / this.childHeight) %
+      numItems;
+
+    if (chosen !== this.state.active) {
+      this.setState({ active: chosen });
+    }
+  };
+
   public clickedChoice = (choice: MenuChoice) => {
     this.props.history.push(getMenuItem(choice).link);
   };
@@ -81,15 +129,30 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
   public render() {
     return (
       <div className="flex-1 max-h-full relative overflow-hidden font-header xs:h-middle sm:h-middle bg-black">
-        <div className="h-full overflow-y-scroll overflow-x-hidden">
+        <div
+          className="h-full overflow-y-scroll overflow-x-hidden scroll-snap invisible-scrollbar"
+          ref={this.container}
+          onScroll={this.loopScroll}
+        >
           {Array.from(Array(numItems).keys()).map(choice => {
             return (
               <BackgroundImage
                 key={choice}
+                className="snap-point"
                 backgroundImage={getMenuItem(choice).backgroundImage}
               />
             );
           })}
+          <BackgroundImage
+            key={"extra0"}
+            className="snap-point"
+            backgroundImage={getMenuItem(0).backgroundImage}
+          />
+          <BackgroundImage
+            key={"extra1"}
+            className=""
+            backgroundImage={getMenuItem(1).backgroundImage}
+          />
         </div>
         <div className="absolute pin overflow-hidden">
           <div className="flex text-white h-full">
@@ -119,7 +182,9 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                   }
                 >
                   <div className="flex-no-grow fadeIn ">
-                    <div className="-mb-2">{this.state.title}</div>
+                    <div className="-mb-2">
+                      {getMenuItem(this.state.active).title}
+                    </div>
                     <div
                       className={
                         "bg-white h-3 hoverBar " +
