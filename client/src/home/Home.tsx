@@ -76,10 +76,10 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
   public componentDidMount() {
     if (this.container.current) {
       this.childHeight = this.container.current.children[1].clientHeight;
-      if (this.props.location.state !== 0) {
-        this.container.current.children[
-          this.props.location.state
-        ].scrollIntoView({ block: "center" });
+      if (this.state.active !== 0) {
+        this.container.current.children[this.state.active].scrollIntoView({
+          block: "center"
+        });
       } else {
         this.container.current.scrollTop = 1;
       }
