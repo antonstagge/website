@@ -131,7 +131,7 @@ sudo crontab -e
 to look like this:
 
 ```
-0 0 1 * * /opt/letsencrypt/letsencrypt-auto renew
+0 0 1 * * ./home/anton/website/renew_certification.sh
 0 18 * * * /home/anton/website/websiteenv/bin/python3 /home/anton/website/send_mail.py
 ```
 
