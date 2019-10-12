@@ -38,7 +38,13 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
       >
         {showArrows && (
           <div className="flex justify-end mb-12 mr-6 sm:mr-12">
-            <img src={arrowUp} height={20} width={20} className="" />
+            <img
+              src={arrowUp}
+              width={20}
+              style={{
+                height: "12px"
+              }}
+            />
           </div>
         )}
         {titles.map((title, index) => (
@@ -92,11 +98,11 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
           <div className="flex justify-end mt-12 mr-6 sm:mr-12">
             <img
               src={arrowUp}
-              height={20}
               width={20}
               className=""
               style={{
-                transform: "rotate(180deg)"
+                transform: "rotate(180deg)",
+                height: "12px"
               }}
             />
           </div>
