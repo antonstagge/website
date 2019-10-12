@@ -1,5 +1,6 @@
 import * as React from "react";
 import { MenuChoice } from "src/home/Home";
+import arrowUp from "src/resources/logos/arrow-up.png";
 
 export interface MenuListProps {
   titles: string[];
@@ -35,7 +36,11 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
           "flex flex-col justify-center text-right fadeIn " + className
         }
       >
-        {showArrows && <div>^</div>}
+        {showArrows && (
+          <div className="flex justify-end mb-12 mr-6 sm:mr-12">
+            <img src={arrowUp} height={20} width={20} className="" />
+          </div>
+        )}
         {titles.map((title, index) => (
           <div
             key={"menulist_" + index}
@@ -83,6 +88,19 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
             </div>
           </div>
         ))}
+        {showArrows && (
+          <div className="flex justify-end mt-12 mr-6 sm:mr-12">
+            <img
+              src={arrowUp}
+              height={20}
+              width={20}
+              className=""
+              style={{
+                transform: "rotate(180deg)"
+              }}
+            />
+          </div>
+        )}
       </div>
     );
   }
