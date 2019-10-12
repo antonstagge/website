@@ -6886,8 +6886,8 @@ table {
 }
 
 .scroll-snap {
-  -ms-scroll-snap-type: y mandatory;
-      scroll-snap-type: y mandatory;
+  -ms-scroll-snap-type: y proximity;
+      scroll-snap-type: y proximity;
 }
 
 .snap-point {

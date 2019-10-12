@@ -92,21 +92,22 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
       return;
     }
 
-    const lowerLimit =
-      this.childHeight * numItems + this.container.current.children.length;
-
     if (!this.disableScroll) {
-      if (this.container.current.scrollTop >= lowerLimit) {
+      if (
+        this.container.current.scrollTop + 2 * this.childHeight >=
+        this.container.current.scrollHeight
+      ) {
         this.container.current.scrollTop = 1;
         this.disableScroll = true;
       } else if (this.container.current.scrollTop <= 0) {
-        this.container.current.scrollTop = lowerLimit - 3;
+        this.container.current.scrollTop =
+          this.container.current.scrollHeight - 2 * this.childHeight;
         this.disableScroll = true;
       }
     } else {
       setTimeout(() => {
         this.disableScroll = false;
-      }, 100);
+      }, 40);
     }
 
     const chosen =
