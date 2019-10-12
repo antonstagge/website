@@ -92,8 +92,6 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
       return;
     }
 
-    console.log("scroll");
-
     const lowerLimit =
       this.childHeight * numItems + this.container.current.children.length;
 
