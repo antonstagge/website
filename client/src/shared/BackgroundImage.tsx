@@ -4,6 +4,9 @@ interface BackgroundImageProps {
   backgroundImage: string;
   className?: string;
   big?: boolean;
+  onClick?: () => void;
+  onMouseEnter?(e: React.MouseEvent<HTMLDivElement>): void;
+  onMouseLeave?(e: React.MouseEvent<HTMLDivElement>): void;
 }
 
 class BackgroundImage extends React.Component<BackgroundImageProps> {
@@ -12,9 +15,26 @@ class BackgroundImage extends React.Component<BackgroundImageProps> {
   }
 
   public render() {
-    const { className, backgroundImage, big } = this.props;
+    const {
+      className,
+      backgroundImage,
+      big,
+      onClick,
+      onMouseEnter,
+      onMouseLeave
+    } = this.props;
     return (
-      <div className={className + " relative " + (!big ? "-mt-02" : "")}>
+      <div
+        className={
+          className +
+          " relative bg-grey-dark " +
+          (!big && " -mt-02 ") +
+          (onClick && " cursor-pointer ")
+        }
+        onClick={onClick}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
         <div className="absolute z-10 w-full xs:h-middle sm:h-middle pointer-events-none" />
         <img
           src={fadeframe}
