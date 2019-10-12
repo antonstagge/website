@@ -75,6 +75,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
 
   public componentDidMount() {
     if (this.container.current) {
+      this.container.current.focus();
       this.childHeight = this.container.current.children[1].clientHeight;
       if (this.state.active !== 0) {
         this.container.current.children[this.state.active].scrollIntoView({
@@ -90,6 +91,8 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
     if (!this.container.current) {
       return;
     }
+
+    console.log("scroll");
 
     const lowerLimit =
       this.childHeight * numItems + this.container.current.children.length;
@@ -125,6 +128,27 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
     this.props.history.push(getMenuItem(choice).link);
   };
 
+  public onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    if (e.keyCode === 13) {
+      this.props.history.push(getMenuItem(this.state.active).link);
+    } else if (e.keyCode === 38 || e.keyCode === 40) {
+      let newActive = null;
+      if (e.keyCode === 38) {
+        newActive = (this.state.active + (numItems - 1)) % numItems;
+      } else {
+        newActive = (this.state.active + (numItems + 1)) % numItems;
+      }
+
+      if (this.container.current) {
+        this.container.current.children[newActive].scrollIntoView({
+          block: "center",
+          behavior: "smooth"
+        });
+      }
+    }
+  };
+
   public render() {
     return (
       <div className="flex-1 max-h-full relative overflow-hidden font-header xs:h-middle sm:h-middle bg-black">
@@ -132,6 +156,8 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
           className="h-full overflow-y-scroll overflow-x-hidden scroll-snap invisible-scrollbar"
           ref={this.container}
           onScroll={this.loopScroll}
+          onKeyDown={this.onKeyDown}
+          tabIndex={1}
         >
           {Array.from(Array(numItems).keys()).map(choice => {
             return (
