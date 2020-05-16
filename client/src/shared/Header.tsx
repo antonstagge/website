@@ -20,7 +20,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     this.state = {
       headerAnim: true,
       shrink: true,
-      hoverBack: false
+      hoverBack: false,
     };
   }
 
@@ -34,7 +34,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
       () =>
         this.props.route({
           pathname: "/",
-          state: type
+          state: type,
         }),
       animTime / 2
     );

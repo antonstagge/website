@@ -170,7 +170,6 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
                 }
                 onMouseEnter={() => this.setState({ hover: true })}
                 onMouseLeave={() => this.setState({ hover: false })}
-                big={true}
               />
             );
           })}
@@ -181,7 +180,6 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
             onClick={() => this.props.history.push(getMenuItem(0).link)}
             onMouseEnter={() => this.setState({ hover: true })}
             onMouseLeave={() => this.setState({ hover: false })}
-            big={true}
           />
           <BackgroundImage
             key={"extra1"}
@@ -190,7 +188,6 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
             onClick={() => this.props.history.push(getMenuItem(1).link)}
             onMouseEnter={() => this.setState({ hover: true })}
             onMouseLeave={() => this.setState({ hover: false })}
-            big={true}
           />
         </div>
         <NoStyleLink

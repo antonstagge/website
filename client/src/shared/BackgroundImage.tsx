@@ -3,7 +3,6 @@ import fadeframe from "src/resources/images/fade_frame.png";
 interface BackgroundImageProps {
   backgroundImage: string;
   className?: string;
-  big?: boolean;
   onClick?: () => void;
   onMouseEnter?(e: React.MouseEvent<HTMLDivElement>): void;
   onMouseLeave?(e: React.MouseEvent<HTMLDivElement>): void;
@@ -18,39 +17,37 @@ class BackgroundImage extends React.Component<BackgroundImageProps> {
     const {
       className,
       backgroundImage,
-      big,
       onClick,
       onMouseEnter,
-      onMouseLeave
+      onMouseLeave,
     } = this.props;
     return (
       <div
         className={
           className +
-          " relative bg-grey-dark " +
-          (!big && " -mt-02 ") +
+          " relative bg-grey-dark xs:h-middle sm:h-middle " +
           (onClick && " cursor-pointer ")
         }
         onClick={onClick}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
       >
-        <div className="absolute z-10 w-full xs:h-middle sm:h-middle pointer-events-none" />
+        <div className="absolute z-10 w-full h-full pointer-events-none" />
         <img
           src={fadeframe}
           alt="fadeframe"
-          className="absolute w-full xs:h-middle sm:h-middle "
+          className="absolute w-full h-full "
           style={{
             opacity: 0.3,
-            pointerEvents: "none"
+            pointerEvents: "none",
           }}
         />
         <img
           src={backgroundImage}
           alt="background"
-          className={"min-w-full xs:h-middle sm:h-middle "}
+          className={"min-w-full h-full "}
           style={{
-            maxWidth: "unset"
+            maxWidth: "unset",
           }}
         />
       </div>
