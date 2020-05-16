@@ -14,7 +14,7 @@ export enum MenuChoice {
   AboutMe = 0,
   Resume = 1,
   Portfolio = 2,
-  Contact = 3
+  Contact = 3,
 }
 interface MenuItem {
   title: string;
@@ -31,28 +31,28 @@ export const getMenuItem = (choice: MenuChoice): MenuItem => {
         title: "ABOUT ME",
         backgroundImage: aboutMePic,
         number: choice,
-        link: "aboutme"
+        link: "aboutme",
       };
     case MenuChoice.Resume:
       return {
         title: "RESUME",
         backgroundImage: resumePic,
         number: choice,
-        link: "resume"
+        link: "resume",
       };
     case MenuChoice.Portfolio:
       return {
         title: "PORTFOLIO",
         backgroundImage: computer,
         number: choice,
-        link: "portfolio"
+        link: "portfolio",
       };
     case MenuChoice.Contact:
       return {
         title: "CONTACT",
         backgroundImage: contactPic,
         number: choice,
-        link: "contact"
+        link: "contact",
       };
   }
 };
@@ -68,7 +68,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
     super(props);
     this.state = {
       active: this.props.location.state | 0,
-      hover: false
+      hover: false,
     };
     this.container = React.createRef();
   }
@@ -79,7 +79,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
       this.childHeight = this.container.current.children[1].clientHeight;
       if (this.state.active !== 0) {
         this.container.current.children[this.state.active].scrollIntoView({
-          block: "center"
+          block: "center",
         });
       } else {
         this.container.current.scrollTop = 1;
@@ -128,10 +128,11 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
   };
 
   public onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    e.preventDefault();
     if (e.keyCode === 13) {
+      e.preventDefault();
       this.props.history.push(getMenuItem(this.state.active).link);
     } else if (e.keyCode === 38 || e.keyCode === 40) {
+      e.preventDefault();
       let newActive = null;
       if (e.keyCode === 38) {
         newActive = (this.state.active + (numItems - 1)) % numItems;
@@ -142,7 +143,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
       if (this.container.current) {
         this.container.current.children[newActive].scrollIntoView({
           block: "center",
-          behavior: "smooth"
+          behavior: "smooth",
         });
       }
     }
@@ -158,7 +159,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
           onKeyDown={this.onKeyDown}
           tabIndex={1}
         >
-          {Array.from(Array(numItems).keys()).map(choice => {
+          {Array.from(Array(numItems).keys()).map((choice) => {
             return (
               <BackgroundImage
                 key={choice}
@@ -223,7 +224,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
           onClick={this.clickedChoice}
           onTouch={this.clickedChoice}
           titles={Array.from(Array(numItems).keys()).map(
-            choice => getMenuItem(choice).title
+            (choice) => getMenuItem(choice).title
           )}
           active={this.state.active}
         />
