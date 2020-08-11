@@ -22,7 +22,7 @@ def send_mail(subject, new_times):
         server.ehlo()
         server.login(my_mail, pw)
 
-        server.sendmail(my_mail, my_mail, text_msg)
+        server.sendmail(my_mail, emil_mail, text_msg)
         return True
     except smtplib.SMTPException as e:
         print(str(e))
@@ -32,6 +32,7 @@ def get_payload(ssn, locationId, typeId):
     return ('{"bookingSession":{"socialSecurityNumber":"%s","licenceId":4,"bookingModeId":0,"ignoreDebt":false,"ignoreBookingHindrance":false,"excludeExaminationCategories":[],"rescheduleTypeId":0,"paymentIsActive":false,"paymentReference":null,"paymentUrl":null},"occasionBundleQuery":{"startDate":"2020-08-11T22:00:00.000Z","locationId":%d,"languageId":13,"vehicleTypeId":1,"tachographTypeId":1,"occasionChoiceId":1,"examinationTypeId":%d}}' % (ssn, locationId, typeId))
 
 my_mail = config.MAIL_ADDR
+emil_mail = 'empa.lantz@gmail.com'
 pw = config.MAIL_PWD
 url = 'https://fp.trafikverket.se/Boka/occasion-bundles'
 headers = {'content-type': 'application/json', 'Accept-Charset': 'UTF-8'}
