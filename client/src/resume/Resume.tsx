@@ -1,10 +1,7 @@
 import * as React from "react";
 import * as ReactDOMServer from "react-dom/server";
-import { MenuChoice, numItems, getMenuItem } from "src/home/Home";
-import { RouteComponentProps } from "react-router-dom";
 import download from "src/resources/logos/download.png";
 import downloadwhite from "src/resources/logos/downloadwhite.png";
-import Header from "src/shared/Header";
 import Button from "src/shared/Button";
 import * as api from "src/api/api";
 
@@ -12,11 +9,11 @@ interface ResumeState {
   download: boolean | null | undefined;
 }
 
-class Resume extends React.Component<RouteComponentProps, ResumeState> {
-  constructor(props: RouteComponentProps) {
+class Resume extends React.Component<{}, ResumeState> {
+  constructor(props: {}) {
     super(props);
     this.state = {
-      download: undefined
+      download: undefined,
     };
   }
   public clickDownload = (data: any) => {
@@ -76,14 +73,14 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
       api
         .downloadCV({
           personal: personalData,
-          resume: resumeData
+          resume: resumeData,
         } as api.PDFdata)
         .then(
-          resp => {
+          (resp) => {
             this.clickDownload(resp.data);
             this.setState({ download: true });
           },
-          badResp => {
+          (badResp) => {
             console.error(badResp);
             this.setState({ download: false });
           }
@@ -126,13 +123,7 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
 
   public render() {
     return (
-      <Header
-        type={MenuChoice.Resume}
-        titles={Array.from(Array(numItems).keys()).map(
-          choice => getMenuItem(choice).title
-        )}
-        route={this.props.history.push}
-      >
+      <>
         <div className="m-4">
           <div id="resume-text">
             <div className="xs:text-xl sm:text-3xl pb-3 text-grey-dark">
@@ -244,7 +235,7 @@ class Resume extends React.Component<RouteComponentProps, ResumeState> {
             </div>
           </div>
         </div>
-      </Header>
+      </>
     );
   }
 }

@@ -1,10 +1,7 @@
 import * as React from "react";
 import * as api from "src/api/api";
 import Captcha from "./Captcha";
-import { MenuChoice, numItems, getMenuItem } from "src/home/Home";
-import { RouteComponentProps } from "react-router-dom";
 import { debounce } from "ts-debounce";
-import Header from "src/shared/Header";
 import Button from "src/shared/Button";
 
 enum InputType {
@@ -31,8 +28,8 @@ interface ContactState {
   canSend: CanSend; // Value of the name input.
 }
 
-class Contact extends React.Component<RouteComponentProps, ContactState> {
-  constructor(props: RouteComponentProps) {
+class Contact extends React.Component<{}, ContactState> {
+  constructor(props: {}) {
     super(props);
     this.state = {
       name: "",
@@ -158,13 +155,7 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
 
   public render() {
     return (
-      <Header
-        type={MenuChoice.Contact}
-        titles={Array.from(Array(numItems).keys()).map(
-          (choice) => getMenuItem(choice).title
-        )}
-        route={this.props.history.push}
-      >
+      <>
         <div className="m-4 text-lg flex">
           <div className="xs:w-0 sm:w-1/5" />
           <div className="xs:w-full sm:w-3/5">
@@ -174,7 +165,7 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
             <div className="flex xs:text-sm sm:text-lg py-2">
               <div>Email:&nbsp;</div>
               <div className="select-text font-bold" onClick={this.copyText}>
-                stagge@kth.se
+                antonstagge@gmail.com
               </div>
             </div>
             <div className="xs:text-lg sm:text-3xl text-grey-dark pt-4 pb-2">
@@ -267,7 +258,7 @@ class Contact extends React.Component<RouteComponentProps, ContactState> {
           </div>
           <div className="xs:w-0 sm:w-1/5" />
         </div>
-      </Header>
+      </>
     );
   }
 }
