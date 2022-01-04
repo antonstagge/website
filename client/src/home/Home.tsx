@@ -1,8 +1,8 @@
 import * as React from "react";
-import resumePic from "src/resources/images/yosemity-falls.jpg";
-import aboutMePic from "src/resources/images/vineyard.jpg";
-import contactPic from "src/resources/images/typewriter.jpg";
-import computer from "src/resources/images/desk.jpg";
+import resumePic from "src/resources/images/yosemity-falls-min.jpg";
+import aboutMePic from "src/resources/images/vineyard-min.jpg";
+import contactPic from "src/resources/images/typewriter-min.jpg";
+import computer from "src/resources/images/desk-min.jpg";
 import BackgroundImage from "src/shared/BackgroundImage";
 import MenuList from "src/shared/MenuList";
 import Socials from "./Socials";
@@ -62,12 +62,12 @@ interface HomeState {
 }
 class Home extends React.Component<RouteComponentProps, HomeState> {
   private container: React.RefObject<HTMLDivElement>;
-  private childHeight: number = 0;
   private disableScroll: boolean = false;
   constructor(props: RouteComponentProps) {
     super(props);
+    const activeFromProps = this.props.location.state as number;
     this.state = {
-      active: this.props.location.state | 0,
+      active: activeFromProps | 0,
       hover: false,
     };
     this.container = React.createRef();
@@ -76,7 +76,6 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
   public componentDidMount() {
     if (this.container.current) {
       this.container.current.focus();
-      this.childHeight = this.container.current.children[1].clientHeight;
       if (this.state.active !== 0) {
         this.container.current.children[this.state.active].scrollIntoView({
           block: "center",
@@ -92,16 +91,17 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
       return;
     }
 
+    const childHeight = this.container.current.children[1].clientHeight;
     if (!this.disableScroll) {
       if (
-        this.container.current.scrollTop + 2 * this.childHeight >=
+        this.container.current.scrollTop + 2 * childHeight >=
         this.container.current.scrollHeight
       ) {
         this.container.current.scrollTop = 1;
         this.disableScroll = true;
       } else if (this.container.current.scrollTop <= 0) {
         this.container.current.scrollTop =
-          this.container.current.scrollHeight - 2 * this.childHeight;
+          this.container.current.scrollHeight - 2 * childHeight;
         this.disableScroll = true;
       }
     } else {
@@ -111,8 +111,7 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
     }
 
     const chosen =
-      Math.round(this.container.current.scrollTop / this.childHeight) %
-      numItems;
+      Math.round(this.container.current.scrollTop / childHeight) % numItems;
 
     if (chosen !== this.state.active) {
       this.setState({ active: chosen });
@@ -151,9 +150,9 @@ class Home extends React.Component<RouteComponentProps, HomeState> {
 
   public render() {
     return (
-      <div className="flex-1 max-h-full relative overflow-hidden font-header xs:h-middle sm:h-middle bg-black">
+      <div className="flex-1 relative overflow-hidden font-header xs:h-middle sm:h-middle bg-black">
         <div
-          className="h-full overflow-y-scroll overflow-x-hidden scroll-snap invisible-scrollbar"
+          className="xs:h-middle sm:h-middle overflow-y-scroll overflow-x-hidden scroll-snap invisible-scrollbar"
           ref={this.container}
           onScroll={this.loopScroll}
           onKeyDown={this.onKeyDown}

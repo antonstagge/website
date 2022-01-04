@@ -14,13 +14,8 @@ class BackgroundImage extends React.Component<BackgroundImageProps> {
   }
 
   public render() {
-    const {
-      className,
-      backgroundImage,
-      onClick,
-      onMouseEnter,
-      onMouseLeave,
-    } = this.props;
+    const { className, backgroundImage, onClick, onMouseEnter, onMouseLeave } =
+      this.props;
     return (
       <div
         className={
@@ -45,9 +40,10 @@ class BackgroundImage extends React.Component<BackgroundImageProps> {
         <img
           src={backgroundImage}
           alt="background"
-          className={"min-w-full h-full "}
+          className={"min-w-full xs:h-middle sm:h-middle"}
           style={{
             maxWidth: "unset",
+            objectFit: "contain",
           }}
         />
       </div>
