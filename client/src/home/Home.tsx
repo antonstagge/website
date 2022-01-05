@@ -4,7 +4,7 @@ import aboutMePic from "src/resources/images/vineyard-min.jpg";
 import contactPic from "src/resources/images/typewriter-min.jpg";
 import computer from "src/resources/images/desk-min.jpg";
 import BackgroundImage from "./components/BackgroundImage";
-import MenuList from "src/shared/MenuList";
+import MenuList from "./components/MenuList";
 import Socials from "./components/Socials";
 import LogoWithName from "./components/LogoWithName";
 import NoStyleLink from "src/shared/NoStyleLink";
@@ -50,9 +50,11 @@ export interface MenuItem {
   number: MenuChoice;
   link: string;
 }
-export const animTime: number = 500;
+
 export const numItems = 4;
 export const getMenuItem = (choice: MenuChoice): MenuItem => menuItems[choice];
+const getMenuChoiceByPathname = (pathname: string): MenuChoice | null =>
+  Object.values(menuItems).find((v) => v.link === pathname)?.number ?? null;
 
 const Home = () => {
   const container = useRef<HTMLDivElement>(null);
@@ -74,6 +76,21 @@ const Home = () => {
       }
     }
   }, [container]);
+
+  useEffect(() => {
+    if (container.current) {
+      if (getMenuItem(active).link !== location.pathname) {
+        const newActive = getMenuChoiceByPathname(location.pathname);
+        if (newActive !== null) {
+          container.current.children[newActive].scrollIntoView({
+            block: "center",
+            behavior: "smooth",
+          });
+          setActive(newActive);
+        }
+      }
+    }
+  }, [container, location.pathname]);
 
   const loopScroll = useCallback(() => {
     if (!container.current) {

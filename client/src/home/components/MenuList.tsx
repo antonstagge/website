@@ -1,7 +1,7 @@
 import * as React from "react";
 import { MenuItem } from "src/home/Home";
 import arrowUp from "src/resources/logos/arrow-up.png";
-import NoStyleLink from "./NoStyleLink";
+import NoStyleLink from "src/shared/NoStyleLink";
 
 interface MenuListProps {
   menuItems: MenuItem[];
@@ -39,13 +39,12 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
           </div>
         )}
         {menuItems.map((item, index) => (
-          <div
-            key={"menulist_" + index}
-            onMouseEnter={() => this.setState({ hover: index })}
-            onMouseLeave={() => this.setState({ hover: -1 })}
-            className={"flex-no-grow xs:h-6 sm:h-8 flex cursor-pointer "}
-          >
-            <NoStyleLink to={item.link}>
+          <NoStyleLink to={item.link} key={index}>
+            <div
+              onMouseEnter={() => this.setState({ hover: index })}
+              onMouseLeave={() => this.setState({ hover: -1 })}
+              className={"flex-no-grow xs:h-6 sm:h-8 flex cursor-pointer "}
+            >
               <div className="flex-1 flex flex-col justify-center">
                 <div
                   className={
@@ -78,8 +77,8 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
                   {"<"}
                 </div>
               </div>
-            </NoStyleLink>
-          </div>
+            </div>
+          </NoStyleLink>
         ))}
         {showArrows && (
           <div className="flex justify-end mt-12 mr-6 sm:mr-12">
