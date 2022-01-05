@@ -42,7 +42,7 @@ const BackgroundImage = ({
           className={"min-w-full xs:h-middle sm:h-middle"}
           style={{
             maxWidth: "unset",
-            objectFit: "contain",
+            objectFit: "cover",
           }}
         />
       </Link>
