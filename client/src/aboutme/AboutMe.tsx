@@ -16,39 +16,52 @@ const AboutMe = () => {
           <p className="xs:text-lg sm:text-xl text-grey-dark pb-2">Who am I?</p>
           <p>
             My name is Anton Stagge. I am a social, outgoing and happy guy.
-            Right now, I am studying for my master's degree in engineering and
-            computer science at the Royal Institute of Technology in Stockholm,
-            Sweden. I have completed my bachelor's degree. My thesis was on the
-            subject of applying machine learning techniques on Automated Guided
-            Vehicles in Amazon warehouses.
+            Right now, I'm working for the e-health company Kry / Livi where
+            I've been for the last 3 years.
           </p>
-          <p>&nbsp;</p>
+          <br />
           <p>
             I'm a very meticulous person that always strives for perfection. It
             is easy for me to learn new things quickly, but I still always want,
             and try, to understand everything in detail. It is then I perform at
             my best; one could say that I am a full stack thinker.
           </p>
-          <p>&nbsp;</p>
+          <br />
           <p>
-            I believe that my fascination and love for programming started
-            already when I was a child playing with Legos. I also got a liking
-            for math early on. I like to view programming as a big Lego problem.
-            You have to connect the correct pieces to build something new and
-            exciting.
+            I believe that my love for programming and problem solving started
+            very early on in my life. I've always been fascinated by how things
+            work. At the age of 16 I bought an old motorcycle and took it apart
+            in order to learn how a combustion engine worked. aThen put it back
+            together, and it worked even better.
           </p>
         </div>
       </div>
       <div className="flex xs:m-2 sm:m-4 ">
         <div className="flex-1 pr-4">
           <p>
-            The transition from Legos to actual programming took place when I
-            studied a year at college in Silicon Valley. Ever since I took the
-            course Introduction to Programming in C++ there, I have devoted most
-            of my waking hours to programming - both in school and during spare
-            time with countless small side projects I've started.
+            The first time a got to try programming was when I studied a year at
+            college in Silicon Valley. Ever since I took the course Introduction
+            to Programming in C++ there, I have devoted most of my waking hours
+            to programming - in school, work, and during my spare time with
+            countless small side projects I've started.
           </p>
-          <p>&nbsp;</p>
+          <br />
+          <p>
+            Now, I have a master's degree in engineering and computer science
+            from the Royal Institute of Technology in Stockholm, Sweden. My
+            masters thesis was on the subject of applying time-series
+            forecasting techniques on the queue wait-time prediction problem. I
+            compared the performance of a Temporal Convolutional Network (TCN),
+            a LSTM and other ML-models to a simulation algorithm. In the end, a
+            self designed combination model had the best performance.
+          </p>
+          <div className="mt-1">
+            My thesis can be found here:
+            <a href="http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-279291">
+              http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-279291
+            </a>
+          </div>
+          <br />
           <p>
             I will always strive to learn more in the field and art of
             programming and computer science. I don't think my motivation to do

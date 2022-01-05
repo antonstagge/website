@@ -75,6 +75,22 @@ const Portfolio = () => {
         </div>
 
         <Steganography className="" />
+
+        <div className="xs:text-xl sm:text-3xl pt-10 pb-4 text-grey-dark">
+          My Master Thesis
+        </div>
+        <div className="flex flex-wrap pb-8">
+          <div className="flex-1">
+            <p>
+              The paper is titled A time series forecasting approach for queue
+              wait-time prediction, and the full paper can be found&nbsp;
+              <a href="http://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-279291">
+                here.
+              </a>
+            </p>
+          </div>
+          <div className="xs:flex-no-grow sm:flex-1" />
+        </div>
       </div>
     </>
   );

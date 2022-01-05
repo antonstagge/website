@@ -45,9 +45,9 @@ class Resume extends React.Component<{}, ResumeState> {
               <div className=" pt-20">
                 <div className="font-header text-4xl">Anton Stagge</div>
                 <div className="font-bold">Telephone: 0702412556</div>
-                <div className="font-bold">Email: stagge@kth.se</div>
+                <div className="font-bold">Email: antonstagge@gmail.se</div>
                 <div className="font-bold">
-                  Address: Slottsvägen 3, 18352 TÄBY
+                  Address: Norrtullsgatan 61, 11345 STOCKHOLM
                 </div>
                 <div className="font-bold">Website: antonstagge.com</div>
               </div>
@@ -130,6 +130,18 @@ class Resume extends React.Component<{}, ResumeState> {
               Experience
             </div>
             {this.CVItem(
+              "Software Engineer",
+              "Kry/Livi AB",
+              "2020-",
+              "Fullstack developer, on the clinician side of the product. I work in the physical team, which focus on the web tools used in the care-facilities and Krys' physical offering"
+            )}
+            {this.CVItem(
+              "Software Engineer Intern",
+              "Kry/Livi AB",
+              "2019-2020",
+              "I worked as a fullstack developer, improving and building new features in the internal Backoffice tool."
+            )}
+            {this.CVItem(
               "Software developer/consultant",
               "Decerno",
               "Summer 2018",
@@ -154,8 +166,8 @@ class Resume extends React.Component<{}, ResumeState> {
             {this.CVItem(
               "KTH",
               "Royal Institute of Technology",
-              "2015-",
-              "Currently in my fifth and last year, studying for my masters in computer science with a track in Data analysis.",
+              "2015-2020",
+              "Sub-track in Data analysis.",
               "Computer Science and Engineering"
             )}
             {this.CVItem(
@@ -184,7 +196,7 @@ class Resume extends React.Component<{}, ResumeState> {
               Computer languages, frameworks and general skills
             </div>
             <div className="xs:text-xs sm:text-xl font-bold">
-              Java, C++, SQL, Python, JavaScript, TypeScript, React Redux
+              Java, C++, mySQL, Python, JavaScript, TypeScript, React, Redux
             </div>
             <div className="xs:text-sm sm:text-xl text-grey-dark py-2">
               Also familiar with:
@@ -196,7 +208,7 @@ class Resume extends React.Component<{}, ResumeState> {
               General skills:
             </div>
             <div className="xs:text-xs sm:text-xl font-bold">
-              Github, Bash, Latex
+              Git, Bash
               <div className="text-grey-dark xs:text-xs sm:text-base pt-2">
                 References can be provided upon request.
               </div>
