@@ -3,11 +3,13 @@ import resumePic from "src/resources/images/yosemity-falls-min.jpg";
 import aboutMePic from "src/resources/images/vineyard-min.jpg";
 import contactPic from "src/resources/images/typewriter-min.jpg";
 import computer from "src/resources/images/desk-min.jpg";
-import BackgroundImage from "src/shared/BackgroundImage";
+import BackgroundImage from "./components/BackgroundImage";
 import MenuList from "src/shared/MenuList";
-import Socials from "./Socials";
-import LogoWithName from "./LogoWithName";
+import Socials from "./components/Socials";
+import LogoWithName from "./components/LogoWithName";
 import NoStyleLink from "src/shared/NoStyleLink";
+import { useLocation } from "react-router-dom";
+import { BackButton } from "./components/BackButton";
 
 export enum MenuChoice {
   AboutMe = 0,
@@ -57,6 +59,8 @@ const Home = () => {
   const disableScroll = useRef<boolean>(false);
   const [active, setActive] = useState(0);
   const [hover, setHover] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     if (container.current) {
@@ -137,34 +141,52 @@ const Home = () => {
           onMouseLeave={() => setHover(false)}
         />
       </div>
-      <NoStyleLink
-        to={getMenuItem(active).link}
-        className="cursor-pointer flex flex-col justify-end xs:mb-8 sm:mb-16 xs:pl-8 sm:pl-16 z-30 absolute pin-b pin-l"
-      >
-        <div
-          className={
-            "flex-no-grow xs:text-4xl sm:text-7xl font-bold flex text-white"
-          }
-        >
-          <div className="flex-no-grow fadeIn ">
-            <div className="-mb-2">{getMenuItem(active).title}</div>
+      {isHome && (
+        <>
+          <NoStyleLink
+            to={getMenuItem(active).link}
+            className="cursor-pointer flex flex-col justify-end xs:mb-8 sm:mb-16 xs:pl-8 sm:pl-16 z-30 absolute pin-b pin-l"
+          >
             <div
-              className={"bg-white h-3 hoverBar " + (hover ? "w-full" : "w-0")}
-            />
+              className={
+                "flex-no-grow xs:text-4xl sm:text-7xl font-bold flex text-white"
+              }
+            >
+              <div className="flex-no-grow fadeIn ">
+                <div className="-mb-2">{getMenuItem(active).title}</div>
+                <div
+                  className={
+                    "bg-white h-3 hoverBar " + (hover ? "w-full" : "w-0")
+                  }
+                />
+              </div>
+              <div className="flex-1" />
+            </div>
+          </NoStyleLink>
+          <LogoWithName />
+          <Socials className="absolute pin-t pin-r xs:pr-5 sm:pr-10 pt-10 xs:mt-1 sm:mt-0 z-30" />
+          <MenuList
+            className="absolute pin-t pin-b pin-r z-20 text-white"
+            showArrows={true}
+            menuItems={Array.from(Array(numItems).keys()).map((choice) =>
+              getMenuItem(choice)
+            )}
+            active={active}
+          />
+        </>
+      )}
+      {!isHome && (
+        <>
+          <BackButton hover={hover} />
+          <div
+            className={
+              "absolute text-white text-5xl font-bold pin-t pin-l pt-6 xs:px-4 sm:px-8 xs:h-48 sm:h-64 fadeIn pointer-events-none"
+            }
+          >
+            <div>{getMenuItem(active).title}</div>
           </div>
-          <div className="flex-1" />
-        </div>
-      </NoStyleLink>
-      <LogoWithName />
-      <Socials className="absolute pin-t pin-r xs:pr-5 sm:pr-10 pt-10 xs:mt-1 sm:mt-0 z-30" />
-      <MenuList
-        className="absolute pin-t pin-b pin-r z-20 text-white"
-        showArrows={true}
-        menuItems={Array.from(Array(numItems).keys()).map((choice) =>
-          getMenuItem(choice)
-        )}
-        active={active}
-      />
+        </>
+      )}
     </div>
   );
 };
