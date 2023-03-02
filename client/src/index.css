@@ -114,8 +114,7 @@ a {
 abbr[title] {
   border-bottom: none; /* 1 */
   text-decoration: underline; /* 2 */
-  -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted; /* 2 */
+  text-decoration: underline dotted; /* 2 */
 }
 
 /**
@@ -591,16 +590,6 @@ textarea {
   font-family: inherit;
 }
 
-input::-moz-placeholder, textarea::-moz-placeholder {
-  color: inherit;
-  opacity: .5;
-}
-
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  color: inherit;
-  opacity: .5;
-}
-
 input::placeholder,
 textarea::placeholder {
   color: inherit;
@@ -622,9 +611,7 @@ table {
 }
 
 .appearance-none {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
 }
 
 .bg-fixed {
@@ -4874,7 +4861,6 @@ table {
 }
 
 .sticky {
-  position: -webkit-sticky;
   position: sticky;
 }
 
@@ -6130,15 +6116,11 @@ table {
 
 .select-none {
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
 
 .select-text {
   -webkit-user-select: text;
-     -moz-user-select: text;
-      -ms-user-select: text;
           user-select: text;
 }
 
@@ -6368,25 +6350,17 @@ table {
   }
 
   .xs\:shrinkHeight {
-    -webkit-animation-name: xsShrinkHeight;
-            animation-name: xsShrinkHeight;
-    -webkit-animation-duration: 250ms;
-            animation-duration: 250ms;
-    -webkit-animation-timing-function: ease-in-out;
-            animation-timing-function: ease-in-out;
-    -webkit-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
+    animation-name: xsShrinkHeight;
+    animation-duration: 250ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
   }
 
   .xs\:growHeight {
-    -webkit-animation-name: xsGrowHeight;
-            animation-name: xsGrowHeight;
-    -webkit-animation-duration: 250ms;
-            animation-duration: 250ms;
-    -webkit-animation-timing-function: ease-in-out;
-            animation-timing-function: ease-in-out;
-    -webkit-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
+    animation-name: xsGrowHeight;
+    animation-duration: 250ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
   }
 }
 
@@ -6400,35 +6374,17 @@ table {
   }
 
   .sm\:shrinkHeight {
-    -webkit-animation-name: smShrinkHeight;
-            animation-name: smShrinkHeight;
-    -webkit-animation-duration: 250ms;
-            animation-duration: 250ms;
-    -webkit-animation-timing-function: ease-in-out;
-            animation-timing-function: ease-in-out;
-    -webkit-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
+    animation-name: smShrinkHeight;
+    animation-duration: 250ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
   }
 
   .sm\:growHeight {
-    -webkit-animation-name: smGrowHeight;
-            animation-name: smGrowHeight;
-    -webkit-animation-duration: 250ms;
-            animation-duration: 250ms;
-    -webkit-animation-timing-function: ease-in-out;
-            animation-timing-function: ease-in-out;
-    -webkit-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
-  }
-}
-
-@-webkit-keyframes smShrinkHeight {
-  0% {
-    height: calc(100vh - 3rem);
-  }
-
-  100% {
-    height: 16rem;
+    animation-name: smGrowHeight;
+    animation-duration: 250ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
   }
 }
 
@@ -6442,16 +6398,6 @@ table {
   }
 }
 
-@-webkit-keyframes smGrowHeight {
-  0% {
-    height: 16rem;
-  }
-
-  100% {
-    height: calc(100vh - 3rem);
-  }
-}
-
 @keyframes smGrowHeight {
   0% {
     height: 16rem;
@@ -6462,16 +6408,6 @@ table {
   }
 }
 
-@-webkit-keyframes xsShrinkHeight {
-  0% {
-    height: calc(100vh - 1.5rem);
-  }
-
-  100% {
-    height: 12rem;
-  }
-}
-
 @keyframes xsShrinkHeight {
   0% {
     height: calc(100vh - 1.5rem);
@@ -6479,16 +6415,6 @@ table {
 
   100% {
     height: 12rem;
-  }
-}
-
-@-webkit-keyframes xsGrowHeight {
-  0% {
-    height: 12rem;
-  }
-
-  100% {
-    height: calc(100vh - 1.5rem);
   }
 }
 
@@ -6527,24 +6453,10 @@ table {
 }
 
 .bgAnimDown {
-  -webkit-animation-name: slide-down;
-          animation-name: slide-down;
-  -webkit-animation-duration: 500ms;
-          animation-duration: 500ms;
-  -webkit-animation-timing-function: ease-in-out;
-          animation-timing-function: ease-in-out;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes slide-down {
-  0% {
-    transform: translateY(-100%);
-  }
-
-  100% {
-    transform: translateY(0%);
-  }
+  animation-name: slide-down;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 @keyframes slide-down {
@@ -6558,24 +6470,10 @@ table {
 }
 
 .bgAnimUp {
-  -webkit-animation-name: slide-up;
-          animation-name: slide-up;
-  -webkit-animation-duration: 500ms;
-          animation-duration: 500ms;
-  -webkit-animation-timing-function: ease-in-out;
-          animation-timing-function: ease-in-out;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes slide-up {
-  0% {
-    transform: translateY(0%);
-  }
-
-  100% {
-    transform: translateY(-100%);
-  }
+  animation-name: slide-up;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 @keyframes slide-up {
@@ -6589,24 +6487,10 @@ table {
 }
 
 .bgAnimDownLast {
-  -webkit-animation-name: slide-down-last;
-          animation-name: slide-down-last;
-  -webkit-animation-duration: 500ms;
-          animation-duration: 500ms;
-  -webkit-animation-timing-function: ease-in-out;
-          animation-timing-function: ease-in-out;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes slide-down-last {
-  0% {
-    transform: translateY(-200%);
-  }
-
-  100% {
-    transform: translateY(-100%);
-  }
+  animation-name: slide-down-last;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 @keyframes slide-down-last {
@@ -6620,24 +6504,10 @@ table {
 }
 
 .bgAnimDownFirst {
-  -webkit-animation-name: slide-down-first;
-          animation-name: slide-down-first;
-  -webkit-animation-duration: 500ms;
-          animation-duration: 500ms;
-  -webkit-animation-timing-function: ease-in-out;
-          animation-timing-function: ease-in-out;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes slide-down-first {
-  0% {
-    transform: translateY(0%);
-  }
-
-  100% {
-    transform: translateY(100%);
-  }
+  animation-name: slide-down-first;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 @keyframes slide-down-first {
@@ -6651,24 +6521,10 @@ table {
 }
 
 .bgAnimUpLast {
-  -webkit-animation-name: slide-up-last;
-          animation-name: slide-up-last;
-  -webkit-animation-duration: 500ms;
-          animation-duration: 500ms;
-  -webkit-animation-timing-function: ease-in-out;
-          animation-timing-function: ease-in-out;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes slide-up-last {
-  0% {
-    transform: translateY(-100%);
-  }
-
-  100% {
-    transform: translateY(-200%);
-  }
+  animation-name: slide-up-last;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 @keyframes slide-up-last {
@@ -6682,24 +6538,10 @@ table {
 }
 
 .bgAnimUpFirst {
-  -webkit-animation-name: slide-up-first;
-          animation-name: slide-up-first;
-  -webkit-animation-duration: 500ms;
-          animation-duration: 500ms;
-  -webkit-animation-timing-function: ease-in-out;
-          animation-timing-function: ease-in-out;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes slide-up-first {
-  0% {
-    transform: translateY(100%);
-  }
-
-  100% {
-    transform: translateY(0%);
-  }
+  animation-name: slide-up-first;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 @keyframes slide-up-first {
@@ -6713,26 +6555,9 @@ table {
 }
 
 .fadeOutIn {
-  -webkit-animation-name: fade;
-          animation-name: fade;
-  -webkit-animation-duration: 500ms;
-          animation-duration: 500ms;
-  -webkit-animation-timing-function: ease-in-out;
-          animation-timing-function: ease-in-out;
-}
-
-@-webkit-keyframes fade {
-  0% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
+  animation-name: fade;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
 }
 
 @keyframes fade {
@@ -6750,24 +6575,10 @@ table {
 }
 
 .fadeIn {
-  -webkit-animation-name: fadeIn;
-          animation-name: fadeIn;
-  -webkit-animation-duration: 250ms;
-          animation-duration: 250ms;
-  -webkit-animation-timing-function: ease-in-out;
-          animation-timing-function: ease-in-out;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
+  animation-name: fadeIn;
+  animation-duration: 250ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 @keyframes fadeIn {
@@ -6781,24 +6592,10 @@ table {
 }
 
 .fadeOut {
-  -webkit-animation-name: fadeOut;
-          animation-name: fadeOut;
-  -webkit-animation-duration: 250ms;
-          animation-duration: 250ms;
-  -webkit-animation-timing-function: ease-in-out;
-          animation-timing-function: ease-in-out;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
+  animation-name: fadeOut;
+  animation-duration: 250ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 @keyframes fadeOut {
@@ -6848,8 +6645,7 @@ table {
 }
 
 .scroll-snap {
-  -ms-scroll-snap-type: y proximity;
-      scroll-snap-type: y proximity;
+  scroll-snap-type: y proximity;
 }
 
 .snap-point {
@@ -6896,6 +6692,10 @@ table {
   transition: height 500ms ease-out;
 }
 
+.object-cover {
+  object-fit: cover;
+}
+
 @media (min-width: 320px) {
   .xs\:list-reset {
     list-style: none;
@@ -6903,9 +6703,7 @@ table {
   }
 
   .xs\:appearance-none {
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
+    appearance: none;
   }
 
   .xs\:bg-fixed {
@@ -11139,7 +10937,6 @@ table {
   }
 
   .xs\:sticky {
-    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -12387,15 +12184,11 @@ table {
 
   .xs\:select-none {
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
             user-select: none;
   }
 
   .xs\:select-text {
     -webkit-user-select: text;
-       -moz-user-select: text;
-        -ms-user-select: text;
             user-select: text;
   }
 
@@ -12621,9 +12414,7 @@ table {
   }
 
   .sm\:appearance-none {
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
+    appearance: none;
   }
 
   .sm\:bg-fixed {
@@ -16857,7 +16648,6 @@ table {
   }
 
   .sm\:sticky {
-    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -18105,15 +17895,11 @@ table {
 
   .sm\:select-none {
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
             user-select: none;
   }
 
   .sm\:select-text {
     -webkit-user-select: text;
-       -moz-user-select: text;
-        -ms-user-select: text;
             user-select: text;
   }
 
@@ -18339,9 +18125,7 @@ table {
   }
 
   .md\:appearance-none {
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
+    appearance: none;
   }
 
   .md\:bg-fixed {
@@ -22575,7 +22359,6 @@ table {
   }
 
   .md\:sticky {
-    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -23823,15 +23606,11 @@ table {
 
   .md\:select-none {
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
             user-select: none;
   }
 
   .md\:select-text {
     -webkit-user-select: text;
-       -moz-user-select: text;
-        -ms-user-select: text;
             user-select: text;
   }
 
@@ -24057,9 +23836,7 @@ table {
   }
 
   .lg\:appearance-none {
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
+    appearance: none;
   }
 
   .lg\:bg-fixed {
@@ -28293,7 +28070,6 @@ table {
   }
 
   .lg\:sticky {
-    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -29541,15 +29317,11 @@ table {
 
   .lg\:select-none {
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
             user-select: none;
   }
 
   .lg\:select-text {
     -webkit-user-select: text;
-       -moz-user-select: text;
-        -ms-user-select: text;
             user-select: text;
   }
 
@@ -29775,9 +29547,7 @@ table {
   }
 
   .xl\:appearance-none {
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
+    appearance: none;
   }
 
   .xl\:bg-fixed {
@@ -34011,7 +33781,6 @@ table {
   }
 
   .xl\:sticky {
-    position: -webkit-sticky;
     position: sticky;
   }
 
@@ -35259,15 +35028,11 @@ table {
 
   .xl\:select-none {
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
             user-select: none;
   }
 
   .xl\:select-text {
     -webkit-user-select: text;
-       -moz-user-select: text;
-        -ms-user-select: text;
             user-select: text;
   }
 

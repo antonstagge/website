@@ -122,8 +122,7 @@ const Home = () => {
     if (chosen !== active) {
       setActive(chosen);
     }
-  }, [container]);
-
+  }, [container, active]);
   return (
     <div className="flex-1 relative overflow-hidden font-header xs:h-middle sm:h-middle bg-black">
       <div

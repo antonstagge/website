@@ -3,7 +3,7 @@ import AboutMe from "src/aboutme/AboutMe";
 import Resume from "src/resume/Resume";
 import Portfolio from "src/portfolio/Portfolio";
 import Contact from "src/contact/Contact";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./font-faces.css";
 import { PageWrapper } from "src/shared/PageWrapper";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
@@ -16,18 +16,25 @@ const App = () => {
         <Home />
         <TransitionGroup>
           <CSSTransition timeout={3000} classNames="fade" key={location.key}>
-            <Switch location={location}>
+            <Routes location={location}>
+              <Route
+                path="/"
+                element={
+                  <></>
+                }
+              />
               <Route
                 path="/aboutme"
-                render={() => (
+
+                element={
                   <PageWrapper>
                     <AboutMe />
                   </PageWrapper>
-                )}
+                }
               />
               <Route
                 path="/resume"
-                render={() => (
+                element={ (
                   <PageWrapper>
                     <Resume />
                   </PageWrapper>
@@ -35,7 +42,7 @@ const App = () => {
               />
               <Route
                 path="/portfolio"
-                render={() => (
+                element={ (
                   <PageWrapper>
                     <Portfolio />
                   </PageWrapper>
@@ -43,13 +50,13 @@ const App = () => {
               />
               <Route
                 path="/contact"
-                render={() => (
+                element={ (
                   <PageWrapper>
                     <Contact />
                   </PageWrapper>
                 )}
               />
-            </Switch>
+            </Routes>
           </CSSTransition>
         </TransitionGroup>
       </div>

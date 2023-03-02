@@ -1,5 +1,6 @@
 import me from "src/resources/images/me.jpg";
 import logoblack from "src/resources/images/logoblack.png";
+import { Link } from "react-router-dom";
 
 const AboutMe = () => {
   return (
@@ -16,8 +17,8 @@ const AboutMe = () => {
           <p className="xs:text-lg sm:text-xl text-grey-dark pb-2">Who am I?</p>
           <p>
             My name is Anton Stagge. I am a social, outgoing and happy guy.
-            Right now, I'm working for the e-health company Kry / Livi where
-            I've been for the last 3 years.
+            Right now, I'm working for the fintech company Quickbit where I get 
+            to build payment solutions with crypto currency support.
           </p>
           <br />
           <p>
@@ -31,7 +32,7 @@ const AboutMe = () => {
             I believe that my love for programming and problem solving started
             very early on in my life. I've always been fascinated by how things
             work. At the age of 16 I bought an old motorcycle and took it apart
-            in order to learn how a combustion engine worked. aThen put it back
+            in order to learn how a combustion engine worked. Then put it back
             together, and it worked even better.
           </p>
         </div>
@@ -69,6 +70,10 @@ const AboutMe = () => {
             so many things and skills that I want to learn and master. The
             fullfilling sensation you get when creating something from scratch
             is too good to ever stop chasing after.
+          </p>
+          <br />
+          <p>
+            If you want to get to know me better, don't hesitate to reach out <Link to="/contact" >here</Link> or to my email address.
           </p>
         </div>
         <div className="flex-no-grow ">

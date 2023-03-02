@@ -3,7 +3,32 @@ import * as ReactDOMServer from "react-dom/server";
 import download from "src/resources/logos/download.png";
 import downloadwhite from "src/resources/logos/downloadwhite.png";
 import Button from "src/shared/Button";
+import { CVItem } from "./CVItem";
 import * as api from "src/api/api";
+
+const PersonalDetails = () => (
+  <table className="mb-6">
+    <tbody>
+      <tr>
+        <td className="w-48">
+          <img
+            src={"IMAGE_PATH"}
+            alt="me"
+            className="h-48 border border-black object-cover"
+          />
+        </td>
+        <td className="pb-0">
+          <div className=" pt-24 pl-10">
+            <div className="font-header text-4xl">Anton Stagge</div>
+            <div >Telephone: 0702412556</div>
+            <div >Email: antonstagge95@gmail.se</div>
+            <div >Website: antonstagge.com</div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+);
 
 interface ResumeState {
   download: boolean | null | undefined;
@@ -30,35 +55,8 @@ class Resume extends React.Component<{}, ResumeState> {
     this.setState({ download: null });
     const resumeText = document.getElementById("resume-text");
 
-    const personalDetails = (
-      <table className="mb-6">
-        <tbody>
-          <tr>
-            <td className="w-48">
-              <img
-                src="IMAGE_PATH"
-                alt="me"
-                className="h-48 border border-black"
-              />
-            </td>
-            <td className="pb-0">
-              <div className=" pt-20">
-                <div className="font-header text-4xl">Anton Stagge</div>
-                <div className="font-bold">Telephone: 0702412556</div>
-                <div className="font-bold">Email: antonstagge@gmail.se</div>
-                <div className="font-bold">
-                  Address: Norrtullsgatan 61, 11345 STOCKHOLM
-                </div>
-                <div className="font-bold">Website: antonstagge.com</div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    );
-
     if (resumeText) {
-      const personalData = ReactDOMServer.renderToString(personalDetails);
+      const personalData = ReactDOMServer.renderToString(<PersonalDetails />);
       let resumeData = resumeText.innerHTML;
 
       resumeData = resumeData.replace(/sm:text-base/g, "text-xs");
@@ -88,39 +86,6 @@ class Resume extends React.Component<{}, ResumeState> {
     }
   };
 
-  public CVItem = (
-    name: string,
-    place: string,
-    year: string,
-    comment?: string,
-    optional?: string
-  ) => (
-    <table className="w-full mb-2 xs:text-xs sm:text-2xl">
-      <tbody>
-        <tr>
-          <td className="w-4/5">
-            <span className="font-bold ">{name}</span>
-            <span>,&nbsp;</span>
-            <span className="italic ">{place}</span>
-            {optional !== undefined ? <span>,&nbsp;</span> : null}
-            {optional !== undefined ? (
-              <span className="">{optional}</span>
-            ) : null}
-          </td>
-          <td className="w-1/5 text-right font-bold whitespace-no-wrap ">
-            {year}
-          </td>
-        </tr>
-        <tr className="pb-4 xs:text-xs sm:text-xl">
-          <td className="w-4/5">{comment}</td>
-          <td className="w-1/5 text-right font-bold whitespace-no-wrap ">
-            &nbsp;
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  );
-
   public render() {
     return (
       <>
@@ -129,86 +94,86 @@ class Resume extends React.Component<{}, ResumeState> {
             <div className="xs:text-xl sm:text-3xl pb-3 text-grey-dark">
               Experience
             </div>
-            {this.CVItem(
-              "Software Engineer",
-              "Kry/Livi AB",
-              "2020-",
-              "Fullstack developer, on the clinician side of the product. I work in the physical team, which focus on the web tools used in the care-facilities and Krys' physical offering"
-            )}
-            {this.CVItem(
-              "Software Engineer Intern",
-              "Kry/Livi AB",
-              "2019-2020",
-              "I worked as a fullstack developer, improving and building new features in the internal Backoffice tool."
-            )}
-            {this.CVItem(
-              "Software developer/consultant",
-              "Decerno",
-              "Summer 2018",
-              "I was a fullstack developer, working as a consultant. I made a web application using a C# back-end with Domain Driven Design and a React front-end using redux."
-            )}
-            {this.CVItem(
-              "Software developer",
-              "Windfall VR",
-              "Summer 2017",
-              "Developed a game in VR using Unity Engine and C#. It was the early phases of the game, and I got to develop some of the core mechanics."
-            )}
-            {this.CVItem(
-              "Software developer",
-              "SIPRI - Stockholm International Peace Research Institute",
-              "Spring 2016",
-              "As part of a school project to recreate a database and web application used at SIPRI, I was front-end lead. We created the front-end using React."
-            )}
+            <CVItem 
+              name="Senior Software Engineer"
+              place="Quickbit"
+              year="2022-"
+              comment="Team Tech lead, Scrum Master and Fullstack developer. Designed microservice architecture. Built payment solutions with crypto currency support."
+            />
+            <CVItem
+              name="Software Engineer"
+              place="Kry/Livi AB"
+              year="2019-2022"
+              comment="Fullstack developer, on the clinician side of the product. I worked in the physical team, which focused on the web tools used in the care-facilities and Krys' physical offering."
+            />
+            <CVItem
+              name="Software developer/consultant"
+              place="Decerno"
+              year="Summer 2018"
+              comment="I was a fullstack developer, working as a consultant. I made a web application using a C# back-end with Domain Driven Design and a React front-end using redux."
+            />
+            <CVItem
+              name="Software developer"
+              place="Windfall VR"
+              year="Summer 2017"
+              comment="Developed a game in VR using Unity Engine and C#. It was the early phases of the game, and I got to develop some of the core mechanics."
+            />
+            <CVItem
+              name="Software developer"
+              place="SIPRI - Stockholm International Peace Research Institute"
+              year="Spring 2016"
+              comment="As part of a school project to recreate a database and web application used at SIPRI, I was front-end lead. We created the front-end using React."
+            />
 
             <div className="xs:text-xl sm:text-3xl pt-8 pb-3 text-grey-dark">
               Education
             </div>
-            {this.CVItem(
-              "KTH",
-              "Royal Institute of Technology",
-              "2015-2020",
-              "Sub-track in Data analysis.",
-              "Computer Science and Engineering"
-            )}
-            {this.CVItem(
-              "Foothill College",
-              "Silicon Valley, California, (USA)",
-              "2014-2015",
-              "Intermediate and advanced courses in C++, pre-calculus and Introduction to Engineering."
-            )}
-            {this.CVItem(
-              "Åva gymnasium",
-              "Natural science programme",
-              "2011-2014"
-            )}
+            <CVItem
+              name="KTH"
+              place="Royal Institute of Technology"
+              year="2018-2020"
+              comment="Master of Science degree in Computer Science and Engineering. Specialization in data science and machine learning."
+            />
+            <CVItem
+              name="KTH"
+              place="Royal Institute of Technology"
+              year="2015-2018"
+              comment="Bachelor of Science degree in Computer Science and Engineering."
+            />
+            <CVItem
+              name="Foothill College"
+              place="Silicon Valley, California, (USA)"
+              year="2014-2015"
+              comment="Intermediate and advanced courses in C++, pre-calculus and Introduction to Engineering."
+            />
 
             <div className="xs:text-xl sm:text-3xl pt-8 pb-3 text-grey-dark">
               Volunteer Experience
             </div>
-            {this.CVItem(
-              "Reception",
-              "KTH",
-              "Summer 2017",
-              "I was part of the 1 month long reception for the new students at KTH. I was a mentor to a group of 13 new students."
-            )}
+            <CVItem
+              name="Reception"
+              place="KTH"
+              year="Summer 2017"
+              comment="I was part of the 1 month long reception for the new students at KTH. I was a mentor to a group of 13 new students."
+            />
 
             <div className="xs:text-xl sm:text-3xl pt-8 pb-3 text-grey-dark">
               Computer languages, frameworks and general skills
             </div>
             <div className="xs:text-xs sm:text-xl font-bold">
-              Java, C++, mySQL, Python, JavaScript, TypeScript, React, Redux
+              Java, SQL, Python, JavaScript, TypeScript, React, Redux, FastAPI, Django, Next.js, Node, express
             </div>
             <div className="xs:text-sm sm:text-xl text-grey-dark py-2">
               Also familiar with:
             </div>
             <div className="xs:text-xs sm:text-xl font-bold">
-              Haskell, Prolog, Unity Engine, C#, C
+              Haskell, Prolog, Unity Engine, C#, .Net, C++
             </div>
             <div className="xs:text-sm sm:text-xl text-grey-dark py-2">
               General skills:
             </div>
             <div className="xs:text-xs sm:text-xl font-bold">
-              Git, Bash
+              Git, Building Design Systems, Microservices architecture
               <div className="text-grey-dark xs:text-xs sm:text-base pt-2">
                 References can be provided upon request.
               </div>

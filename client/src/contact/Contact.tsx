@@ -165,7 +165,7 @@ class Contact extends React.Component<{}, ContactState> {
             <div className="flex xs:text-sm sm:text-lg py-2">
               <div>Email:&nbsp;</div>
               <div className="select-text font-bold" onClick={this.copyText}>
-                antonstagge@gmail.com
+                antonstagge95@gmail.com
               </div>
             </div>
             <div className="xs:text-lg sm:text-3xl text-grey-dark pt-4 pb-2">
