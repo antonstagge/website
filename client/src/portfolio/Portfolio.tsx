@@ -1,14 +1,14 @@
-import onepong from "src/resources/images/onepong.gif";
-import Steganography from "./Steganography";
+import onepong from 'src/resources/images/onepong.gif';
+import Steganography from './Steganography';
+
+const ListItem = ({ title, descr }: { title: string; descr: string }) => (
+  <div className="flex py-1 pl-2">
+    <div className="font-bold">{title}:</div>
+    <div>&nbsp;{descr}</div>
+  </div>
+);
 
 const Portfolio = () => {
-  const listItem = (title: string, descr: string) => (
-    <div className="flex py-1 pl-2">
-      <div className="font-bold">{title}:</div>
-      <div>&nbsp;{descr}</div>
-    </div>
-  );
-
   return (
     <>
       <div className="m-4 xs:text-sm sm:text-lg">
@@ -38,16 +38,19 @@ const Portfolio = () => {
                 to train an AI into playing or doing whatever you want. All you
                 need to provide is 4 functions:
               </p>
-              {listItem(
-                "initialize",
-                "A constructor to init and return the game"
-              )}
-              {listItem(
-                "play_one_iteration",
-                "Move game forward one step using parameter action"
-              )}
-              {listItem("get_observation", "Return a input vecor")}
-              {listItem("get_reward", "Return the reward for a state.")}
+              <ListItem
+                title="initialize"
+                descr="A constructor to init and return the game"
+              />
+              <ListItem
+                title="play_one_iteration"
+                descr="Move game forward one step using parameter action"
+              />
+              <ListItem title="get_observation" descr="Return a input vecor" />
+              <ListItem
+                title="get_reward"
+                descr="Return the reward for a state."
+              />
               <p className="py-2">
                 For more information, or to try yourself, check out the&nbsp;
                 <a href="https://github.com/antonstagge/onepong">

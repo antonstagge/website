@@ -1,7 +1,7 @@
-import * as React from "react";
-import { MenuItem } from "src/home/Home";
-import fadeframe from "src/resources/images/fade_frame.png";
-import { Link, useLocation } from "react-router-dom";
+import * as React from 'react';
+import { MenuItem } from 'src/home/Home';
+import fadeframe from 'src/resources/images/fade_frame.png';
+import { Link, useLocation } from 'react-router-dom';
 interface BackgroundImageProps {
   className?: string;
   menuItem: MenuItem;
@@ -20,12 +20,12 @@ const BackgroundImage = ({
     <div
       className={
         className +
-        " relative bg-grey-dark xs:h-middle sm:h-middle cursor-pointer "
+        ' relative bg-grey-dark xs:h-middle sm:h-middle cursor-pointer '
       }
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <Link to={location.pathname !== "/" ? "/" : menuItem.link}>
+      <Link to={location.pathname !== '/' ? '/' : menuItem.link}>
         <div className="absolute z-10 w-full h-full pointer-events-none" />
         <img
           src={fadeframe}
@@ -33,16 +33,16 @@ const BackgroundImage = ({
           className="absolute w-full h-full "
           style={{
             opacity: 0.3,
-            pointerEvents: "none",
+            pointerEvents: 'none',
           }}
         />
         <img
           src={menuItem.backgroundImage}
           alt="background"
-          className={"min-w-full xs:h-middle sm:h-middle"}
+          className={'min-w-full xs:h-middle sm:h-middle'}
           style={{
-            maxWidth: "unset",
-            objectFit: "cover",
+            maxWidth: 'unset',
+            objectFit: 'cover',
           }}
         />
       </Link>

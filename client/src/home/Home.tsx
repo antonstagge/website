@@ -1,60 +1,60 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import resumePic from "src/resources/images/yosemity-falls-min.jpg";
-import aboutMePic from "src/resources/images/vineyard-min.jpg";
-import contactPic from "src/resources/images/typewriter-min.jpg";
-import computer from "src/resources/images/desk-min.jpg";
-import BackgroundImage from "./components/BackgroundImage";
-import MenuList from "./components/MenuList";
-import Socials from "./components/Socials";
-import LogoWithName from "./components/LogoWithName";
-import NoStyleLink from "src/shared/NoStyleLink";
-import { useLocation } from "react-router-dom";
-import { BackButton } from "./components/BackButton";
+import { useCallback, useEffect, useRef, useState } from 'react';
+import resumePic from 'src/resources/images/yosemity-falls-min.jpg';
+import aboutMePic from 'src/resources/images/vineyard-min.jpg';
+import contactPic from 'src/resources/images/typewriter-min.jpg';
+import computer from 'src/resources/images/desk-min.jpg';
+import BackgroundImage from './components/BackgroundImage';
+import MenuList from './components/MenuList';
+import Socials from './components/Socials';
+import LogoWithName from './components/LogoWithName';
+import NoStyleLink from 'src/shared/NoStyleLink';
+import { useLocation } from 'react-router-dom';
+import { BackButton } from './components/BackButton';
 
-export enum MenuChoice {
+enum MenuChoice {
   AboutMe = 0,
   Resume = 1,
   Portfolio = 2,
   Contact = 3,
 }
 
-export const menuItems: { [choice: number]: MenuItem } = {
+const menuItems: { [choice: number]: MenuItem } = {
   [MenuChoice.AboutMe]: {
-    title: "ABOUT ME",
+    title: 'ABOUT ME',
     backgroundImage: aboutMePic,
-    number: MenuChoice.AboutMe,
-    link: "/aboutme",
+    link: '/aboutme',
   },
   [MenuChoice.Resume]: {
-    title: "RESUME",
+    title: 'RESUME',
     backgroundImage: resumePic,
-    number: MenuChoice.Resume,
-    link: "/resume",
+    link: '/resume',
   },
   [MenuChoice.Portfolio]: {
-    title: "PORTFOLIO",
+    title: 'PORTFOLIO',
     backgroundImage: computer,
-    number: MenuChoice.Portfolio,
-    link: "/portfolio",
+    link: '/portfolio',
   },
   [MenuChoice.Contact]: {
-    title: "CONTACT",
+    title: 'CONTACT',
     backgroundImage: contactPic,
-    number: MenuChoice.Contact,
-    link: "/contact",
+    link: '/contact',
   },
 };
 export interface MenuItem {
   title: string;
   backgroundImage: string;
-  number: MenuChoice;
   link: string;
 }
 
-export const numItems = 4;
-export const getMenuItem = (choice: MenuChoice): MenuItem => menuItems[choice];
-const getMenuChoiceByPathname = (pathname: string): MenuChoice | null =>
-  Object.values(menuItems).find((v) => v.link === pathname)?.number ?? null;
+const numItems = Object.keys(menuItems).length;
+const getMenuItem = (choice: MenuChoice): MenuItem => menuItems[choice];
+const getMenuChoiceByPathname = (pathname: string): MenuChoice | null => {
+  const entry = Object.entries(menuItems).find(([_, v]) => v.link === pathname);
+  if (entry) {
+    return Number(entry[0]) as MenuChoice;
+  }
+  return null;
+};
 
 const Home = () => {
   const container = useRef<HTMLDivElement>(null);
@@ -62,14 +62,14 @@ const Home = () => {
   const [active, setActive] = useState(0);
   const [hover, setHover] = useState(false);
   const location = useLocation();
-  const isHome = location.pathname === "/";
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
     if (container.current) {
       container.current.focus();
       if (active !== 0) {
         container.current.children[active].scrollIntoView({
-          block: "center",
+          block: 'center',
         });
       } else {
         container.current.scrollTop = 1;
@@ -83,8 +83,8 @@ const Home = () => {
         const newActive = getMenuChoiceByPathname(location.pathname);
         if (newActive !== null) {
           container.current.children[newActive].scrollIntoView({
-            block: "center",
-            behavior: "smooth",
+            block: 'center',
+            behavior: 'smooth',
           });
           setActive(newActive);
         }
@@ -143,14 +143,14 @@ const Home = () => {
           );
         })}
         <BackgroundImage
-          key={"extra0"}
+          key={'extra0'}
           className="snap-point"
           menuItem={getMenuItem(0)}
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         />
         <BackgroundImage
-          key={"extra1"}
+          key={'extra1'}
           className=""
           menuItem={getMenuItem(1)}
           onMouseEnter={() => setHover(true)}
@@ -165,14 +165,14 @@ const Home = () => {
           >
             <div
               className={
-                "flex-no-grow xs:text-4xl sm:text-7xl font-bold flex text-white"
+                'flex-no-grow xs:text-4xl sm:text-7xl font-bold flex text-white'
               }
             >
               <div className="flex-no-grow fadeIn ">
                 <div className="-mb-2">{getMenuItem(active).title}</div>
                 <div
                   className={
-                    "bg-white h-3 hoverBar " + (hover ? "w-full" : "w-0")
+                    'bg-white h-3 hoverBar ' + (hover ? 'w-full' : 'w-0')
                   }
                 />
               </div>
@@ -196,7 +196,7 @@ const Home = () => {
           <BackButton hover={hover} />
           <div
             className={
-              "absolute text-white text-5xl font-bold pin-t pin-l pt-6 xs:px-4 sm:px-8 xs:h-48 sm:h-64 fadeIn pointer-events-none"
+              'absolute text-white text-5xl font-bold pin-t pin-l pt-6 xs:px-4 sm:px-8 xs:h-48 sm:h-64 fadeIn pointer-events-none'
             }
           >
             <div>{getMenuItem(active).title}</div>

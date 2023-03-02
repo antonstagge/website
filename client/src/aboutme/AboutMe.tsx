@@ -1,6 +1,6 @@
-import me from "src/resources/images/me.jpg";
-import logoblack from "src/resources/images/logoblack.png";
-import { Link } from "react-router-dom";
+import me from 'src/resources/images/me.jpg';
+import logoblack from 'src/resources/images/logoblack.png';
+import { Link } from 'react-router-dom';
 
 const AboutMe = () => {
   return (
@@ -17,7 +17,7 @@ const AboutMe = () => {
           <p className="xs:text-lg sm:text-xl text-grey-dark pb-2">Who am I?</p>
           <p>
             My name is Anton Stagge. I am a social, outgoing and happy guy.
-            Right now, I'm working for the fintech company Quickbit where I get 
+            Right now, I'm working for the fintech company Quickbit where I get
             to build payment solutions with crypto currency support.
           </p>
           <br />
@@ -73,7 +73,8 @@ const AboutMe = () => {
           </p>
           <br />
           <p>
-            If you want to get to know me better, don't hesitate to reach out <Link to="/contact" >here</Link> or to my email address.
+            If you want to get to know me better, don't hesitate to reach out{' '}
+            <Link to="/contact">here</Link> or to my email address.
           </p>
         </div>
         <div className="flex-no-grow ">

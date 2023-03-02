@@ -1,17 +1,14 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
+import { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 interface NoStyleLinkProps {
   className?: string;
   to: string;
+  children: ReactNode;
 }
-const NoStyleLink: React.SFC<NoStyleLinkProps> = ({
-  to,
-  className,
-  children
-}) => {
+const NoStyleLink = ({ to, className, children }: NoStyleLinkProps) => {
   return (
-    <Link to={to} className={"noStyleLink " + className}>
+    <Link to={to} className={'noStyleLink ' + className}>
       {children}
     </Link>
   );

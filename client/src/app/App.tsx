@@ -1,12 +1,12 @@
-import Home from "src/home/Home";
-import AboutMe from "src/aboutme/AboutMe";
-import Resume from "src/resume/Resume";
-import Portfolio from "src/portfolio/Portfolio";
-import Contact from "src/contact/Contact";
-import { Route, Routes, useLocation } from "react-router-dom";
-import "./font-faces.css";
-import { PageWrapper } from "src/shared/PageWrapper";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import Home from 'src/home/Home';
+import AboutMe from 'src/aboutme/AboutMe';
+import Resume from 'src/resume/Resume';
+import Portfolio from 'src/portfolio/Portfolio';
+import Contact from 'src/contact/Contact';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import './font-faces.css';
+import { PageWrapper } from 'src/shared/PageWrapper';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 const App = () => {
   const location = useLocation();
@@ -17,15 +17,9 @@ const App = () => {
         <TransitionGroup>
           <CSSTransition timeout={3000} classNames="fade" key={location.key}>
             <Routes location={location}>
-              <Route
-                path="/"
-                element={
-                  <></>
-                }
-              />
+              <Route path="/" element={<></>} />
               <Route
                 path="/aboutme"
-
                 element={
                   <PageWrapper>
                     <AboutMe />
@@ -34,27 +28,27 @@ const App = () => {
               />
               <Route
                 path="/resume"
-                element={ (
+                element={
                   <PageWrapper>
                     <Resume />
                   </PageWrapper>
-                )}
+                }
               />
               <Route
                 path="/portfolio"
-                element={ (
+                element={
                   <PageWrapper>
                     <Portfolio />
                   </PageWrapper>
-                )}
+                }
               />
               <Route
                 path="/contact"
-                element={ (
+                element={
                   <PageWrapper>
                     <Contact />
                   </PageWrapper>
-                )}
+                }
               />
             </Routes>
           </CSSTransition>

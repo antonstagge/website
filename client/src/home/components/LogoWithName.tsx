@@ -1,7 +1,6 @@
-import * as React from "react";
-import logowhite from "src/resources/images/logowhite.png";
+import logowhite from 'src/resources/images/logowhite.png';
 
-const LogoWithName: React.SFC<{}> = () => (
+const LogoWithName = () => (
   <div className="fadeIn absolute pin-t pin-l flex items-center xs:pl-5 sm:pl-10 pt-6 ">
     <img src={logowhite} alt="" className="xs:h-16 sm:h-32" />
     <div className="flex">

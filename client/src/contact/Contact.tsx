@@ -1,8 +1,8 @@
-import * as React from "react";
-import * as api from "src/api/api";
-import Captcha from "./Captcha";
-import { debounce } from "ts-debounce";
-import Button from "src/shared/Button";
+import * as React from 'react';
+import * as api from 'src/api/api';
+import Captcha from './Captcha';
+import { debounce } from 'ts-debounce';
+import Button from 'src/shared/Button';
 
 enum InputType {
   Name,
@@ -32,9 +32,9 @@ class Contact extends React.Component<{}, ContactState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      name: "",
-      email: "",
-      message: "",
+      name: '',
+      email: '',
+      message: '',
       sending: false,
       status: null,
       error: null,
@@ -54,7 +54,7 @@ class Contact extends React.Component<{}, ContactState> {
     }
     this.setState({ sending: true });
     api
-      .post("send_message", this.state)
+      .post('send_message', this.state)
       .then((resp) => {
         this.setState({ sending: false, status: true });
       })
@@ -69,7 +69,7 @@ class Contact extends React.Component<{}, ContactState> {
           this.setState({
             sending: false,
             status: false,
-            error: "Could not reach server.",
+            error: 'Could not reach server.',
           });
         }
       });
@@ -82,7 +82,7 @@ class Contact extends React.Component<{}, ContactState> {
         this.setState({
           name: value,
           canSend:
-            value !== ""
+            value !== ''
               ? this.state.canSend & ~CanSend.NameMissing
               : this.state.canSend | CanSend.NameMissing,
         });
@@ -90,7 +90,7 @@ class Contact extends React.Component<{}, ContactState> {
       case InputType.Email:
         this.setState({
           email: value,
-          canSend: value.includes("@")
+          canSend: value.includes('@')
             ? this.state.canSend & ~CanSend.EmailMissing
             : this.state.canSend | CanSend.EmailMissing,
         });
@@ -99,7 +99,7 @@ class Contact extends React.Component<{}, ContactState> {
         this.setState({
           message: value,
           canSend:
-            value !== ""
+            value !== ''
               ? this.state.canSend & ~CanSend.MessageMissing
               : this.state.canSend | CanSend.MessageMissing,
         });
@@ -120,7 +120,7 @@ class Contact extends React.Component<{}, ContactState> {
     canSendValue: CanSend,
     className: string
   ) => (
-    <div className={"flex-1 flex flex-col ml-8 " + className}>
+    <div className={'flex-1 flex flex-col ml-8 ' + className}>
       <label
         htmlFor={title}
         className="xs:text-xs sm:text-sm text-grey-dark flex"
@@ -149,7 +149,7 @@ class Contact extends React.Component<{}, ContactState> {
       selection.removeAllRanges();
       selection.addRange(range);
       // add to clipboard.
-      document.execCommand("copy");
+      document.execCommand('copy');
     }
   };
 
@@ -174,30 +174,30 @@ class Contact extends React.Component<{}, ContactState> {
             <div className="xs:text-xs sm:text-sm pb-2">
               <div>Your email will not be saved other than in my inbox.</div>
               <div>
-                Required and incomplete fields are marked with a{" "}
+                Required and incomplete fields are marked with a{' '}
                 {<span className="text-red">*</span>}.
               </div>
             </div>
             <div className="flex flex-wrap -ml-8">
               {this.styledInput(
-                "Name",
+                'Name',
                 InputType.Name,
                 CanSend.NameMissing,
-                ""
+                ''
               )}
               {this.styledInput(
-                "Email",
+                'Email',
                 InputType.Email,
                 CanSend.EmailMissing,
-                ""
+                ''
               )}
             </div>
             <div className="pt-2 flex flex-col">
               <label
-                htmlFor={"Message"}
+                htmlFor={'Message'}
                 className="xs:text-xs sm:text-sm text-grey-dark flex"
               >
-                {"Message"}&nbsp;
+                {'Message'}&nbsp;
                 {this.state.canSend & CanSend.MessageMissing ? (
                   <div className="text-red-light text-xs flex flex-col justify-center">
                     *
